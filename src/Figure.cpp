@@ -35,12 +35,6 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Figure & Figure::operator = ( const Figure & unFigure )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
 
 //-------------------------------------------- Constructeurs - destructeur
 Figure::Figure ( const Figure & unFigure )

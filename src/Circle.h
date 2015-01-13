@@ -11,15 +11,15 @@
 #include "Figure.h"
 //--------------------------------------------------- Interfaces utilisées
 
-//------------------------------------------------------------- Constantes 
+//------------------------------------------------------------- Constantes
 
-//------------------------------------------------------------------ Types 
+//------------------------------------------------------------------ Types
 
-//------------------------------------------------------------------------ 
+//------------------------------------------------------------------------
 // Rôle de la classe <Circle>
 //
 //
-//------------------------------------------------------------------------ 
+//------------------------------------------------------------------------
 
 class Circle : public Figure
 {
@@ -39,7 +39,7 @@ public:
     //
 
     Circle (long circleRadius, Point figureOrigin, string graphicsName, string graphicsCommandLine)
-		:Figure(figureOrigin, graphicsName, graphicsCommandLine), radius(circleRadius);
+		:Figure(figureOrigin, graphicsName, graphicsCommandLine), radius(circleRadius){}
     // Mode d'emploi :
     //
     // Contrat :
@@ -51,28 +51,28 @@ public:
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE 
+//------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-	virtual bool isInside(Point p1, Point p2);
-    // Mode d'emploi :  
+	bool isInside(Point p1, Point p2);
+    // Mode d'emploi :
     //	Vérifie que le rectangle courant appartient au rectangle formé par p1, p2
     //
-    // Contrat : 
+    // Contrat :
     //	P1 = coin supérieur gauche du rectangle
     //	P2 = coin inférieur droit du rectangle
     //
 
 
-    virtual string description();
-    // Mode d'emploi :  
+    string description();
+    // Mode d'emploi :
     //
-    // Contrat : 
+    // Contrat :
     //
-    
-    virtual void move(long dx, long dy);
+
+    void move(long dx, long dy);
     // Mode d'emploi :
     //
     // Contrat :

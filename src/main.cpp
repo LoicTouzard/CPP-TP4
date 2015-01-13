@@ -1,8 +1,9 @@
 #include <iostream>
-#include <string>
+#include <vector>
+#include <string.h>
+#include <Point.h>
 using namespace std;
 
-class main{
 	int main(){
 
     string entree;
@@ -13,7 +14,7 @@ class main{
 
         if (entree.substr(0,4)=="LIST") {
 			//Code pour afficher tous les descripteurs d'objets
-            
+
 			cin>>entree;
         }
 
@@ -37,7 +38,7 @@ class main{
             cin>>entree;
 
         }
-        
+
         else if (entree.substr(0,4)=="SAVE") {
             //Code pour SAVE
 
@@ -51,51 +52,98 @@ class main{
             cin>>entree;
 
         }
-        
+
         else if (entree.substr(0,6)=="DELETE") {
             //Code pour DELETE
 
             cin>>entree;
 
         }
-        
+
         else if (entree.substr(0,4)=="MOVE") {
             //Code pour MOVE
 
             cin>>entree;
 
         }
-        
+
         else if (entree.substr(0,1)=="C") {
+
+            string name;
+            long radius, centerX, centerY;
+
+            cin>>name>>centerX>>centerY>>radius;
+
             //Code pour ajouter un cercle
 
             cin>>entree;
 
         }
-        
+
         else if (entree.substr(0,1)=="R") {
+
+            string name;
+            long radius, coin1X, coin2X, coin1Y, coin2Y;
+
+            cin>>name>>coin1X>>coin1Y>>coin2X>>coin2Y;
 
             //Code pour ajouter un rectangle
 
             cin>>entree;
 
         }
-        
+
         else if (entree.substr(0,2)=="PL") {
+
+            string name;
+            long radius, coinX, coinY;
+
+            cin>>name;
+
+            int nbEspaces=0;
+
+            //A revoir (traiter le cas où le dernier caractère est un espace)
+            for(int i=0; i<entree.length()-1; ++i){
+                    if(entree[i]==' ' && entree[i+1]!=' ' ){
+                        nbEspaces++;
+                    }
+            }
+            int nbPoints=(nbEspaces+1)/2;
+            vector<Point> pointList;
+            vector<Point>::iterator it;
+            for(int j=0; j<nbPoints/2; j++){
+                    cin>>coinX;
+                    cin>>coinY;
+                    pointList[j].x=coinX;
+                    pointList[j].y=coinY;
+            }
+
             //Code pour ajouter une polyligne
 
             cin>>entree;
 
         }
-        
+
         else if (entree.substr(0,1)=="L") {
+
+            string name;
+            long radius, coin1X, coin2X, coin1Y, coin2Y;
+
+            cin>>name>>coin1X>>coin1Y>>coin2X>>coin2Y;
+
             //Code pour ajouter une ligne
 
             cin>>entree;
 
         }
-        
+
         else if (entree.substr(0,1)=="S") {
+
+            string name;
+            long radius, coin1X, coin2X, coin1Y, coin2Y;
+
+            cin>>name>>coin1X>>coin1Y>>coin2X>>coin2Y;
+
             //Code pour ajouter une selection
 
             cin>>entree;
@@ -113,5 +161,4 @@ class main{
     return 0;
 
 	}
-};
 

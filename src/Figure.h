@@ -8,6 +8,7 @@
 //---------- Interface de la classe <Figure> (fichier Figure.h) ------
 #if ! defined ( FIGURE_H )
 #define FIGURE_H
+#include <sstream>
 #include "Point.h"
 #include "Graphics.h"
 //--------------------------------------------------- Interfaces utilisées
@@ -41,7 +42,7 @@ public:
     //
 
     Figure (Point figureOrigin, string graphicsName, string graphicsCommandLine)
-		:Graphics(graphicsName, graphicsCommandLine), origin(figureOrigin);
+		:Graphics(graphicsName, graphicsCommandLine), origin(figureOrigin){}
     // Mode d'emploi :
     //
     // Contrat :

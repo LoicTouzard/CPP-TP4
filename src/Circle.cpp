@@ -30,11 +30,7 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Circle & Circle::operator = ( const Circle & unCircle )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
+
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -71,7 +67,7 @@ Circle::~Circle ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-Circle::bool isInside(Point p1, Point p2)
+ bool Circle::isInside(Point p1, Point p2)
 // Algorithme :
 //
 {
@@ -90,7 +86,7 @@ Circle::bool isInside(Point p1, Point p2)
 
 } //----- Fin de isInside
 
-Circle::virtual string description()
+string Circle::description()
 // Algorithme :
 //
 {
@@ -98,7 +94,7 @@ Circle::virtual string description()
 
 } //----- Fin de description
 
-Circle::virtual void move(long dx, long dy)
+void Circle::move(long dx, long dy)
 // Algorithme :
 //
 {
