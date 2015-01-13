@@ -8,13 +8,12 @@
 //---------- Interface de la classe <Rectangle> (fichier Rectangle.h) ------
 #if ! defined ( RECTANGLE_H )
 #define RECTANGLE_H
-
+#include "Point.h"
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
-typedef struct 
 
 
 //------------------------------------------------------------------------ 
@@ -29,20 +28,8 @@ class Rectangle : public Figure
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste de paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Rectangle & operator = ( const Rectangle & unRectangle );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 
 //-------------------------------------------- Constructeurs - destructeur
     Rectangle ( const Rectangle & unRectangle );
@@ -51,7 +38,8 @@ public:
     // Contrat :
     //
 
-    Rectangle ( );
+    Rectangle (Point recExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine)
+		:Figure(figureOrigin, graphicsName, graphicsCommandLine), extremity(recExtremity);
     // Mode d'emploi :
     //
     // Contrat :
@@ -68,6 +56,28 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
+	virtual bool isInside(Point p1, Point p2);
+    // Mode d'emploi :  
+    //	Vérifie que le rectangle courant appartient au rectangle formé par p1, p2
+    //
+    // Contrat : 
+    //	P1 = coin supérieur gauche du rectangle
+    //	P2 = coin inférieur droit du rectangle
+    //
+
+    virtual string description();
+    // Mode d'emploi :  
+    //
+    // Contrat : 
+    //
+    
+    virtual void move(long dx, long dy);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+
 private:
 //------------------------------------------------------- Méthodes privées
 
@@ -77,7 +87,7 @@ protected:
 private:
 //------------------------------------------------------- Attributs privés
 
-Point extremite;
+Point extremity;
 
 //---------------------------------------------------------- Classes amies
 

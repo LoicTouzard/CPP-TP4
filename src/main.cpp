@@ -46,7 +46,6 @@ class main{
         }
 
         else if (entree.substr(0,4)=="CLEAR") {
-
             //Code pour CLEAR
 
             cin>>entree;
@@ -54,7 +53,6 @@ class main{
         }
         
         else if (entree.substr(0,6)=="DELETE") {
-
             //Code pour DELETE
 
             cin>>entree;

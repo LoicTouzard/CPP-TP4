@@ -8,7 +8,7 @@
 //---------- Interface de la classe <Circle> (fichier Circle.h) ------
 #if ! defined ( CIRCLE_H )
 #define CIRCLE_H
-
+#include "Figure.h"
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes 
@@ -30,12 +30,6 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Circle & operator = ( const Circle & unCircle );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 
 //-------------------------------------------- Constructeurs - destructeur
     Circle ( const Circle & unCircle );
@@ -44,7 +38,8 @@ public:
     // Contrat :
     //
 
-    Circle ( );
+    Circle (long circleRadius, Point figureOrigin, string graphicsName, string graphicsCommandLine)
+		:Figure(figureOrigin, graphicsName, graphicsCommandLine), radius(circleRadius);
     // Mode d'emploi :
     //
     // Contrat :
@@ -61,6 +56,29 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
+	virtual bool isInside(Point p1, Point p2);
+    // Mode d'emploi :  
+    //	Vérifie que le rectangle courant appartient au rectangle formé par p1, p2
+    //
+    // Contrat : 
+    //	P1 = coin supérieur gauche du rectangle
+    //	P2 = coin inférieur droit du rectangle
+    //
+
+
+    virtual string description();
+    // Mode d'emploi :  
+    //
+    // Contrat : 
+    //
+    
+    virtual void move(long dx, long dy);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+
 private:
 //------------------------------------------------------- Méthodes privées
 
@@ -70,7 +88,7 @@ protected:
 private:
 //------------------------------------------------------- Attributs privés
 
-int radius;
+	long radius;
 
 //---------------------------------------------------------- Classes amies
 

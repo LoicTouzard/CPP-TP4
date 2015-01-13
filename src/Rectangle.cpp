@@ -48,7 +48,7 @@ Rectangle::Rectangle ( const Rectangle & unRectangle )
 } //----- Fin de Rectangle (constructeur de copie)
 
 
-Rectangle::Rectangle ( )
+Rectangle::Rectangle (Point recExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine)
 // Algorithme :
 //
 {
@@ -71,5 +71,44 @@ Rectangle::~Rectangle ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+Rectangle::virtual bool isInside(Point p1, Point p2)
+// Algorithme : 
+//
+{
+	
+	if( (p1.x <=origin.x) && 
+		(p2.x >=extremity.x) &&
+		(p1.y >=origin.y) &&
+		(p2.y <=extremity.y) )
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+	
+} //----- Fin de isInside
+
+Rectangle::virtual string description()
+// Algorithme :
+//
+{
+	return commandLine;
+	
+} //----- Fin de description
+
+Rectangle::virtual void move(long dx, long dy)
+// Algorithme :
+//
+{
+	origin.x += dx;
+	origin.y += dy;
+	extremity.x += dx;
+	extremity.y += dy;
+	
+	commandLine="R "+name+" "+Long_to_string(origin.x)+" "+Long_to_string(origin.y)+" "+Long_to_string(extremity.x)+" "+Long_to_string(extremity.y);
+	
+} //----- Fin de move
 
 //------------------------------------------------------- Méthodes privées
