@@ -2,10 +2,16 @@
 #include <vector>
 #include <string.h>
 #include <Point.h>
+#include <Container.h>
+#include <Graphics.h>
 using namespace std;
+
+	int nombreEspaces(String s);
+    bool separateur(string s);
 
 	int main(){
 
+    Container espace;
     string entree;
 
     cin>>entree;
@@ -48,6 +54,7 @@ using namespace std;
 
         else if (entree.substr(0,4)=="CLEAR") {
             //Code pour CLEAR
+            //Réinitialiser le container
 
             cin>>entree;
 
@@ -72,10 +79,26 @@ using namespace std;
             string name;
             long radius, centerX, centerY;
 
-            cin>>name>>centerX>>centerY>>radius;
-
-            //Code pour ajouter un cercle
-
+            if(nombreEspaces(entree)==4){
+                cin>>name>>centerX>>centerY>>radius;
+                if(radius<0){
+                    cout<<"ERR"<<endl;
+                    cout<<"#radius must be a postive interger"<<endl;
+                }
+                else if(separateur(name)){  //Tester si le nom contient des séparateurs
+                    cout<<"ERR"<<endl;
+                    cout<<"#invalid name"<<endl;
+                }
+                else{
+                    //Code pour ajouter un cercle
+                    cout<<"OK"<<endl;
+                    cout<<"#New object :"<<name<<endl;
+                }
+            }
+            else{
+                cout<<"ERR"<<endl;
+                cout<<"#invalid parameters"<<endl;
+            }
             cin>>entree;
 
         }
@@ -84,10 +107,28 @@ using namespace std;
 
             string name;
             long radius, coin1X, coin2X, coin1Y, coin2Y;
+            if(nombreEspaces(entree)==5){
+                cin>>name>>coin1X>>coin1Y>>coin2X>>coin2Y;
+                if(coin1X>coin2X ||coin1Y<coin2Y){ //Pour éviter ce test, prendre les max et min des deux points dans la méthode isInside(p1,p2)
+                    cout<<"ERR"<<endl;
+                    cout<<"#The must add the coordinates of the top left corner after the name"<<endl;
+                }
+                else if(separateur(name)){  //Tester si le nom contient des séparateurs
+                    cout<<"ERR"<<endl;
+                    cout<<"#invalid name"<<endl;
+                }
 
-            cin>>name>>coin1X>>coin1Y>>coin2X>>coin2Y;
+                else{
+                    //Code pour ajouter un rectangle
+                    cout<<"OK"<<endl;
+                    cout<<"#New object :"<<name<<endl;
+                }
+            }
+            else{
+                cout<<"ERR"<<endl;
+                cout<<"#invalid parameters"<<endl;
+            }
 
-            //Code pour ajouter un rectangle
 
             cin>>entree;
 
@@ -99,26 +140,37 @@ using namespace std;
             long radius, coinX, coinY;
 
             cin>>name;
+            if(separateur(name)){ //Tester si le nom contient des séparateurs
+                cout<<"ERR"<<endl;
+                cout<<"#invalid name"<<endl;
+            }
 
-            int nbEspaces=0;
+           else if(nombreEspaces(entree)<=2){
+                cout<<"ERR"<<endl;
+                cout<<"#invalid parameters"<<endl;
+            }
 
-            //A revoir (traiter le cas où le dernier caractère est un espace)
-            for(int i=0; i<entree.length()-1; ++i){
-                    if(entree[i]==' ' && entree[i+1]!=' ' ){
-                        nbEspaces++;
+            else if(nombreEspaces(entree)%2!=0){
+                cout<<"ERR"<<endl;
+                cout<<"#the last point has only one coordonate. Missing Y-axis coordonate"<<endl;
+            }
+
+            else{
+                    int nbPoints=(nbEspaces+1)/2;
+                    vector<Point> pointList;
+                    vector<Point>::iterator it;
+                    for(it=0; it<nbPoints/2;++it){
+                            cin>>coinX;
+                            cin>>coinY;
+                            pointList[it].x=coinX;
+                            pointList[it].y=coinY;
                     }
-            }
-            int nbPoints=(nbEspaces+1)/2;
-            vector<Point> pointList;
-            vector<Point>::iterator it;
-            for(int j=0; j<nbPoints/2; j++){
-                    cin>>coinX;
-                    cin>>coinY;
-                    pointList[j].x=coinX;
-                    pointList[j].y=coinY;
+
+                     //Code pour ajouter un polyligne
+                    cout<<"OK"<<endl;
+                    cout<<"#New object :"<<name<<endl;
             }
 
-            //Code pour ajouter une polyligne
 
             cin>>entree;
 
@@ -129,9 +181,22 @@ using namespace std;
             string name;
             long radius, coin1X, coin2X, coin1Y, coin2Y;
 
-            cin>>name>>coin1X>>coin1Y>>coin2X>>coin2Y;
-
-            //Code pour ajouter une ligne
+            if(nombreEspaces(entree)==5){
+                cin>>name>>coin1X>>coin1Y>>coin2X>>coin2Y;
+                if(separateur(name)){  //Tester si le nom contient des séparateurs
+                    cout<<"ERR"<<endl;
+                    cout<<"#invalid name"<<endl;
+                }
+                else{
+                    //Code pour ajouter une ligne
+                    cout<<"OK"<<endl;
+                    cout<<"#New object :"<<name<<endl;
+                }
+            }
+            else{
+                cout<<"ERR"<<endl;
+                cout<<"#invalid parameters"<<endl;
+            }
 
             cin>>entree;
 
@@ -142,16 +207,30 @@ using namespace std;
             string name;
             long radius, coin1X, coin2X, coin1Y, coin2Y;
 
-            cin>>name>>coin1X>>coin1Y>>coin2X>>coin2Y;
 
-            //Code pour ajouter une selection
+            if(nombreEspaces(entree)==5){
+                cin>>name>>coin1X>>coin1Y>>coin2X>>coin2Y;
+                if(separateur(name)){  //Tester si le nom contient des séparateurs
+                    cout<<"ERR"<<endl;
+                    cout<<"#invalid name"<<endl;
+                }
+                else{
+                    //Code pour ajouter une selection
+                    cout<<"OK"<<endl;
+                    cout<<"#New object :"<<name<<endl;
+                }
+            }
+            else{
+                cout<<"ERR"<<endl;
+                cout<<"#invalid parameters"<<endl;
+            }
 
             cin>>entree;
 
         }
 
         else{
-
+            cout<<"#invalid command"<<endl;
             cin>>entree;
 
         }
@@ -161,4 +240,24 @@ using namespace std;
     return 0;
 
 	}
+
+    int nombreEspaces(String s){
+        int nbEspaces=0;
+        for(int i=0; i<s.length()-1; ++i){
+            if(s[i]==' '){
+                nbEspaces++;
+            }
+        }
+        return nbEspaces;
+    }
+
+    bool separateur(string s){
+        if(s.find(" ")==-1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
 
