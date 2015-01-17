@@ -93,6 +93,7 @@ vector<Graphics*> *listeGraphics;
 
 //---------------------------------------------------------- Classes amies
 friend int main();
+friend bool NomLibre(string s);
 //-------------------------------------------------------- Classes privées
 
 //----------------------------------------------------------- Types privés
