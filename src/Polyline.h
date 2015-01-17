@@ -9,18 +9,20 @@
 #if ! defined ( POLYLINE_H )
 #define POLYLINE_H
 #include "Point.h"
+#include "Figure.h"
+#include <vector>
 using namespace std;
 //--------------------------------------------------- Interfaces utilisées
 
-//------------------------------------------------------------- Constantes 
+//------------------------------------------------------------- Constantes
 
-//------------------------------------------------------------------ Types 
+//------------------------------------------------------------------ Types
 
-//------------------------------------------------------------------------ 
+//------------------------------------------------------------------------
 // Rôle de la classe <Polyline>
 //
 //
-//------------------------------------------------------------------------ 
+//------------------------------------------------------------------------
 
 class Polyline : public Figure
 {
@@ -39,7 +41,7 @@ public:
     //
 
     Polyline (vector<Point> newPointList, Point figureOrigin, string graphicsName, string graphicsCommandLine)
-		:Figure(figureOrigin, graphicsName, graphicsCommandLine), pointList(newPointList);
+    		:Figure(figureOrigin, graphicsName, graphicsCommandLine), pointList(newPointList){}
     // Mode d'emploi :
     //
     // Contrat :
@@ -51,14 +53,14 @@ public:
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE 
+//------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Méthodes protégées
 
 
-	virtual bool isInside(Point p1, Point p2);
-    // Mode d'emploi :  
+	bool isInside(Point p1, Point p2);
+    // Mode d'emploi :
     //	Vérifie que le polyligne appartient au rectangle formé par p1, p2
     //
     // Contrat :
@@ -66,13 +68,13 @@ protected:
     //	P2 = coin inférieur droit du rectangle
     //
 
-    virtual string description();
-    // Mode d'emploi :  
+    string description();
+    // Mode d'emploi :
     //
-    // Contrat : 
+    // Contrat :
     //
-    
-    virtual void move(long dx, long dy);
+
+    void move(long dx, long dy);
     // Mode d'emploi :
     //
     // Contrat :

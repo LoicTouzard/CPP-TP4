@@ -45,6 +45,7 @@ Container::Container ( )
 // Algorithme :
 //
 {
+    listeGraphics=new vector<Graphics*>;
 #ifdef MAP
     cout << "Appel au constructeur de <Container>" << endl;
 #endif

@@ -8,18 +8,19 @@
 //---------- Interface de la classe <Selection> (fichier Selection.h) ------
 #if ! defined ( SELECTION_H )
 #define SELECTION_H
-
+#include "Figure.h"
+#include <vector>
 //--------------------------------------------------- Interfaces utilisées
 
-//------------------------------------------------------------- Constantes 
+//------------------------------------------------------------- Constantes
 
-//------------------------------------------------------------------ Types 
+//------------------------------------------------------------------ Types
 
-//------------------------------------------------------------------------ 
+//------------------------------------------------------------------------
 // Rôle de la classe <Selection>
 //
 //
-//------------------------------------------------------------------------ 
+//------------------------------------------------------------------------
 
 class Selection : public Graphics
 {
@@ -37,8 +38,8 @@ public:
     // Contrat :
     //
 
-    Selection (vector<Figure*> newFigureLIst, Point figureOrigin, string graphicsName, string graphicsCommandLine)
-		:Figure(figureOrigin, graphicsName, graphicsCommandLine), figureList(newFigureLIst);
+    Selection (vector <Figure*> newFigureList, Point p1, Point p2, string graphicsName, string graphicsCommandLine)
+    :Graphics(graphicsName, graphicsCommandLine), figureList(newFigureList), coinGauche(p1), coinDroit(p2){}
     // Mode d'emploi :
     //
     // Contrat :
@@ -50,18 +51,18 @@ public:
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE 
+//------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-    virtual bool description();
+    string description();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual void move(long dx, long dy);
+    void move(long dx, long dy);
     // Mode d'emploi :
     //
     // Contrat :
@@ -74,6 +75,8 @@ protected:
 //----------------------------------------------------- Attributs protégés
 
 vector<Figure*> figureList;
+Point coinGauche;
+Point coinDroit;
 
 
 private:

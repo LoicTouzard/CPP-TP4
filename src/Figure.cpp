@@ -47,15 +47,23 @@ Figure::Figure ( const Figure & unFigure )
 } //----- Fin de Figure (constructeur de copie)
 
 
-Figure::Figure ( )
+/*Figure::Figure ( Point figureOrigin, string graphicsName2, string graphicsCommandLine2)
 // Algorithme :
 //
 {
+
+name=graphicsName2;
+commandLine=graphicsCommandLine2;
+origin=figureOrigin;
 #ifdef MAP
     cout << "Appel au constructeur de <Figure>" << endl;
 #endif
-} //----- Fin de Figure
+} //----- Fin de Figure*/
 
+
+Figure::Figure ( ){
+
+}
 
 Figure::~Figure ( )
 // Algorithme :

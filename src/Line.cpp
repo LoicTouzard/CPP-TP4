@@ -29,12 +29,6 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 //------------------------------------------------- Surcharge d'opérateurs
-Line & Line::operator = ( const Line & unLine )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
 
 //-------------------------------------------- Constructeurs - destructeur
 Line::Line ( const Line & unLine )
@@ -47,14 +41,20 @@ Line::Line ( const Line & unLine )
 } //----- Fin de Line (constructeur de copie)
 
 
-Line::Line (Point recExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine)
+/*Line::Line (Point recExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine)
 // Algorithme :
 //
 {
+
+    extremity=recExtremity;
+    origin=figureOrigin;
+    name=graphicsName;
+    commandLine=graphicsCommandLine;
+
 #ifdef MAP
     cout << "Appel au constructeur de <Line>" << endl;
 #endif
-} //----- Fin de Line
+} //----- Fin de Line*/
 
 
 Line::~Line ( )
@@ -70,12 +70,12 @@ Line::~Line ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-Line::virtual bool isInside(Point p1, Point p2)
-// Algorithme : 
+bool Line::isInside(Point p1, Point p2)
+// Algorithme :
 //
 {
-	
-	if( (p1.x <=origin.x) && 
+
+	if( (p1.x <=origin.x) &&
 		(p2.x >=extremity.x) &&
 		(p1.y >=origin.y) &&
 		(p2.y <=extremity.y) )
@@ -86,18 +86,18 @@ Line::virtual bool isInside(Point p1, Point p2)
 	{
 		return false;
 	}
-	
+
 } //----- Fin de isInside
 
-Line::virtual string description()
+string Line:: description()
 // Algorithme :
 //
 {
 	return commandLine;
-	
+
 } //----- Fin de description
 
-Line::virtual void move(long dx, long dy)
+void Line:: move(long dx, long dy)
 // Algorithme :
 //
 {
@@ -105,9 +105,9 @@ Line::virtual void move(long dx, long dy)
 	origin.y += dy;
 	extremity.x += dx;
 	extremity.y += dy;
-	
+
 	commandLine="L "+name+" "+Long_to_string(origin.x)+" "+Long_to_string(origin.y)+" "+Long_to_string(extremity.x)+" "+Long_to_string(extremity.y);
-	
+
 } //----- Fin de move
 
 

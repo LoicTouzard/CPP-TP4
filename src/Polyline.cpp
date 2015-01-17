@@ -12,7 +12,6 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
-
 //------------------------------------------------------ Include personnel
 #include "Polyline.h"
 
@@ -43,14 +42,19 @@ Polyline::Polyline ( const Polyline & unPolyline )
 } //----- Fin de Polyline (constructeur de copie)
 
 
-Polyline::Polyline (vector<Point> newPointList, Point figureOrigin, string graphicsName, string graphicsCommandLine)
+/*Polyline::Polyline (vector<Point> newPointList, Point figureOrigin, string graphicsName, string graphicsCommandLine)
 // Algorithme :
 //
 {
+
+name=graphicsName;
+commandLine=graphicsCommandLine;
+origin=figureOrigin;
+pointList=newPointList;
 #ifdef MAP
     cout << "Appel au constructeur de <Polyline>" << endl;
 #endif
-} //----- Fin de Polyline
+} //----- Fin de Polyline*/
 
 
 Polyline::~Polyline ( )
@@ -66,23 +70,23 @@ Polyline::~Polyline ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-Polyline::virtual bool isInside(Point p1, Point p2)
-// Algorithme : 
+bool Polyline::isInside(Point p1, Point p2)
+// Algorithme :
 //
 {
-	
-	
-	if( !(p1.x <=origin.x) || 
-		!(p2.x >=origin.x) || 
-		!(p1.y >=origin.y) || 
+
+
+	if( !(p1.x <=origin.x) ||
+		!(p2.x >=origin.x) ||
+		!(p1.y >=origin.y) ||
 		!(p2.y <=origin.y) )
 	{
 		return false;
 	}
-	
-	vector<Point>::iterator it;
+
+	/*vector<Point>::iterator it;
 	for(it = pointList.begin(); it!=pointList.end(); ++it){
-		if( !(p1.x <=pointList[it].x) || 
+		if( !(p1.x <=pointList[it].x) ||
 			!(p2.x >=pointList[it].x) ||
 			!(p1.y >=pointList[it].y) ||
 			!(p2.y <=pointList[it].y) )
@@ -90,33 +94,33 @@ Polyline::virtual bool isInside(Point p1, Point p2)
 			return false;
 		}
 	}
-	return true;
-	
+	return true;*/
+
 } //----- Fin de isInside
 
-Polyline::virtual string description()
+string Polyline::description()
 // Algorithme :
 //
 {
 	return commandLine;
-	
+
 } //----- Fin de description
 
-Polyline::virtual void move(long dx, long dy)
+void Polyline::move(long dx, long dy)
 // Algorithme :
 //
 {
-	
-	vector<Point>::iterator it;
+
+	/*vector<Point>::iterator it;
 	origin.x += dx;
 	origin.y += dy;
 	commandLine="PL "+name+" "+Long_to_string(origin.x)+" "+Long_to_string(origin.y);
 	for(it = pointList.begin(); it!=pointList.end(); ++it){
-		pointList[i].x += dx;
-		pointList[i].y += dy;
-		commandLIne +=" "+Long_to_string(pointList[i].x)+" "+Long_to_string(pointList[i].y);
-	}
-	
+		pointList[it].x += dx;
+		pointList[it].y += dy;
+		commandLIne +=" "+Long_to_string(pointList[it].x)+" "+Long_to_string(pointList[it].y);
+	}*/
+
 } //----- Fin de move
 
 

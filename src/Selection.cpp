@@ -15,7 +15,6 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Selection.h"
-
 //------------------------------------------------------------- Constantes
 
 //---------------------------------------------------- Variables de classe
@@ -35,12 +34,6 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Selection & Selection::operator = ( const Selection & unSelection )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
 
 //-------------------------------------------- Constructeurs - destructeur
 Selection::Selection ( const Selection & unSelection )
@@ -53,14 +46,21 @@ Selection::Selection ( const Selection & unSelection )
 } //----- Fin de Selection (constructeur de copie)
 
 
-Selection::Selection ( )
-// Algorithme :
+ /*Selection::Selection (vector <Figure*> newFigureList, Point p1, Point p2, string graphicsName, string graphicsCommandLine)
+ // Algorithme :
 //
 {
+   coinGauche=p1;
+   coinDroit=p2;
+   name=graphicsName;
+   commandLine=graphicsCommandLine;
+   figureList=new vector<Figure>;
+
+
 #ifdef MAP
     cout << "Appel au constructeur de <Selection>" << endl;
 #endif
-} //----- Fin de Selection
+} //----- Fin de Selection*/
 
 
 Selection::~Selection ( )
@@ -77,4 +77,17 @@ Selection::~Selection ( )
 
 //----------------------------------------------------- Méthodes protégées
 
+    string Selection::description()
+    // type Selection::Méthode ( liste de paramètres )
+    // Algorithme :
+    {
+
+    } //----- Fin de description
+
+    void Selection::move(long dx, long dy)
+    // type Selection::Méthode ( liste de paramètres )
+    // Algorithme :
+    {
+
+    } //----- Fin de move
 //------------------------------------------------------- Méthodes privées

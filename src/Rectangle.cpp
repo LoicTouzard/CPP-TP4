@@ -30,11 +30,6 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Rectangle & Rectangle::operator = ( const Rectangle & unRectangle )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -48,14 +43,18 @@ Rectangle::Rectangle ( const Rectangle & unRectangle )
 } //----- Fin de Rectangle (constructeur de copie)
 
 
-Rectangle::Rectangle (Point recExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine)
+/*Rectangle::Rectangle (Point recExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine)
 // Algorithme :
 //
 {
+    extremity=recExtremity;
+    origin=figureOrigin;
+    name=graphicsName;
+    commandLine=graphicsCommandLine;
 #ifdef MAP
     cout << "Appel au constructeur de <Rectangle>" << endl;
 #endif
-} //----- Fin de Rectangle
+} //----- Fin de Rectangle*/
 
 
 Rectangle::~Rectangle ( )
@@ -71,12 +70,12 @@ Rectangle::~Rectangle ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-Rectangle::virtual bool isInside(Point p1, Point p2)
-// Algorithme : 
+bool Rectangle::isInside(Point p1, Point p2)
+// Algorithme :
 //
 {
-	
-	if( (p1.x <=origin.x) && 
+
+	if( (p1.x <=origin.x) &&
 		(p2.x >=extremity.x) &&
 		(p1.y >=origin.y) &&
 		(p2.y <=extremity.y) )
@@ -87,18 +86,18 @@ Rectangle::virtual bool isInside(Point p1, Point p2)
 	{
 		return false;
 	}
-	
+
 } //----- Fin de isInside
 
-Rectangle::virtual string description()
+string Rectangle::description()
 // Algorithme :
 //
 {
 	return commandLine;
-	
+
 } //----- Fin de description
 
-Rectangle::virtual void move(long dx, long dy)
+void Rectangle::move(long dx, long dy)
 // Algorithme :
 //
 {
@@ -106,9 +105,9 @@ Rectangle::virtual void move(long dx, long dy)
 	origin.y += dy;
 	extremity.x += dx;
 	extremity.y += dy;
-	
+
 	commandLine="R "+name+" "+Long_to_string(origin.x)+" "+Long_to_string(origin.y)+" "+Long_to_string(extremity.x)+" "+Long_to_string(extremity.y);
-	
+
 } //----- Fin de move
 
 //------------------------------------------------------- Méthodes privées

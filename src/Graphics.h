@@ -8,9 +8,9 @@
 //---------- Interface de la classe <Graphics> (fichier Graphics.h) ------
 #if ! defined ( GRAPHICS_H )
 #define GRAPHICS_H
-#include <string.h>
+#include <string>
 //--------------------------------------------------- Interfaces utilisées
-
+using namespace std;
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -38,12 +38,15 @@ public:
     // Contrat :
     //
 
-    Graphics (string graphicsName, string graphicsCommandLine )
-		:name(graphicsName), commandLine(graphicsCommandLine){}
+
+    Graphics (  );
+
+    //Graphics (string graphicsName, string graphicsCommandLine );
     // Mode d'emploi :
     //
     // Contrat :
     //
+    Graphics (string graphicsName, string graphicsCommandLine ):name(graphicsName), commandLine(graphicsCommandLine){}
 
     virtual ~Graphics ( );
     // Mode d'emploi :
@@ -83,7 +86,7 @@ private:
 //------------------------------------------------------- Attributs privés
 
 //---------------------------------------------------------- Classes amies
-
+friend int main();
 //-------------------------------------------------------- Classes privées
 
 //----------------------------------------------------------- Types privés

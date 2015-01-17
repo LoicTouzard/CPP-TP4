@@ -12,12 +12,15 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <string.h>
 #include <map>
+#include <vector>
+#include "Graphics.h"
 using namespace std;
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
-typedef map<string, Graphics> MapGraphics;
+//typedef map<string, Graphics> MapGraphics;
+//typedef map<string, Figure> MapFigure;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Container>
@@ -84,11 +87,12 @@ private:
 //------------------------------------------------------- Attributs privés
 
 
-MapGraphics GraphicsList;
+//MapGraphics GraphicsList;
+vector<Graphics*> *listeGraphics;
 
 
 //---------------------------------------------------------- Classes amies
-
+friend int main();
 //-------------------------------------------------------- Classes privées
 
 //----------------------------------------------------------- Types privés

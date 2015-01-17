@@ -35,12 +35,6 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Graphics & Graphics::operator = ( const Graphics & unGraphics )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
 
 //-------------------------------------------- Constructeurs - destructeur
 Graphics::Graphics ( const Graphics & unGraphics )
@@ -53,16 +47,18 @@ Graphics::Graphics ( const Graphics & unGraphics )
 } //----- Fin de Graphics (constructeur de copie)
 
 
-Graphics::Graphics ()
+/*Graphics::Graphics (string graphicsName, string graphicsCommandLine )
 // Algorithme :
 //
 {
-	
+name=graphicsName;
+commandLine=graphicsCommandLine;
 #ifdef MAP
     cout << "Appel au constructeur de <Graphics>" << endl;
 #endif
-} //----- Fin de Graphics
+} //----- Fin de Graphics*/
 
+Graphics::Graphics (  ){}
 
 Graphics::~Graphics ( )
 // Algorithme :

@@ -41,8 +41,10 @@ public:
     // Contrat :
     //
 
-    Figure (Point figureOrigin, string graphicsName, string graphicsCommandLine)
-		:Graphics(graphicsName, graphicsCommandLine), origin(figureOrigin){}
+    Figure ( );
+
+    Figure (Point figureOrigin, string graphicsName2, string graphicsCommandLine2)
+    :Graphics(graphicsName2, graphicsCommandLine2), origin(figureOrigin){}
     // Mode d'emploi :
     //
     // Contrat :

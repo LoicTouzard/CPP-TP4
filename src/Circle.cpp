@@ -44,14 +44,14 @@ Circle::Circle ( const Circle & unCircle )
 } //----- Fin de Circle (constructeur de copie)
 
 
-Circle::Circle (long newRadius, Point figureOrigin, string graphicsName, string graphicsCommandLine)
+/*Circle::Circle (long newRadius, Point figureOrigin, string graphicsName, string graphicsCommandLine)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Circle>" << endl;
 #endif
-} //----- Fin de Circle
+} //----- Fin de Circle*/
 
 
 Circle::~Circle ( )
