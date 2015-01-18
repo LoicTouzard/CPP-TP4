@@ -55,14 +55,18 @@ using namespace std;
         }
 
         else if (entree.substr(0,4)=="UNDO") {
-           //Code pour UNDO
+            //Code pour UNDO
 
+
+            //Fin du code pour UNDO
             getline(cin,entree);
         }
 
         else if (entree.substr(0,4)=="REDO") {
             //Code pour REDO
 
+
+            //Fin du code pour REDO
            getline(cin,entree);
 
         }
@@ -125,8 +129,34 @@ using namespace std;
 
         else if (entree.substr(0,6)=="DELETE") {
             //Code pour DELETE
+            string name;
+            string *temp=new string[NombreEspaces(entree)];
+            vector<Graphics*>::iterator it;
+            bool erreur=false;
+            for(int i=1; i<=NombreEspaces(entree); i++){
+                name=Decoupage(entree,i);
+                temp[i-1]=name;
+                //Tester si chaque nom existe dans la liste
+                if( NomLibre(name) ){
+                    cout<<"#ERR"<<endl;
+                    cout<<"#Can't find "<<name<<" as an object"<<endl;
+                    erreur=true;
+                    break;
+                }
+            }
+            if(!erreur){
+                for(it=espace.listeGraphics->begin(); it!=espace.listeGraphics->end();++it){
+                    for(int j=0; j<NombreEspaces(entree); j++){
+                        if( (*it)->name==temp[j]){
+                           //espace.listeGraphics->erase(it);
+                           //Rajouter une méthode virtuelle delete sur toutes les formes (éviter les fuites mémoire)
+                        }
+                    }
+                }
+               // cout<<"OK"<<endl;
+            }
+            //Fin du code pour DELETE
             getline(cin,entree);
-
         }
 
         else if (entree.substr(0,4)=="MOVE") {
@@ -298,7 +328,53 @@ using namespace std;
         }
 
         else if (entree.substr(0,2)=="PL") {
+            string name;
+            string cornerX, cornerY;
+            long coinX, coinY;
+            name=Decoupage(entree,1);
 
+            if( NombreEspaces(entree)%2==1 && NombreEspaces(entree)>=3){ //Un point minimum
+                if(Separateur(name)){  //Tester si le nom contient des séparateurs
+                    cout<<"ERR"<<endl;
+                    cout<<"#invalid name"<<endl;
+                    break;
+                }
+                else if( !NomLibre(name) ){
+                    cout<<"ERR"<<endl;
+                    cout<<"#name already taken"<<endl;
+                }
+                else if( NomLibre(name) ){
+                        //Code pour ajouter un polyligne
+                        int nbPoints=(NombreEspaces(entree)-1)/2;
+                        Point origin;
+                        vector<Point> newPointList;
+                        cornerX=Decoupage(entree,2);
+                        cornerY=Decoupage(entree,3);
+                        coinX=atol(cornerX.c_str());
+                        coinY=atol(cornerY.c_str());
+                        origin.x=coinX;
+                        origin.y=coinY;
+                        for(int i=1; i<nbPoints; i++){
+                            cornerX=Decoupage(entree,i+2);
+                            cornerY=Decoupage(entree,i+3);
+                            coinX=atol(cornerX.c_str());
+                            coinY=atol(cornerY.c_str());
+                            Point p;
+                            p.x=coinX;
+                            p.y=coinY;
+                            newPointList.push_back(p);
+                        }
+                        Polyline *pl =new Polyline (newPointList, origin, name, entree);
+                        espace.listeGraphics->push_back(pl);
+                        //Fin du code pour ajouter un polyligne
+                        cout<<"OK"<<endl;
+                        cout<<"#New object :"<<name<<endl;
+                }
+            }
+            else{
+                cout<<"ERR"<<endl;
+                cout<<"#invalid parameters"<<endl;
+            }
             getline(cin,entree);
 
         }
@@ -361,8 +437,25 @@ using namespace std;
 
         else if (entree.substr(0,1)=="S") {
 
-            getline(cin,entree);
+            string name;
+            string corner1X, corner1Y, corner2X, corner2Y;
+            long coin1X, coin1Y, coin2X, coin2Y;
+            name=Decoupage(entree,1);
+            corner1X=Decoupage(entree,2);
+            corner1Y=Decoupage(entree,3);
+            corner2X=Decoupage(entree,4);
+            corner2Y=Decoupage(entree,5);
 
+            coin1X=atol(corner1X.c_str());
+            coin1Y=atol(corner1Y.c_str());
+            coin2X=atol(corner2X.c_str());
+            coin2Y=atol(corner2Y.c_str());
+
+
+
+            //Code pour ajouter une selection
+            getline(cin,entree);
+            //Fin du code pour ajouter une selection
         }
 
         else{
@@ -370,16 +463,18 @@ using namespace std;
             cin>>entree;
 
         }
-
     }
 
     return 0;
 
 	}
 
-    int NombreEspaces(string s){ //Compte le nombre d'espaces dans un string (utile pour savoir si le format d'entrée est respecté)
+int NombreEspaces(string s)
+// Algorithme : Compte le nombre d'espaces dans un string (utile pour savoir si le format d'entrée est respecté)
+//
+{
         int nbEspaces=0;
-        for(int i=0; i<s.length()-1; ++i){
+        for(int i=0; i<s.length()-1; i++){
             if(s[i]==' '){
                 nbEspaces++;
             }
@@ -387,7 +482,10 @@ using namespace std;
         return nbEspaces;
     }
 
-    bool Separateur(string s){ //Teste si le nom de la figure créée ne contient pas de séparateur
+bool Separateur(string s)
+// Algorithme : Renvoie true si le nom de la figure ne contient pas de séparateur
+//
+{
         if(s.find(" ")==-1){
             return false;
         }
@@ -396,7 +494,10 @@ using namespace std;
         }
     }
 
-    string Decoupage(string s, int posSpace){ //On extrait la chaine de caractères à paritir du posSpace-ème espace
+string Decoupage(string s, int posSpace)
+// Algotihme : On extrait la chaine de caractères à paritir du posSpace-ème espace
+//
+{
         int i;
         int n=0;
         string result;
@@ -419,7 +520,10 @@ using namespace std;
         return result;
     }
 
-    bool NomLibre(string s){ //Test si le nom de la figure que l'on vient de créer n'est pas déjà utilisé
+bool NomLibre(string s)
+// Algorithme : Renvoie true si le nom de la figure n'est pas déjà utilisé
+//
+{
         vector<Graphics*>::iterator it;
          for(it=espace.listeGraphics->begin(); it!=espace.listeGraphics->end();++it){
             if( (*it)->name==s){
@@ -430,7 +534,7 @@ using namespace std;
     }
 
 bool TestFichierExiste(string nomFichier)
-// Algorithme :
+// Algorithme : Renvoie true si le fichier existe déjà
 //
 {
     ifstream fichierATester(nomFichier.c_str());
