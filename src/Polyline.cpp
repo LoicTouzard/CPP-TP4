@@ -47,25 +47,26 @@ Polyline::Polyline (vector<Point> newPointList, Point figureOrigin, string graph
 // Algorithme :
 //
 {
+
 vector<Point>::iterator it;
 for(it=pointList.begin(); it!=pointList.end(); ++it)
 {
-	if(pointList[it].x>maxX)
+	if(it->x > downRightCorner.x)
 	{
-		downRightCorner.x=pointList[it].x;
+		downRightCorner.x=it->x;
 	}
-	else if(pointList[it].x<minX)
+	else if(it->x < leftUpCorner.x)
 	{
-		leftUpCorner.x=pointList[it].x;
+		leftUpCorner.x=it->x;
 	}
 
-	if(pointList[it].y>maxY)
+	if(it->y > leftUpCorner.y)
 	{
-		leftUpCorner.y=pointList[it].y;
+		leftUpCorner.y=it->y;
 	}
-	else if(pointList[it].y><minY)
+	else if(it->y < downRightCorner.y)
 	{
-		downRightCorner.y=pointList[it].y;
+		downRightCorner.y=it->y;
 	}
 }
 

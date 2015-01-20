@@ -38,8 +38,7 @@ public:
     // Contrat :
     //
 
-    Line (Point lineExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine)
-    :Figure(figureOrigin, graphicsName, graphicsCommandLine), extremity(lineExtremity){}
+    Line (Point lineExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine);
     // Mode d'emploi :
     //
     // Contrat :
