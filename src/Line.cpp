@@ -41,20 +41,22 @@ Line::Line ( const Line & unLine )
 } //----- Fin de Line (constructeur de copie)
 
 
-/*Line::Line (Point recExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine)
+Line::Line (Point recExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine)
+	:Figure(figureOrigin, graphicsName, graphicsCommandLine), extremity(recExtremity)
 // Algorithme :
 //
 {
+	leftUpCorner.x=(origin.x<extremity.x)?origin.x:extremity.x;
+	leftUpCorner.y=(origin.y<extremity.y)?extremity.y:origin.y;
+	
+	downRightCorner.x=(origin.x<extremity.x)?extremity.x:origin.x;
+	downRightCorner.y=(origin.y<extremity.y)?origin.y:extremity.y;
 
-    extremity=recExtremity;
-    origin=figureOrigin;
-    name=graphicsName;
-    commandLine=graphicsCommandLine;
 
 #ifdef MAP
     cout << "Appel au constructeur de <Line>" << endl;
 #endif
-} //----- Fin de Line*/
+} //----- Fin de Line
 
 
 Line::~Line ( )
@@ -75,10 +77,10 @@ bool Line::isInside(Point p1, Point p2)
 //
 {
 
-	if( (p1.x <=origin.x) &&
-		(p2.x >=extremity.x) &&
-		(p1.y >=origin.y) &&
-		(p2.y <=extremity.y) )
+	if( (p1.x <=leftUpCorner.x) &&
+		(p2.x >=downRightCorner.x) &&
+		(p1.y >=leftUpCorner.y) &&
+		(p2.y <=downRightCorner.y) )
 	{
 		return true;
 	}

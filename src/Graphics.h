@@ -86,8 +86,7 @@ private:
 //------------------------------------------------------- Attributs privés
 
 //---------------------------------------------------------- Classes amies
-friend int main();
-friend bool NomLibre(string s);
+friend class Container;
 //-------------------------------------------------------- Classes privées
 
 //----------------------------------------------------------- Types privés

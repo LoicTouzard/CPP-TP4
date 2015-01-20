@@ -87,7 +87,8 @@ private:
 //------------------------------------------------------- Attributs privés
 
 Point extremity;
-
+Point leftUpCorner;
+Point downRightCorner;
 //---------------------------------------------------------- Classes amies
 
 //-------------------------------------------------------- Classes privées

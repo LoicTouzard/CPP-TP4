@@ -10,17 +10,17 @@
 #define CONTAINER_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <string.h>
+#include <string>
 #include <map>
 #include <vector>
 #include "Graphics.h"
+#include "Point.h"
 using namespace std;
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
-//typedef map<string, Graphics> MapGraphics;
-//typedef map<string, Figure> MapFigure;
+typedef map<string, Graphics*> MapGraphics;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Container>
@@ -34,6 +34,9 @@ class Container
 
 public:
 //----------------------------------------------------- Méthodes publiques
+
+typedef MapGraphics::iterator Graphics_iterator;
+typedef MapGraphics::const_iterator Graphics_const_iterator;
 
 //-------------------------------------------- Constructeurs - destructeur
     Container ( const Container & unContainer );
@@ -53,16 +56,11 @@ public:
     //
     // Contrat :
     //
-
-//------------------------------------------------------------------ PRIVE
-
-protected:
-//----------------------------------------------------- Méthodes protégées
-
-private:
-//------------------------------------------------------- Méthodes privées
-
-	void List();
+    
+    Graphics_iterator Graphics_begin(){ return listeGraphics.begin(); }
+    Graphics_iterator Graphics_end(){ return listeGraphics.end(); }
+    
+    void List();
 	// Mode d'emploi :
     //
     // Contrat :
@@ -74,8 +72,70 @@ private:
     // Contrat :
     //
 
-    void Save();
+    void Save(string nomFichier);
 	// Mode d'emploi :
+    //
+    // Contrat :
+    //
+    
+    void moveElement(string name, long dX, long dY);
+	// Mode d'emploi :
+    //
+    // Contrat :
+    //
+    
+    void Load(string nomFichier);
+	// Mode d'emploi :
+    //
+    // Contrat :
+    //
+    
+    void Delete(vector<string> listeNoms);
+	// Mode d'emploi :
+    //
+    // Contrat :
+    //
+    
+	void AddCircle(string name, long radius, long centerX, long centerY, string commande);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    
+	void AddRectangle(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string entree);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    
+	void AddLine(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    
+	void AddPolyline(string name, vector<Point> newPointList, Point origin, string commande);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    
+    void AddSelection();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    
+//------------------------------------------------------------------ PRIVE
+
+protected:
+//----------------------------------------------------- Méthodes protégées
+
+private:
+//------------------------------------------------------- Méthodes privées
+
+    bool NomLibre(string name);
+    // Mode d'emploi :
     //
     // Contrat :
     //
@@ -87,13 +147,13 @@ private:
 //------------------------------------------------------- Attributs privés
 
 
-//MapGraphics GraphicsList;
-vector<Graphics*> *listeGraphics;
+MapGraphics listeGraphics;
+//vector<Graphics*> *listeGraphics;
 
 
 //---------------------------------------------------------- Classes amies
-friend int main();
-friend bool NomLibre(string s);
+/*friend int main();
+friend bool NomLibre(string s);*/
 //-------------------------------------------------------- Classes privées
 
 //----------------------------------------------------------- Types privés
