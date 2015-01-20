@@ -193,10 +193,10 @@ using namespace std;
 				coinY=atol(cornerY.c_str());
 				origin.x=coinX;
 				origin.y=coinY;
-				for(int i=1; i<nbPoints; i++){
+				for(int i=2; i<=nbPoints; i++){
 					//Améliorer performances de découpage
-					cornerX=Decoupage(entree,i+2);
-					cornerY=Decoupage(entree,i+3);
+					cornerX=Decoupage(entree,i*2);
+					cornerY=Decoupage(entree,i*2+1);
 					coinX=atol(cornerX.c_str());
 					coinY=atol(cornerY.c_str());
 					Point p;
@@ -273,26 +273,26 @@ int NombreEspaces(string s)
 // Algorithme : Compte le nombre d'espaces dans un string (utile pour savoir si le format d'entrée est respecté)
 //
 {
-        int nbEspaces=0;
-        for(unsigned int i=0; i<s.length()-1; i++){
-            if(s[i]==' '){
-                nbEspaces++;
-            }
+    int nbEspaces=0;
+    for(unsigned int i=0; i<s.length()-1; i++){
+        if(s[i]==' '){
+            nbEspaces++;
         }
-        return nbEspaces;
     }
+    return nbEspaces;
+}
 
 bool Separateur(string s)
 // Algorithme : Renvoie true si le nom de la figure ne contient pas de séparateur
 //
 {
-        if(s.find(" ")==string::npos){
-            return false;
-        }
-        else{
-            return true;
-        }
+    if(s.find(" ")==string::npos){
+        return false;
     }
+    else{
+        return true;
+    }
+}
 
 string Decoupage(string s, int posSpace)
 // Algotihme : On extrait la chaine de caractères à paritir du posSpace-ème espace
