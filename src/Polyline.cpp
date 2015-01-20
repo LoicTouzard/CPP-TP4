@@ -42,19 +42,37 @@ Polyline::Polyline ( const Polyline & unPolyline )
 } //----- Fin de Polyline (constructeur de copie)
 
 
-/*Polyline::Polyline (vector<Point> newPointList, Point figureOrigin, string graphicsName, string graphicsCommandLine)
+Polyline::Polyline (vector<Point> newPointList, Point figureOrigin, string graphicsName, string graphicsCommandLine)
+	:Figure(figureOrigin, graphicsName, graphicsCommandLine), pointList(newPointList)
 // Algorithme :
 //
 {
+vector<Point>::iterator it;
+for(it=pointList.begin(); it!=pointList.end(); ++it)
+{
+	if(pointList[it].x>maxX)
+	{
+		downRightCorner.x=pointList[it].x;
+	}
+	else if(pointList[it].x<minX)
+	{
+		leftUpCorner.x=pointList[it].x;
+	}
 
-name=graphicsName;
-commandLine=graphicsCommandLine;
-origin=figureOrigin;
-pointList=newPointList;
+	if(pointList[it].y>maxY)
+	{
+		leftUpCorner.y=pointList[it].y;
+	}
+	else if(pointList[it].y><minY)
+	{
+		downRightCorner.y=pointList[it].y;
+	}
+}
+
 #ifdef MAP
     cout << "Appel au constructeur de <Polyline>" << endl;
 #endif
-} //----- Fin de Polyline*/
+} //----- Fin de Polyline
 
 
 Polyline::~Polyline ( )
@@ -74,27 +92,17 @@ bool Polyline::isInside(Point p1, Point p2)
 // Algorithme :
 //
 {
-
-
-	if( !(p1.x <=origin.x) ||
-		!(p2.x >=origin.x) ||
-		!(p1.y >=origin.y) ||
-		!(p2.y <=origin.y) )
+	if( (p1.x <=leftUpCorner.x) &&
+		(p2.x >=downRightCorner.x) &&
+		(p1.y >=leftUpCorner.y) &&
+		(p2.y <=downRightCorner.y) )
+	{
+		return true;
+	}
+	else
 	{
 		return false;
 	}
-
-	/*vector<Point>::iterator it;
-	for(it = pointList.begin(); it!=pointList.end(); ++it){
-		if( !(p1.x <=pointList[it].x) ||
-			!(p2.x >=pointList[it].x) ||
-			!(p1.y >=pointList[it].y) ||
-			!(p2.y <=pointList[it].y) )
-		{
-			return false;
-		}
-	}
-	return true;*/
 
 } //----- Fin de isInside
 

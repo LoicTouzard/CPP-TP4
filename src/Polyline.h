@@ -40,8 +40,7 @@ public:
     // Contrat :
     //
 
-    Polyline (vector<Point> newPointList, Point figureOrigin, string graphicsName, string graphicsCommandLine)
-    		:Figure(figureOrigin, graphicsName, graphicsCommandLine), pointList(newPointList){}
+    Polyline (vector<Point> newPointList, Point figureOrigin, string graphicsName, string graphicsCommandLine);
     // Mode d'emploi :
     //
     // Contrat :
@@ -90,6 +89,8 @@ private:
 //------------------------------------------------------- Attributs privés
 
 vector<Point> pointList;
+Point leftUpCorner;
+Point downRightCorner;
 
 //---------------------------------------------------------- Classes amies
 

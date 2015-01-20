@@ -274,44 +274,34 @@ using namespace std;
                     //Code pour ajouter un rectangle
                     Point origin;
                     Point extremity;
-                    if(coin1X>coin2X && coin1Y>coin2Y){
-                        //On inverse que les X des deux coins
-                        long temp1X;
-                        temp1X=coin1X;
-                        coin1X=coin2X;
-                        coin2X=temp1X;
+                    //origin doit prendre le x minimum et y maximum
+                    //extremity doir prendre le y minimum et x maximum
+                    if(coin1X>coin2X)
+                    {
+						origin.x=coin2X;
+						extremity.x=coin1X;
                         cout<<"#Reverse corner's X coordonates"<<endl;
-                        //Modifier la commandLine
-                    }
-                    else if(coin1X<coin2X && coin1Y>coin2Y){
-                        //OK
-                    }
-                    else if(coin1X>coin2X && coin1Y<coin2Y){
-                        //On échange les coins
-                        long tempX, tempY;
-                        tempX=coin1X;
-                        tempY=coin1Y;
-                        coin1X=coin2X;
-                        coin1Y=coin2Y;
-                        coin2X=tempX;
-                        coin2Y=tempY;
-                        cout<<"#Reverse corners"<<endl;
-                        //Modifier la commandLine
-                    }
-                    else if(coin1X<coin2X && coin1Y<coin2Y){
-                        //On inverse que les Y des deux coins
-                        long temp1Y;
-                        temp1Y=coin1Y;
-                        coin1Y=coin2Y;
-                        coin2Y=temp1Y;
+                        
+					}
+					else
+					{
+						origin.x=coin1X;
+						extremity.x=coin2X;
+					}
+					if(coin1Y<coin2Y)
+					{
+						origin.y=coin2Y;
+						extremity.y=coin1Y;	
                         cout<<"#Reverse corner's Y coordonates"<<endl;
-                        //Modifier la commandLine
-                    }
-                    origin.x=coin1X;
-                    origin.y=coin1Y;
-                    extremity.x=coin2X;
-                    extremity.y=coin2Y;
-                    Rectangle *r=new Rectangle(extremity, origin, name, entree);
+                        					
+					}
+					else
+					{
+						origin.y=coin1Y;
+						extremity.y=coin2Y;	
+					}
+					string cmd="R "+name+" "+Long_to_string(origin.x)+" "+Long_to_string(origin.y)+" "+Long_to_string(extremity.x)+" "+Long_to_string(extremity.y);
+                    Rectangle *r=new Rectangle(extremity, origin, name, cmd);
                     espace.listeGraphics->push_back(r);
                     //Fin du code pour ajouter un rectangle
                     cout<<"OK"<<endl;
@@ -330,7 +320,7 @@ using namespace std;
         else if (entree.substr(0,2)=="PL") {
             string name;
             string cornerX, cornerY;
-            long coinX, coinY;
+             long coinX, coinY;
             name=Decoupage(entree,1);
 
             if( NombreEspaces(entree)%2==1 && NombreEspaces(entree)>=3){ //Un point minimum
@@ -436,7 +426,7 @@ using namespace std;
         }
 
         else if (entree.substr(0,1)=="S") {
-
+/*
             string name;
             string corner1X, corner1Y, corner2X, corner2Y;
             long coin1X, coin1Y, coin2X, coin2Y;
@@ -452,7 +442,7 @@ using namespace std;
             coin2Y=atol(corner2Y.c_str());
 
 
-
+*/
             //Code pour ajouter une selection
             getline(cin,entree);
             //Fin du code pour ajouter une selection
@@ -474,7 +464,7 @@ int NombreEspaces(string s)
 //
 {
         int nbEspaces=0;
-        for(int i=0; i<s.length()-1; i++){
+        for(unsigned int i=0; i<s.length()-1; i++){
             if(s[i]==' '){
                 nbEspaces++;
             }
@@ -486,7 +476,7 @@ bool Separateur(string s)
 // Algorithme : Renvoie true si le nom de la figure ne contient pas de séparateur
 //
 {
-        if(s.find(" ")==-1){
+        if(s.find(" ")==string::npos){
             return false;
         }
         else{
@@ -498,7 +488,7 @@ string Decoupage(string s, int posSpace)
 // Algotihme : On extrait la chaine de caractères à paritir du posSpace-ème espace
 //
 {
-        int i;
+        unsigned int i;
         int n=0;
         string result;
         int *space=new int[s.length()];
