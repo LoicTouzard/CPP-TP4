@@ -14,7 +14,7 @@ using namespace std;
 #include <iostream>
 //------------------------------------------------------ Include personnel
 #include "Polyline.h"
-
+#include "toString.h"
 //------------------------------------------------------------- Constantes
 
 //---------------------------------------------------- Variables de classe
@@ -111,7 +111,7 @@ string Polyline::description()
 // Algorithme :
 //
 {
-	return commandLine;
+	return commandLine+"\r\n";
 
 } //----- Fin de description
 
@@ -120,15 +120,15 @@ void Polyline::move(long dx, long dy)
 //
 {
 
-	/*vector<Point>::iterator it;
+	vector<Point>::iterator it;
 	origin.x += dx;
 	origin.y += dy;
-	commandLine="PL "+name+" "+Long_to_string(origin.x)+" "+Long_to_string(origin.y);
+	commandLine="PL "+name+" "+toString(origin.x)+" "+toString(origin.y);
 	for(it = pointList.begin(); it!=pointList.end(); ++it){
-		pointList[it].x += dx;
-		pointList[it].y += dy;
-		commandLIne +=" "+Long_to_string(pointList[it].x)+" "+Long_to_string(pointList[it].y);
-	}*/
+		it->x += dx;
+		it->y += dy;
+		commandLine +=" "+toString(it->x)+" "+toString(it->y);
+	}
 
 } //----- Fin de move
 

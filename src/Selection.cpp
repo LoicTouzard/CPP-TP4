@@ -15,6 +15,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Selection.h"
+#include "toString.h"
 //------------------------------------------------------------- Constantes
 
 //---------------------------------------------------- Variables de classe

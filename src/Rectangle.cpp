@@ -15,6 +15,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Rectangle.h"
+#include "toString.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -93,7 +94,7 @@ string Rectangle::description()
 // Algorithme :
 //
 {
-	return commandLine;
+	return commandLine+"\r\n";
 
 } //----- Fin de description
 
@@ -106,7 +107,7 @@ void Rectangle::move(long dx, long dy)
 	extremity.x += dx;
 	extremity.y += dy;
 
-	commandLine="R "+name+" "+Long_to_string(origin.x)+" "+Long_to_string(origin.y)+" "+Long_to_string(extremity.x)+" "+Long_to_string(extremity.y);
+	commandLine="R "+name+" "+toString(origin.x)+" "+toString(origin.y)+" "+toString(extremity.x)+" "+toString(extremity.y);
 
 } //----- Fin de move
 

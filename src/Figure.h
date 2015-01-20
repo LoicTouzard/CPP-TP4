@@ -83,19 +83,6 @@ protected:
     // Contrat :
     //
 
-
-	template <typename T>
-	// Mode d'emploi :Convertir un entier en chaine de caractere
-	//
-	// Contrat :
-	//
-	string Long_to_string(T valeur)
-	{
-		ostringstream oss;
-		oss<<valeur;
-		return oss.str();
-	}
-
 private:
 //------------------------------------------------------- Méthodes privées
 

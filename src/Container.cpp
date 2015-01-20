@@ -116,7 +116,6 @@ void Container::List()
 		for(it=listeGraphics.begin(); it!=listeGraphics.end();++it){
 			cout<<it->second->description();
 		}
-		cout << endl;
 	}
 }
 
@@ -251,7 +250,7 @@ void Container::AddPolyline(string name, vector<Point> newPointList, Point origi
 		cout<<"#name already taken"<<endl;
 		return;
 	}
-	string cmd="PL "+name+" "+origin.x+" "+origin.y;
+	string cmd="PL "+name+" "+toString(origin.x)+" "+toString(origin.y);
 	vector<Point>::iterator it;
 	for(it=newPointList.begin(); it!=newPointList.end(); ++it){
 		cmd += " "+toString(it->x)+" "+toString(it->y);

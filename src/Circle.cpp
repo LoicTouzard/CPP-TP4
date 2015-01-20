@@ -15,7 +15,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Circle.h"
-
+#include "toString.h"
 //------------------------------------------------------------- Constantes
 
 //---------------------------------------------------- Variables de classe
@@ -90,7 +90,7 @@ string Circle::description()
 // Algorithme :
 //
 {
-	return commandLine;
+	return commandLine+"\r\n";
 
 } //----- Fin de description
 
@@ -101,7 +101,7 @@ void Circle::move(long dx, long dy)
 	origin.x += dx;
 	origin.y += dy;
 
-	commandLine="C "+name+" "+Long_to_string(origin.x)+" "+Long_to_string(origin.y)+" "+Long_to_string(radius);
+	commandLine="C "+name+" "+toString(origin.x)+" "+toString(origin.y)+" "+toString(radius);
 
 } //----- Fin de move
 //------------------------------------------------------- Méthodes privées

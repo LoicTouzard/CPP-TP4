@@ -15,6 +15,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Line.h"
+#include "toString.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -48,7 +49,7 @@ Line::Line (Point recExtremity, Point figureOrigin, string graphicsName, string 
 {
 	leftUpCorner.x=(origin.x<extremity.x)?origin.x:extremity.x;
 	leftUpCorner.y=(origin.y<extremity.y)?extremity.y:origin.y;
-	
+
 	downRightCorner.x=(origin.x<extremity.x)?extremity.x:origin.x;
 	downRightCorner.y=(origin.y<extremity.y)?origin.y:extremity.y;
 
@@ -95,7 +96,7 @@ string Line:: description()
 // Algorithme :
 //
 {
-	return commandLine;
+	return commandLine+"\r\n";
 
 } //----- Fin de description
 
@@ -108,7 +109,7 @@ void Line:: move(long dx, long dy)
 	extremity.x += dx;
 	extremity.y += dy;
 
-	commandLine="L "+name+" "+Long_to_string(origin.x)+" "+Long_to_string(origin.y)+" "+Long_to_string(extremity.x)+" "+Long_to_string(extremity.y);
+	commandLine="L "+name+" "+toString(origin.x)+" "+toString(origin.y)+" "+toString(extremity.x)+" "+toString(extremity.y);
 
 } //----- Fin de move
 

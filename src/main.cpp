@@ -116,9 +116,9 @@ using namespace std;
             deltaY=Decoupage(entree,3);
             dX=atol(deltaX.c_str());
             dY=atol(deltaY.c_str());
-            
+
 			//Faire les tests si on ne rentre pas des entiers
-			
+
             if(NombreEspaces(entree)==3){
 				espace.moveElement(name, dX, dY);
             }
@@ -127,7 +127,7 @@ using namespace std;
                 cout<<"#invalid parameters"<<endl;
             }
         }
-        
+
         else if (entree.substr(0,1)=="C") {
             string name;
             string radius, centerX, centerY;
@@ -135,7 +135,7 @@ using namespace std;
             centerX=Decoupage(entree,2);
             centerY=Decoupage(entree,3);
             radius=Decoupage(entree,4);
-            
+
             if(NombreEspaces(entree)==4)
             {
 				long centerlX=atol(centerX.c_str());
@@ -234,10 +234,6 @@ using namespace std;
                 cout<<"ERR"<<endl;
                 cout<<"#invalid parameters"<<endl;
             }
-
-
-            getline(cin,entree);
-
         }
 
         else if (entree.substr(0,1)=="S") {
