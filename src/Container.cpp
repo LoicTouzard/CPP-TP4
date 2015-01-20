@@ -54,7 +54,7 @@ Container::Container ( )
 // Algorithme :
 //
 {
-   
+
 #ifdef MAP
     cout << "Appel au constructeur de <Container>" << endl;
 #endif
@@ -116,13 +116,14 @@ void Container::List()
 		for(it=listeGraphics.begin(); it!=listeGraphics.end();++it){
 			cout<<it->second->description();
 		}
+		cout << endl;
 	}
 }
 
 void Container::moveElement(string name, long dX, long dY){
 	MapGraphics::iterator it;
 	it=listeGraphics.find(name);
-	if(it==listeGraphics.end()){
+	if(it!=listeGraphics.end()){
 		it->second->move(dX, dY);
 		cout<<"OK"<<endl;
 	}
@@ -181,16 +182,16 @@ void Container::AddCircle(string name, long radius, long centerX, long centerY, 
 
 void Container::AddRectangle(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande)
 {
-	Point origin;
-	Point extremity;
-	//origin doit prendre le x minimum et y maximum
-	//extremity doir prendre le y minimum et x maximum
-	if(!NomLibre(name)){
+
+    if(!NomLibre(name)){
 		cout<<"ERR"<<endl;
 		cout<<"#name already taken"<<endl;
 		return;
 	}
-	
+	Point origin;
+	Point extremity;
+	//origin doit prendre le x minimum et y maximum
+	//extremity doir prendre le y minimum et x maximum
 	if(coin1X>coin2X)
 	{
 		origin.x=coin2X;
@@ -205,13 +206,13 @@ void Container::AddRectangle(string name, long coin1X, long coin1Y, long coin2X,
 	if(coin1Y<coin2Y)
 	{
 		origin.y=coin2Y;
-		extremity.y=coin1Y;	
-		cout<<"#Reverse corner's Y coordonates"<<endl;				
+		extremity.y=coin1Y;
+		cout<<"#Reverse corner's Y coordonates"<<endl;
 	}
 	else
 	{
 		origin.y=coin1Y;
-		extremity.y=coin2Y;	
+		extremity.y=coin2Y;
 	}
 	string cmd="R "+name+" "+toString(origin.x)+" "+toString(origin.y)+" "+toString(extremity.x)+" "+toString(extremity.y);
 	Rectangle *r=new Rectangle(extremity, origin, name, cmd);
@@ -222,6 +223,12 @@ void Container::AddRectangle(string name, long coin1X, long coin1Y, long coin2X,
 
 void Container::AddLine(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande)
 {
+    if(!NomLibre(name)){
+		cout<<"ERR"<<endl;
+		cout<<"#name already taken"<<endl;
+		return;
+	}
+
 	Point origin;
 	Point extremity;
 
@@ -229,7 +236,7 @@ void Container::AddLine(string name, long coin1X, long coin1Y, long coin2X, long
 	origin.y=coin1Y;
 	extremity.x=coin2X;
 	extremity.y=coin2Y;
-	
+
 	string cmd="L "+name+" "+toString(origin.x)+" "+toString(origin.y)+" "+toString(extremity.x)+" "+toString(extremity.y);
 	Line *l=new Line(extremity, origin, name, cmd);
 	listeGraphics.insert(make_pair(name, l));
@@ -239,7 +246,12 @@ void Container::AddLine(string name, long coin1X, long coin1Y, long coin2X, long
 
 void Container::AddPolyline(string name, vector<Point> newPointList, Point origin, string commande)
 {
-	string cmd="PL "+name;
+    if(!NomLibre(name)){
+		cout<<"ERR"<<endl;
+		cout<<"#name already taken"<<endl;
+		return;
+	}
+	string cmd="PL "+name+" "+origin.x+" "+origin.y;
 	vector<Point>::iterator it;
 	for(it=newPointList.begin(); it!=newPointList.end(); ++it){
 		cmd += " "+toString(it->x)+" "+toString(it->y);
@@ -252,7 +264,7 @@ void Container::AddPolyline(string name, vector<Point> newPointList, Point origi
 
 void Container::AddSelection()
 {
-	
+
 }
 
 //------------------------------------------------------------------ PRIVE

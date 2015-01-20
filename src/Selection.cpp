@@ -81,7 +81,7 @@ Selection::~Selection ( )
     // type Selection::Méthode ( liste de paramètres )
     // Algorithme :
     {
-
+        return "";
     } //----- Fin de description
 
     void Selection::move(long dx, long dy)
