@@ -13,8 +13,10 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <list>
 #include "Graphics.h"
 #include "Point.h"
+#include "Command.h"
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -56,10 +58,10 @@ typedef MapGraphics::const_iterator Graphics_const_iterator;
     //
     // Contrat :
     //
-    
+
     Graphics_iterator Graphics_begin(){ return listeGraphics.begin(); }
     Graphics_iterator Graphics_end(){ return listeGraphics.end(); }
-    
+
     void List();
 	// Mode d'emploi :
     //
@@ -77,55 +79,68 @@ typedef MapGraphics::const_iterator Graphics_const_iterator;
     //
     // Contrat :
     //
-    
+
     void moveElement(string name, long dX, long dY);
 	// Mode d'emploi :
     //
     // Contrat :
     //
-    
+
     void Load(string nomFichier);
 	// Mode d'emploi :
     //
     // Contrat :
     //
-    
+
     void Delete(vector<string> listeNoms);
 	// Mode d'emploi :
     //
     // Contrat :
     //
-    
+
 	void AddCircle(string name, long radius, long centerX, long centerY, string commande);
     // Mode d'emploi :
     //
     // Contrat :
     //
-    
+
 	void AddRectangle(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string entree);
     // Mode d'emploi :
     //
     // Contrat :
     //
-    
+
 	void AddLine(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande);
     // Mode d'emploi :
     //
     // Contrat :
     //
-    
+
 	void AddPolyline(string name, vector<Point> newPointList, Point origin, string commande);
     // Mode d'emploi :
     //
     // Contrat :
     //
-    
+
     void AddSelection();
     // Mode d'emploi :
     //
     // Contrat :
     //
-    
+
+    void Undo();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+     void Redo();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+
 //------------------------------------------------------------------ PRIVE
 
 protected:
@@ -140,6 +155,12 @@ private:
     // Contrat :
     //
 
+    void insertCommand(Command* cmd);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
 protected:
 //----------------------------------------------------- Attributs protégés
 
@@ -148,12 +169,14 @@ private:
 
 
 MapGraphics listeGraphics;
-//vector<Graphics*> *listeGraphics;
+list<Command*> undoCommands;
+list<Command*> redoCommands;
 
 
 //---------------------------------------------------------- Classes amies
-/*friend int main();
-friend bool NomLibre(string s);*/
+//il faut mettre toutes les commandes car l'héritage ne transmet pas l'amitié.
+friend MoveCommand;
+
 //-------------------------------------------------------- Classes privées
 
 //----------------------------------------------------------- Types privés

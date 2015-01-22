@@ -86,7 +86,8 @@ private:
 //------------------------------------------------------- Attributs privés
 
 //---------------------------------------------------------- Classes amies
-friend class Container;
+    friend class Container;
+    friend class MoveCommand;
 //-------------------------------------------------------- Classes privées
 
 //----------------------------------------------------------- Types privés

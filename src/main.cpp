@@ -32,13 +32,13 @@ using namespace std;
 
         else if (entree.substr(0,4)=="UNDO") {
             //Code pour UNDO
-
+            espace.Undo();
             //Fin du code pour UNDO
         }
 
         else if (entree.substr(0,4)=="REDO") {
             //Code pour REDO
-
+            espace.Redo();
             //Fin du code pour REDO
         }
 
@@ -194,7 +194,7 @@ using namespace std;
 				origin.x=coinX;
 				origin.y=coinY;
 				for(int i=2; i<=nbPoints; i++){
-					//Améliorer performances de découpage
+					//AmÃ©liorer performances de dÃ©coupage
 					cornerX=Decoupage(entree,i*2);
 					cornerY=Decoupage(entree,i*2+1);
 					coinX=atol(cornerX.c_str());
@@ -270,7 +270,7 @@ using namespace std;
 	}
 
 int NombreEspaces(string s)
-// Algorithme : Compte le nombre d'espaces dans un string (utile pour savoir si le format d'entrée est respecté)
+// Algorithme : Compte le nombre d'espaces dans un string (utile pour savoir si le format d'entrÃ©e est respectÃ©)
 //
 {
     int nbEspaces=0;
@@ -283,7 +283,7 @@ int NombreEspaces(string s)
 }
 
 bool Separateur(string s)
-// Algorithme : Renvoie true si le nom de la figure ne contient pas de séparateur
+// Algorithme : Renvoie true si le nom de la figure ne contient pas de sÃ©parateur
 //
 {
     if(s.find(" ")==string::npos){
@@ -295,7 +295,7 @@ bool Separateur(string s)
 }
 
 string Decoupage(string s, int posSpace)
-// Algotihme : On extrait la chaine de caractères à paritir du posSpace-ème espace
+// Algotihme : On extrait la chaine de caractÃ¨res Ã  paritir du posSpace-Ã¨me espace
 //
 {
         unsigned int i;
@@ -321,7 +321,7 @@ string Decoupage(string s, int posSpace)
     }
 
 bool TestFichierExiste(string nomFichier)
-// Algorithme : Renvoie true si le fichier existe déjà
+// Algorithme : Renvoie true si le fichier existe dÃ©jÃ 
 //
 {
     ifstream fichierATester(nomFichier.c_str());

@@ -25,8 +25,11 @@ using namespace std;
 #include "Polyline.h"
 #include "Selection.h"
 #include "toString.h"
-//------------------------------------------------------------- Constantes
 
+#include "Command.h"
+#include "MoveCommand.h"
+//------------------------------------------------------------- Constantes
+const size_t UNDO_REDO_MAX_LEVEL = 20;
 //---------------------------------------------------- Variables de classe
 
 //----------------------------------------------------------- Types privés
@@ -124,6 +127,11 @@ void Container::moveElement(string name, long dX, long dY){
 	it=listeGraphics.find(name);
 	if(it!=listeGraphics.end()){
 		it->second->move(dX, dY);
+		Point pt;
+		pt.x = dX;
+		pt.y = dY;
+		//on l'ajoute a la pile des undo et on clear les redo
+		insertCommand(new MoveCommand(it->second , pt));
 		cout<<"OK"<<endl;
 	}
 	else{
@@ -266,6 +274,36 @@ void Container::AddSelection()
 
 }
 
+void Container::Undo()
+{
+    if(!undoCommands.empty())
+    {
+        Command* tmpCommand = undoCommands.front(); //on prend la commande du haut de la pile
+        undoCommands.pop_front();
+        tmpCommand->unexecute();
+        redoCommands.push_front(tmpCommand);//on met la command au sommet de la pile de undo
+    }
+    else
+    {
+        cout << "#nothing to undo !" << endl;
+    }
+}
+
+void Container::Redo()
+{
+    if(!redoCommands.empty())
+    {
+        Command* tmpCommand = redoCommands.front(); //on prend la commande du haut de la pile
+        redoCommands.pop_front();
+        tmpCommand->execute();
+        undoCommands.push_front(tmpCommand);//on met la command au sommet de la pile de undo
+    }
+    else
+    {
+        cout << "#nothing to redo !" << endl;
+    }
+}
+
 //------------------------------------------------------------------ PRIVE
 bool Container::NomLibre(string name)
 {
@@ -275,6 +313,20 @@ bool Container::NomLibre(string name)
 		return true;
 	}
 	return false;
+}
+
+void Container::insertCommand(Command* cmd)
+{
+    if(undoCommands.size() >= UNDO_REDO_MAX_LEVEL)
+    //s'il y a deja x evenement dans la liste
+    // on doit supprimer le dernier pour en inserer un nouveau
+    {
+        Command* tmpCmd = undoCommands.back();
+        undoCommands.pop_back();
+        delete tmpCmd;
+    }
+    undoCommands.push_front(cmd);
+    redoCommands.clear();
 }
 //----------------------------------------------------- Méthodes protégées
 
