@@ -64,8 +64,8 @@ MoveCommand::MoveCommand ( const MoveCommand & unMoveCommand ):SimpleCommand(unM
 } //----- Fin de MoveCommand (constructeur de copie)
 
 
-MoveCommand::MoveCommand ( Graphics* elt, Point newOrigin )
-    :SimpleCommand(elt, newOrigin)
+MoveCommand::MoveCommand ( MapGraphics* mapToLink, Graphics* elt, Point newOrigin )
+    :SimpleCommand(mapToLink, elt, newOrigin)
 // Algorithme :
 //
 {

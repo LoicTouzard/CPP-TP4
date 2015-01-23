@@ -30,6 +30,10 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
+    string GetName()
+    {
+        return this->name;
+    }
 
 //-------------------------------------------- Constructeurs - destructeur
     Graphics ( const Graphics & unGraphics );

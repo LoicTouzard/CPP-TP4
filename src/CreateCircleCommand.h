@@ -1,34 +1,28 @@
 /*************************************************************************
-                           SimpleCommand  -  description
+                           CreateCircleCommand  -  description
                              -------------------
     début                : ${date}
     copyright            : (C) ${year} par ${user}
 *************************************************************************/
 
-//---------- Interface de la classe <SimpleCommand> (fichier SimpleCommand.h) ------
-#if ! defined ( SIMPLECOMMAND_H )
-#define SIMPLECOMMAND_H
+//---------- Interface de la classe <CreateCircleCommand> (fichier CreateCircleCommand.h) ------
+#if ! defined ( CREATECIRCLECOMMAND_H )
+#define CREATECIRCLECOMMAND_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <map>
-#include <string>
-#include "Graphics.h"
-#include "Point.h"
-#include "Command.h"
-
-
+#include "SimpleCommand.h"
 //------------------------------------------------------------- Constantes
 
-typedef map<string, Graphics*> MapGraphics;
 //------------------------------------------------------------------ Types
+typedef map<string, Graphics*> MapGraphics;
 
 //------------------------------------------------------------------------
-// Rôle de la classe <SimpleCommand>
+// Rôle de la classe <CreateCircleCommand>
 //
 //
 //------------------------------------------------------------------------
 
-class SimpleCommand : public Command
+class CreateCircleCommand : public SimpleCommand
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -40,35 +34,34 @@ public:
     // Contrat :
     //
 
-    virtual void execute()=0;
+    virtual void execute();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual void unexecute()=0;
+    virtual void unexecute();
     // Mode d'emploi :
     //
     // Contrat :
     //
-
 
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-    SimpleCommand ( const SimpleCommand & unSimpleCommand );
+    CreateCircleCommand ( const CreateCircleCommand & unCreateCircleCommand );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    SimpleCommand ( MapGraphics* mapToLink, Graphics* elt, Point newOrigin );
+    CreateCircleCommand ( MapGraphics* mapToLink, Graphics* name, Point newOrigin );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~SimpleCommand ( );
+    virtual ~CreateCircleCommand ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -84,9 +77,6 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-MapGraphics* linkedMap;
-Graphics* element;
-Point origin;
 
 private:
 //------------------------------------------------------- Attributs privés
@@ -99,6 +89,6 @@ private:
 
 };
 
-//----------------------------------------- Types dépendants de <SimpleCommand>
+//----------------------------------------- Types dépendants de <CreateCircleCommand>
 
-#endif // SIMPLECOMMAND_H
+#endif // CREATECIRCLECOMMAND_H

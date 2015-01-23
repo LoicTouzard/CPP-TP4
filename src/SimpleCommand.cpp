@@ -15,7 +15,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "SimpleCommand.h"
-
+#include "Container.h"
 //------------------------------------------------------------- Constantes
 
 //---------------------------------------------------- Variables de classe
@@ -48,8 +48,8 @@ SimpleCommand::SimpleCommand ( const SimpleCommand & SimpleCommand )
 } //----- Fin de SimpleCommand (constructeur de copie)
 
 
-SimpleCommand::SimpleCommand ( Graphics* elt, Point newOrigin )
-    :element(elt),origin(newOrigin)
+SimpleCommand::SimpleCommand ( MapGraphics* mapToLink, Graphics* elt, Point newOrigin )
+    :linkedMap(mapToLink), element(elt), origin(newOrigin)
 // Algorithme :
 //
 {

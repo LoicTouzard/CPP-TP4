@@ -28,6 +28,7 @@ using namespace std;
 
 #include "Command.h"
 #include "MoveCommand.h"
+#include "CreateCircleCommand.h"
 //------------------------------------------------------------- Constantes
 const size_t UNDO_REDO_MAX_LEVEL = 20;
 //---------------------------------------------------- Variables de classe
@@ -131,7 +132,7 @@ void Container::moveElement(string name, long dX, long dY){
 		pt.x = dX;
 		pt.y = dY;
 		//on l'ajoute a la pile des undo et on clear les redo
-		insertCommand(new MoveCommand(it->second , pt));
+		insertCommand(new MoveCommand(&listeGraphics, it->second , pt));
 		cout<<"OK"<<endl;
 	}
 	else{
@@ -181,6 +182,7 @@ void Container::AddCircle(string name, long radius, long centerX, long centerY, 
 		center.y=centerY;
 		Circle *c=new Circle(radius, center, name, commande);
 		listeGraphics.insert(make_pair(name, c));
+		insertCommand(new CreateCircleCommand(&listeGraphics, c, center ));
 		//Fin du code pour ajouter un cerlce
 		cout<<"OK"<<endl;
 		cout<<"#New object :"<<name<<endl;

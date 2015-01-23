@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="TP4" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/TP4" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/TP4" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Circle.cpp" />
+		<Unit filename="Circle.h" />
+		<Unit filename="Command.cpp" />
+		<Unit filename="Command.h" />
+		<Unit filename="ComposedCommand.cpp" />
+		<Unit filename="ComposedCommand.h" />
+		<Unit filename="Container.cpp" />
+		<Unit filename="Container.h" />
+		<Unit filename="CreateCircleCommand.cpp" />
+		<Unit filename="CreateCircleCommand.h" />
+		<Unit filename="Figure.cpp" />
+		<Unit filename="Figure.h" />
+		<Unit filename="Graphics.cpp" />
+		<Unit filename="Graphics.h" />
+		<Unit filename="Line.cpp" />
+		<Unit filename="Line.h" />
+		<Unit filename="MoveCommand.cpp" />
+		<Unit filename="MoveCommand.h" />
+		<Unit filename="Point.h" />
+		<Unit filename="Polyline.cpp" />
+		<Unit filename="Polyline.h" />
+		<Unit filename="Rectangle.cpp" />
+		<Unit filename="Rectangle.h" />
+		<Unit filename="Selection.cpp" />
+		<Unit filename="Selection.h" />
+		<Unit filename="SimpleCommand.cpp" />
+		<Unit filename="SimpleCommand.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="toString.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

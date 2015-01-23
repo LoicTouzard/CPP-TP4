@@ -5,7 +5,7 @@
     copyright            : (C) ${year} par ${user}
 *************************************************************************/
 
-//---------- Interface de la classe <MoveCommand> (fichier MovecCommand.h) ------
+//---------- Interface de la classe <MoveCommand> (fichier MoveCommand.h) ------
 #if ! defined ( MOVECOMMAND_H )
 #define MOVECOMMAND_H
 
@@ -14,6 +14,7 @@
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
+typedef map<string, Graphics*> MapGraphics;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <MoveCommand>
@@ -54,7 +55,7 @@ public:
     // Contrat :
     //
 
-    MoveCommand ( Graphics* name, Point newOrigin );
+    MoveCommand ( MapGraphics* mapToLink, Graphics* name, Point newOrigin );
     // Mode d'emploi :
     //
     // Contrat :
