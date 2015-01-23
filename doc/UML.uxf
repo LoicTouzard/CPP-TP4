@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>112</x>
-      <y>49</y>
+      <x>119</x>
+      <y>42</y>
       <w>175</w>
       <h>147</h>
     </coordinates>
@@ -28,8 +28,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>56</y>
+      <x>287</x>
+      <y>49</y>
       <w>175</w>
       <h>35</h>
     </coordinates>
@@ -42,8 +42,8 @@ est composé de</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>441</x>
-      <y>63</y>
+      <x>448</x>
+      <y>56</y>
       <w>119</w>
       <h>84</h>
     </coordinates>
@@ -61,8 +61,8 @@ est composé de</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>693</x>
-      <y>161</y>
+      <x>700</x>
+      <y>154</y>
       <w>189</w>
       <h>119</h>
     </coordinates>
@@ -80,8 +80,8 @@ est composé de</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>308</x>
-      <y>98</y>
+      <x>315</x>
+      <y>91</y>
       <w>98</w>
       <h>42</h>
     </coordinates>
@@ -92,8 +92,8 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>343</x>
-      <y>63</y>
+      <x>350</x>
+      <y>56</y>
       <w>28</w>
       <h>49</h>
     </coordinates>
@@ -103,8 +103,8 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>392</x>
-      <y>203</y>
+      <x>399</x>
+      <y>196</y>
       <w>182</w>
       <h>112</h>
     </coordinates>
@@ -124,8 +124,8 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>126</x>
-      <y>210</y>
+      <x>133</x>
+      <y>203</y>
       <w>63</w>
       <h>42</h>
     </coordinates>
@@ -138,8 +138,8 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>182</x>
-      <y>210</y>
+      <x>189</x>
+      <y>203</y>
       <w>224</w>
       <h>49</h>
     </coordinates>
@@ -152,8 +152,8 @@ est l'origine de </panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>203</x>
-      <y>238</y>
+      <x>210</x>
+      <y>231</y>
       <w>147</w>
       <h>56</h>
     </coordinates>
@@ -168,8 +168,8 @@ bg=blue
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>238</x>
-      <y>217</y>
+      <x>245</x>
+      <y>210</y>
       <w>28</w>
       <h>35</h>
     </coordinates>
@@ -179,8 +179,8 @@ bg=blue
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>721</x>
-      <y>343</y>
+      <x>728</x>
+      <y>336</y>
       <w>196</w>
       <h>112</h>
     </coordinates>
@@ -200,8 +200,8 @@ bg=blue
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>483</x>
-      <y>140</y>
+      <x>490</x>
+      <y>133</y>
       <w>21</w>
       <h>77</h>
     </coordinates>
@@ -211,8 +211,8 @@ bg=blue
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>539</x>
-      <y>308</y>
+      <x>546</x>
+      <y>301</y>
       <w>294</w>
       <h>49</h>
     </coordinates>
@@ -222,8 +222,8 @@ bg=blue
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>595</x>
-      <y>476</y>
+      <x>602</x>
+      <y>469</y>
       <w>196</w>
       <h>112</h>
     </coordinates>
@@ -243,8 +243,8 @@ bg=blue
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>406</x>
-      <y>308</y>
+      <x>413</x>
+      <y>301</y>
       <w>70</w>
       <h>182</h>
     </coordinates>
@@ -254,8 +254,8 @@ bg=blue
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>322</x>
-      <y>476</y>
+      <x>329</x>
+      <y>469</y>
       <w>196</w>
       <h>126</h>
     </coordinates>
@@ -277,8 +277,8 @@ bg=blue
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>112</x>
-      <y>399</y>
+      <x>119</x>
+      <y>392</y>
       <w>196</w>
       <h>126</h>
     </coordinates>
@@ -300,8 +300,8 @@ bg=blue
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>497</x>
-      <y>308</y>
+      <x>504</x>
+      <y>301</y>
       <w>182</w>
       <h>182</h>
     </coordinates>
@@ -311,8 +311,8 @@ bg=blue
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>210</x>
-      <y>308</y>
+      <x>217</x>
+      <y>301</y>
       <w>224</w>
       <h>105</h>
     </coordinates>
@@ -322,8 +322,8 @@ bg=blue
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>147</x>
-      <y>245</y>
+      <x>154</x>
+      <y>238</y>
       <w>91</w>
       <h>168</h>
     </coordinates>
@@ -336,8 +336,8 @@ est composée de</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>42</x>
-      <y>301</y>
+      <x>49</x>
+      <y>294</y>
       <w>98</w>
       <h>49</h>
     </coordinates>
@@ -348,8 +348,8 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>133</x>
-      <y>322</y>
+      <x>140</x>
+      <y>315</y>
       <w>35</w>
       <h>21</h>
     </coordinates>
@@ -359,8 +359,8 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>553</x>
-      <y>105</y>
+      <x>560</x>
+      <y>98</y>
       <w>182</w>
       <h>70</h>
     </coordinates>
@@ -370,8 +370,8 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>567</x>
-      <y>231</y>
+      <x>574</x>
+      <y>224</y>
       <w>140</w>
       <h>35</h>
     </coordinates>
