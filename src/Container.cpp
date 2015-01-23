@@ -105,6 +105,16 @@ void Container::Clear()
 		cout<<"#The list was already empty"<<endl;
 	}
 	else{
+
+        vector<Command*> listeCMD;
+        Graphics_iterator it;
+        for(it = listeGraphics.begin(); it!=listeGraphics.end(); ++it)
+        {
+            listeCMD.push_back(new DeleteElementCommand(&listeGraphics, it->second));
+        }
+        //on considère le CLEAR comme un DELETE de tous les elements (même comportement)
+        insertCommand(new DeleteCommand(listeCMD));
+
 		listeGraphics.clear();
 		cout<<"OK"<<endl;
 	}
