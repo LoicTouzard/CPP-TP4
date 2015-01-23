@@ -1,11 +1,11 @@
 /*************************************************************************
-                           Figure  -  description
+                           ${file_base}  -  description
                              -------------------
     début                : ${date}
     copyright            : (C) ${year} par ${user}
 *************************************************************************/
 
-//---------- Réalisation de la classe <Figure> (fichier Figure.cpp) --
+//---------- Réalisation de la classe <${file_base}> (fichier ${file_name}) --
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -14,7 +14,7 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "Figure.h"
+#include "${file_base}.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -27,7 +27,7 @@ using namespace std;
 //-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Méthodes publiques
-// type Figure::Méthode ( liste de paramètres )
+// type ${file_base}::Méthode ( liste de paramètres )
 // Algorithme :
 //
 //{
@@ -35,45 +35,42 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
+${file_base} & ${file_base}::operator = ( const ${file_base} & un${file_base} )
+// Algorithme :
+//
+{
+} //----- Fin de operator =
+
 
 //-------------------------------------------- Constructeurs - destructeur
-Figure::Figure ( const Figure & unFigure )
+${file_base}::${file_base} ( const ${file_base} & un${file_base} )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Figure>" << endl;
+    cout << "Appel au constructeur de copie de <${file_base}>" << endl;
 #endif
-} //----- Fin de Figure (constructeur de copie)
+} //----- Fin de ${file_base} (constructeur de copie)
 
 
-/*Figure::Figure ( Point figureOrigin, string graphicsName2, string graphicsCommandLine2)
+${file_base}::${file_base} ( )
 // Algorithme :
 //
 {
-
-name=graphicsName2;
-commandLine=graphicsCommandLine2;
-origin=figureOrigin;
 #ifdef MAP
-    cout << "Appel au constructeur de <Figure>" << endl;
+    cout << "Appel au constructeur de <${file_base}>" << endl;
 #endif
-} //----- Fin de Figure*/
+} //----- Fin de ${file_base}
 
 
-Figure::Figure ( ){
-
-}
-
-Figure::~Figure ( )
+${file_base}::~${file_base} ( )
 // Algorithme :
 //
 {
-
 #ifdef MAP
-    cout << "Appel au destructeur de <Figure>" << endl;
+    cout << "Appel au destructeur de <${file_base}>" << endl;
 #endif
-} //----- Fin de ~Figure
+} //----- Fin de ~${file_base}
 
 
 //------------------------------------------------------------------ PRIVE

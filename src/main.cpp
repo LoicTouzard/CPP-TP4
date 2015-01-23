@@ -95,11 +95,8 @@ using namespace std;
             //Code pour DELETE
             string name;
             vector<string> listeNoms;
-            vector<string>::iterator it;
-            int compteur=0;
-            for(it=listeNoms.begin(); it!=listeNoms.end(); ++it){
-				compteur++;
-                name=Decoupage(entree,compteur);
+            for(int i=0; i<NombreEspaces(entree); ++i){
+                name=Decoupage(entree,i+1);
                 listeNoms.push_back(name);
 			}
 			espace.Delete(listeNoms);

@@ -28,7 +28,9 @@ using namespace std;
 
 #include "Command.h"
 #include "MoveCommand.h"
-#include "CreateCircleCommand.h"
+#include "CreateElementCommand.h"
+#include "DeleteElementCommand.h"
+#include "DeleteCommand.h"
 //------------------------------------------------------------- Constantes
 const size_t UNDO_REDO_MAX_LEVEL = 20;
 //---------------------------------------------------- Variables de classe
@@ -149,17 +151,28 @@ void Container::Delete(vector<string> listeNoms)
 {
 	for(unsigned int i=0; i<listeNoms.size(); ++i)
 	{
-		if(!NomLibre( listeNoms[i] ) )
+		if(NomLibre( listeNoms[i] ) )
 		{
 			cout<<"ERR"<<endl;
 			cout<<"# can't find "+listeNoms[i]+ ". None of the elements have been removed"<<endl;
 			return;
 		}
 	}
+	vector<Command*> listeCMD;
+	Graphics_iterator it;
 	for(unsigned int i=0; i<listeNoms.size(); ++i)
 	{
-		delete listeGraphics[listeNoms[i]];
+        it=listeGraphics.find(listeNoms[i]); //On met en place l'iterateur sur l'élément pour ne parcourir la map qu'une seule fois
+	    if(it!=listeGraphics.end()) //On vérifie que l'élément est bien présent
+	    //et n'a pas été supprimé par un delete précédent de cette même commande
+	    // Ex : DELETE nameSelection nameObjetOfSelection
+        {
+
+            listeCMD.push_back(new DeleteElementCommand(&listeGraphics, it->second));
+            listeGraphics.erase(it);
+        }
 	}
+	insertCommand(new DeleteCommand(listeCMD));
 	// Penser au cas de la selection suivie des ses éléments (contrat ?)
 	cout<<"OK"<<endl;
 }
@@ -182,7 +195,7 @@ void Container::AddCircle(string name, long radius, long centerX, long centerY, 
 		center.y=centerY;
 		Circle *c=new Circle(radius, center, name, commande);
 		listeGraphics.insert(make_pair(name, c));
-		insertCommand(new CreateCircleCommand(&listeGraphics, c, center ));
+		insertCommand(new CreateElementCommand(&listeGraphics, c ));
 		//Fin du code pour ajouter un cerlce
 		cout<<"OK"<<endl;
 		cout<<"#New object :"<<name<<endl;
@@ -226,6 +239,7 @@ void Container::AddRectangle(string name, long coin1X, long coin1Y, long coin2X,
 	string cmd="R "+name+" "+toString(origin.x)+" "+toString(origin.y)+" "+toString(extremity.x)+" "+toString(extremity.y);
 	Rectangle *r=new Rectangle(extremity, origin, name, cmd);
 	listeGraphics.insert(make_pair(name, r));
+	insertCommand(new CreateElementCommand(&listeGraphics, r ));
 	cout<<"OK"<<endl;
 	cout<<"#New object :"<<name<<endl;
 }
@@ -249,6 +263,7 @@ void Container::AddLine(string name, long coin1X, long coin1Y, long coin2X, long
 	string cmd="L "+name+" "+toString(origin.x)+" "+toString(origin.y)+" "+toString(extremity.x)+" "+toString(extremity.y);
 	Line *l=new Line(extremity, origin, name, cmd);
 	listeGraphics.insert(make_pair(name, l));
+    insertCommand(new CreateElementCommand(&listeGraphics, l ));
 	cout<<"OK"<<endl;
 	cout<<"#New object :"<<name<<endl;
 }
@@ -267,6 +282,7 @@ void Container::AddPolyline(string name, vector<Point> newPointList, Point origi
 	}
 	Polyline *pl =new Polyline (newPointList, origin, name, cmd);
 	listeGraphics.insert(make_pair(name, pl));
+    insertCommand(new CreateElementCommand(&listeGraphics, pl ));
 	cout<<"OK"<<endl;
 	cout<<"#New object :"<<name<<endl;
 }
@@ -284,6 +300,7 @@ void Container::Undo()
         undoCommands.pop_front();
         tmpCommand->unexecute();
         redoCommands.push_front(tmpCommand);//on met la command au sommet de la pile de undo
+        cout<<"OK"<<endl;
     }
     else
     {
@@ -299,6 +316,7 @@ void Container::Redo()
         redoCommands.pop_front();
         tmpCommand->execute();
         undoCommands.push_front(tmpCommand);//on met la command au sommet de la pile de undo
+        cout<<"OK"<<endl;
     }
     else
     {
@@ -308,6 +326,8 @@ void Container::Redo()
 
 //------------------------------------------------------------------ PRIVE
 bool Container::NomLibre(string name)
+//Renvoie true si le nom n'est pa dans la map
+//Renvoie false si le nom est dans la map
 {
 	Graphics_iterator it;
 	it=listeGraphics.find(name);
@@ -328,6 +348,10 @@ void Container::insertCommand(Command* cmd)
         delete tmpCmd;
     }
     undoCommands.push_front(cmd);
+    list<Command*>::iterator it;
+    for (it = redoCommands.begin(); it != redoCommands.end(); ++it){
+        delete *it;
+    }
     redoCommands.clear();
 }
 //----------------------------------------------------- Méthodes protégées

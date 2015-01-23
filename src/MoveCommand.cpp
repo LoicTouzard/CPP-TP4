@@ -40,6 +40,7 @@ using namespace std;
     //
     {
         element->move(origin.x, origin.y);
+        whichList=IN_UNDO;
     }
 
     void MoveCommand::unexecute()
@@ -49,6 +50,7 @@ using namespace std;
     //
     {
         element->move(-(origin.x), -(origin.y));
+        whichList=IN_REDO;
     }
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -65,7 +67,7 @@ MoveCommand::MoveCommand ( const MoveCommand & unMoveCommand ):SimpleCommand(unM
 
 
 MoveCommand::MoveCommand ( MapGraphics* mapToLink, Graphics* elt, Point newOrigin )
-    :SimpleCommand(mapToLink, elt, newOrigin)
+    :SimpleCommand(mapToLink, elt), origin(newOrigin)
 // Algorithme :
 //
 {

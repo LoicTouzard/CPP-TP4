@@ -1,34 +1,27 @@
 /*************************************************************************
-                           SimpleCommand  -  description
+                           ${file_base}  -  description
                              -------------------
     début                : ${date}
     copyright            : (C) ${year} par ${user}
 *************************************************************************/
 
-//---------- Interface de la classe <SimpleCommand> (fichier SimpleCommand.h) ------
-#if ! defined ( SIMPLECOMMAND_H )
-#define SIMPLECOMMAND_H
+//---------- Interface de la classe <${file_base}> (fichier ${file_name}) ------
+#if ! defined ( XXX_H )
+#define XXX_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <map>
-#include <string>
-#include "Graphics.h"
-#include "Point.h"
-#include "Command.h"
 
+//------------------------------------------------------------- Constantes 
 
-//------------------------------------------------------------- Constantes
+//------------------------------------------------------------------ Types 
 
-typedef map<string, Graphics*> MapGraphics;
-//------------------------------------------------------------------ Types
-
-//------------------------------------------------------------------------
-// Rôle de la classe <SimpleCommand>
+//------------------------------------------------------------------------ 
+// Rôle de la classe <${file_base}>
 //
 //
-//------------------------------------------------------------------------
+//------------------------------------------------------------------------ 
 
-class SimpleCommand : public Command
+class ${file_base} : public Ancetre
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -40,41 +33,35 @@ public:
     // Contrat :
     //
 
-    virtual void execute()=0;
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    virtual void unexecute()=0;
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 
 //------------------------------------------------- Surcharge d'opérateurs
+    ${file_base} & operator = ( const ${file_base} & un${file_base} );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
 
 //-------------------------------------------- Constructeurs - destructeur
-    SimpleCommand ( const SimpleCommand & unSimpleCommand );
+    ${file_base} ( const ${file_base} & un${file_base} );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    SimpleCommand ( MapGraphics* mapToLink, Graphics* elt);
+    ${file_base} ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~SimpleCommand ( );
+    virtual ~${file_base} ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE
+//------------------------------------------------------------------ PRIVE 
 
 protected:
 //----------------------------------------------------- Méthodes protégées
@@ -84,8 +71,6 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-MapGraphics* linkedMap;
-Graphics* element;
 
 private:
 //------------------------------------------------------- Attributs privés
@@ -98,6 +83,6 @@ private:
 
 };
 
-//----------------------------------------- Types dépendants de <SimpleCommand>
+//----------------------------------------- Types dépendants de <${file_base}>
 
-#endif // SIMPLECOMMAND_H
+#endif // XXX_H

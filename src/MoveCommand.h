@@ -77,6 +77,7 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
+Point origin;
 
 private:
 //------------------------------------------------------- Attributs privés

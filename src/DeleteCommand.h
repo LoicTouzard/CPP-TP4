@@ -1,34 +1,28 @@
 /*************************************************************************
-                           SimpleCommand  -  description
+                           DeleteCommand  -  description
                              -------------------
     début                : ${date}
     copyright            : (C) ${year} par ${user}
 *************************************************************************/
 
-//---------- Interface de la classe <SimpleCommand> (fichier SimpleCommand.h) ------
-#if ! defined ( SIMPLECOMMAND_H )
-#define SIMPLECOMMAND_H
+//---------- Interface de la classe <DeleteCommand> (fichier ComposedCOmmand.h) ------
+#if ! defined ( DELETECOMMAND_H )
+#define DELETECOMMAND_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <map>
-#include <string>
-#include "Graphics.h"
-#include "Point.h"
-#include "Command.h"
-
-
+#include "ComposedCommand.h"
+#include <vector>
 //------------------------------------------------------------- Constantes
 
-typedef map<string, Graphics*> MapGraphics;
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <SimpleCommand>
+// Rôle de la classe <DeleteCommand>
 //
 //
 //------------------------------------------------------------------------
 
-class SimpleCommand : public Command
+class DeleteCommand : public ComposedCommand
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -40,35 +34,37 @@ public:
     // Contrat :
     //
 
-    virtual void execute()=0;
+    virtual void execute();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual void unexecute()=0;
+    virtual void unexecute();
     // Mode d'emploi :
     //
     // Contrat :
     //
+
 
 
 //------------------------------------------------- Surcharge d'opérateurs
 
+
 //-------------------------------------------- Constructeurs - destructeur
-    SimpleCommand ( const SimpleCommand & unSimpleCommand );
+    DeleteCommand ( const DeleteCommand & unDeleteCommand );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    SimpleCommand ( MapGraphics* mapToLink, Graphics* elt);
+    DeleteCommand ( std::vector<Command*> listC );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~SimpleCommand ( );
+    virtual ~DeleteCommand ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -84,8 +80,6 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-MapGraphics* linkedMap;
-Graphics* element;
 
 private:
 //------------------------------------------------------- Attributs privés
@@ -98,6 +92,6 @@ private:
 
 };
 
-//----------------------------------------- Types dépendants de <SimpleCommand>
+//----------------------------------------- Types dépendants de <DeleteCommand>
 
-#endif // SIMPLECOMMAND_H
+#endif // DELETECOMMAND_H

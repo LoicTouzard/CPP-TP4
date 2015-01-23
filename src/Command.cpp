@@ -51,6 +51,7 @@ Command::Command ( )
 // Algorithme :
 //
 {
+whichList=IN_UNDO;
 #ifdef MAP
     cout << "Appel au constructeur de <Command>" << endl;
 #endif

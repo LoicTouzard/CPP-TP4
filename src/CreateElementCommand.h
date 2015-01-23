@@ -1,34 +1,28 @@
 /*************************************************************************
-                           SimpleCommand  -  description
+                           CreateElementCommand  -  description
                              -------------------
     début                : ${date}
     copyright            : (C) ${year} par ${user}
 *************************************************************************/
 
-//---------- Interface de la classe <SimpleCommand> (fichier SimpleCommand.h) ------
-#if ! defined ( SIMPLECOMMAND_H )
-#define SIMPLECOMMAND_H
+//---------- Interface de la classe <CreateElementCommand> (fichier CreateElementCommand.h) ------
+#if ! defined ( CREATEELEMENTCOMMAND_H )
+#define CREATEELEMENTCOMMAND_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <map>
-#include <string>
-#include "Graphics.h"
-#include "Point.h"
-#include "Command.h"
-
-
+#include "SimpleCommand.h"
 //------------------------------------------------------------- Constantes
 
-typedef map<string, Graphics*> MapGraphics;
 //------------------------------------------------------------------ Types
+typedef map<string, Graphics*> MapGraphics;
 
 //------------------------------------------------------------------------
-// Rôle de la classe <SimpleCommand>
+// Rôle de la classe <CreateElementCommand>
 //
 //
 //------------------------------------------------------------------------
 
-class SimpleCommand : public Command
+class CreateElementCommand : public SimpleCommand
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -40,35 +34,34 @@ public:
     // Contrat :
     //
 
-    virtual void execute()=0;
+    virtual void execute();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual void unexecute()=0;
+    virtual void unexecute();
     // Mode d'emploi :
     //
     // Contrat :
     //
-
 
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-    SimpleCommand ( const SimpleCommand & unSimpleCommand );
+    CreateElementCommand ( const CreateElementCommand & unCreateElementCommand );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    SimpleCommand ( MapGraphics* mapToLink, Graphics* elt);
+    CreateElementCommand ( MapGraphics* mapToLink, Graphics* name);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~SimpleCommand ( );
+    virtual ~CreateElementCommand ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -84,8 +77,6 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-MapGraphics* linkedMap;
-Graphics* element;
 
 private:
 //------------------------------------------------------- Attributs privés
@@ -98,6 +89,6 @@ private:
 
 };
 
-//----------------------------------------- Types dépendants de <SimpleCommand>
+//----------------------------------------- Types dépendants de <CreateElementCommand>
 
-#endif // SIMPLECOMMAND_H
+#endif // CREATEELEMENTCOMMAND_H

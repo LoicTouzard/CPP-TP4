@@ -17,7 +17,6 @@
 #include "Graphics.h"
 #include "Point.h"
 #include "Command.h"
-#include "MoveCommand.h"
 
 using namespace std;
 //------------------------------------------------------------- Constantes
@@ -176,8 +175,6 @@ list<Command*> redoCommands;
 
 
 //---------------------------------------------------------- Classes amies
-//il faut mettre toutes les commandes car l'héritage ne transmet pas l'amitié.
-friend MoveCommand;
 
 //-------------------------------------------------------- Classes privées
 

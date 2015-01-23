@@ -1,0 +1,75 @@
+C cercle1 0 0 1
+C cercle2 0 0 2
+C cercle3 0 0 3
+C cercle4 0 0 4
+C cercle5 0 0 5
+C cercle6 0 0 6
+C cercle7 0 0 7
+C cercle8 0 0 8
+C cercle9 0 0 9
+C cercle10 0 0 10
+C cercle11 0 0 11
+C cercle12 0 0 12
+C cercle13 0 0 13
+C cercle14 0 0 14
+C cercle15 0 0 15
+C cercle16 0 0 16
+C cercle17 0 0 17
+C cercle18 0 0 18
+C cercle19 0 0 19
+C cercle20 0 0 20
+C cercle21 0 0 21
+C cercle22 0 0 22
+C cercle23 0 0 23
+C cercle24 0 0 24
+C cercle25 0 0 25
+
+DELETE cercle1
+DELETE cercle2
+DELETE cercle3
+DELETE cercle4
+DELETE cercle5
+DELETE cercle6
+DELETE cercle7
+DELETE cercle8
+DELETE cercle9
+DELETE cercle10
+DELETE cercle11
+DELETE cercle12
+DELETE cercle13
+DELETE cercle14
+DELETE cercle15
+DELETE cercle16
+DELETE cercle17
+DELETE cercle18
+DELETE cercle19
+DELETE cercle20
+DELETE cercle21
+DELETE cercle22
+DELETE cercle23
+DELETE cercle24
+DELETE cercle25
+
+
+
+
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+UNDO
+
+R rect 1 2 2 1
+PL poly 1 1 2 2 3 3 4 4
+L line 0 0 9 9

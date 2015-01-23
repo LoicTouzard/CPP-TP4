@@ -1,20 +1,23 @@
 /*************************************************************************
-                           Figure  -  description
+                           DeleteCommand  -  description
                              -------------------
     début                : ${date}
     copyright            : (C) ${year} par ${user}
 *************************************************************************/
 
-//---------- Réalisation de la classe <Figure> (fichier Figure.cpp) --
+//---------- Réalisation de la classe <DeleteCommand> (fichier DeleteCommand.h) --
 
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <vector>
 
 //------------------------------------------------------ Include personnel
-#include "Figure.h"
+#include "DeleteCommand.h"
+#include "Command.h"
+
 
 //------------------------------------------------------------- Constantes
 
@@ -27,53 +30,78 @@ using namespace std;
 //-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Méthodes publiques
-// type Figure::Méthode ( liste de paramètres )
+// type DeleteCommand::Méthode ( liste de paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
+void DeleteCommand::execute()
+// Mode d'emploi :
+//
+// Contrat :
+//
+{
+    vector<Command*>::iterator it;
+    for(it=listCommands.begin(); it!=listCommands.end(); ++it)
+    {
+        (*it)->execute();
+    }
+    whichList=IN_UNDO;
 
+}
+
+void DeleteCommand::unexecute()
+// Mode d'emploi :
+//
+// Contrat :
+//
+{
+    vector<Command*>::iterator it;
+    for(it=listCommands.begin(); it!=listCommands.end(); ++it)
+    {
+        (*it)->unexecute();
+    }
+    whichList=IN_REDO;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-Figure::Figure ( const Figure & unFigure )
+DeleteCommand::DeleteCommand ( const DeleteCommand & unDeleteCommand )
+    :ComposedCommand(unDeleteCommand)
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Figure>" << endl;
+    cout << "Appel au constructeur de copie de <DeleteCommand>" << endl;
 #endif
-} //----- Fin de Figure (constructeur de copie)
+} //----- Fin de DeleteCommand (constructeur de copie)
 
 
-/*Figure::Figure ( Point figureOrigin, string graphicsName2, string graphicsCommandLine2)
+DeleteCommand::DeleteCommand ( std::vector<Command*> listC )
+    :ComposedCommand(listC)
 // Algorithme :
 //
 {
-
-name=graphicsName2;
-commandLine=graphicsCommandLine2;
-origin=figureOrigin;
 #ifdef MAP
-    cout << "Appel au constructeur de <Figure>" << endl;
+    cout << "Appel au constructeur de <DeleteCommand>" << endl;
 #endif
-} //----- Fin de Figure*/
+} //----- Fin de DeleteCommand
 
 
-Figure::Figure ( ){
-
-}
-
-Figure::~Figure ( )
+DeleteCommand::~DeleteCommand ( )
 // Algorithme :
 //
 {
-
+    vector<Command*>::iterator it;
+    for (it = listCommands.begin(); it != listCommands.end(); ++it){
+        delete *it;
+    }
+    listCommands.clear();
 #ifdef MAP
-    cout << "Appel au destructeur de <Figure>" << endl;
+    cout << "Appel au destructeur de <DeleteCommand>" << endl;
 #endif
-} //----- Fin de ~Figure
+} //----- Fin de ~DeleteCommand
 
 
 //------------------------------------------------------------------ PRIVE

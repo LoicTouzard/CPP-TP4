@@ -1,13 +1,13 @@
 /*************************************************************************
-                           CreateCircleCommand  -  description
+                           DeleteElementCommand  -  description
                              -------------------
     début                : ${date}
     copyright            : (C) ${year} par ${user}
 *************************************************************************/
 
-//---------- Interface de la classe <CreateCircleCommand> (fichier CreateCircleCommand.h) ------
-#if ! defined ( CREATECIRCLECOMMAND_H )
-#define CREATECIRCLECOMMAND_H
+//---------- Interface de la classe <DeleteElementCommand> (fichier DeleteElementCommand.h) ------
+#if ! defined ( DELETEELEMENTCOMMAND_H )
+#define DELETEELEMENTCOMMAND_H
 
 //--------------------------------------------------- Interfaces utilisées
 #include "SimpleCommand.h"
@@ -17,12 +17,12 @@
 typedef map<string, Graphics*> MapGraphics;
 
 //------------------------------------------------------------------------
-// Rôle de la classe <CreateCircleCommand>
+// Rôle de la classe <DeleteElementCommand>
 //
 //
 //------------------------------------------------------------------------
 
-class CreateCircleCommand : public SimpleCommand
+class DeleteElementCommand : public SimpleCommand
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -49,19 +49,19 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-    CreateCircleCommand ( const CreateCircleCommand & unCreateCircleCommand );
+    DeleteElementCommand ( const DeleteElementCommand & unDeleteElementCommand );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    CreateCircleCommand ( MapGraphics* mapToLink, Graphics* name, Point newOrigin );
+    DeleteElementCommand ( MapGraphics* mapToLink, Graphics* elt);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~CreateCircleCommand ( );
+    virtual ~DeleteElementCommand ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -89,6 +89,6 @@ private:
 
 };
 
-//----------------------------------------- Types dépendants de <CreateCircleCommand>
+//----------------------------------------- Types dépendants de <DeleteElementCommand>
 
-#endif // CREATECIRCLECOMMAND_H
+#endif // DELETEELEMENTCOMMAND_H

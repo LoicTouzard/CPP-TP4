@@ -48,8 +48,8 @@ SimpleCommand::SimpleCommand ( const SimpleCommand & SimpleCommand )
 } //----- Fin de SimpleCommand (constructeur de copie)
 
 
-SimpleCommand::SimpleCommand ( MapGraphics* mapToLink, Graphics* elt, Point newOrigin )
-    :linkedMap(mapToLink), element(elt), origin(newOrigin)
+SimpleCommand::SimpleCommand ( MapGraphics* mapToLink, Graphics* elt)
+    :linkedMap(mapToLink), element(elt)
 // Algorithme :
 //
 {
