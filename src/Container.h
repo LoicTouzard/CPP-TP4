@@ -17,6 +17,8 @@
 #include "Graphics.h"
 #include "Point.h"
 #include "Command.h"
+#include "MoveCommand.h"
+
 using namespace std;
 //------------------------------------------------------------- Constantes
 
