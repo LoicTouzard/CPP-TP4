@@ -33,6 +33,23 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+bool Figure::isInside(Point p1, Point p2)
+// Algorithme :
+//
+{
+	if( (p1.x <=leftUpCorner.x) &&
+		(p2.x >=downRightCorner.x) &&
+		(p1.y >=leftUpCorner.y) &&
+		(p2.y <=downRightCorner.y) )
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+} //----- Fin de isInside
 
 //------------------------------------------------- Surcharge d'opérateurs
 

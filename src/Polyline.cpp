@@ -48,27 +48,27 @@ Polyline::Polyline (vector<Point> newPointList, Point figureOrigin, string graph
 //
 {
 
-vector<Point>::iterator it;
-for(it=pointList.begin(); it!=pointList.end(); ++it)
-{
-	if(it->x > downRightCorner.x)
-	{
-		downRightCorner.x=it->x;
-	}
-	else if(it->x < leftUpCorner.x)
-	{
-		leftUpCorner.x=it->x;
-	}
+    vector<Point>::iterator it;
+    for(it=pointList.begin(); it!=pointList.end(); ++it)
+    {
+        if(it->x > downRightCorner.x)
+        {
+            downRightCorner.x=it->x;
+        }
+        else if(it->x < leftUpCorner.x)
+        {
+            leftUpCorner.x=it->x;
+        }
 
-	if(it->y > leftUpCorner.y)
-	{
-		leftUpCorner.y=it->y;
-	}
-	else if(it->y < downRightCorner.y)
-	{
-		downRightCorner.y=it->y;
-	}
-}
+        if(it->y > leftUpCorner.y)
+        {
+            leftUpCorner.y=it->y;
+        }
+        else if(it->y < downRightCorner.y)
+        {
+            downRightCorner.y=it->y;
+        }
+    }
 
 #ifdef MAP
     cout << "Appel au constructeur de <Polyline>" << endl;
@@ -89,23 +89,6 @@ Polyline::~Polyline ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-bool Polyline::isInside(Point p1, Point p2)
-// Algorithme :
-//
-{
-	if( (p1.x <=leftUpCorner.x) &&
-		(p2.x >=downRightCorner.x) &&
-		(p1.y >=leftUpCorner.y) &&
-		(p2.y <=downRightCorner.y) )
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-
-} //----- Fin de isInside
 
 string Polyline::description()
 // Algorithme :
@@ -123,6 +106,12 @@ void Polyline::move(long dx, long dy)
 	vector<Point>::iterator it;
 	origin.x += dx;
 	origin.y += dy;
+
+    leftUpCorner.x+=dx;
+    leftUpCorner.y+=dy;
+    downRightCorner.x+=dx;
+    downRightCorner.y+=dy;
+
 	commandLine="PL "+name+" "+toString(origin.x)+" "+toString(origin.y);
 	for(it = pointList.begin(); it!=pointList.end(); ++it){
 		it->x += dx;

@@ -44,14 +44,16 @@ Rectangle::Rectangle ( const Rectangle & unRectangle )
 } //----- Fin de Rectangle (constructeur de copie)
 
 
-/*Rectangle::Rectangle (Point recExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine)
+Rectangle::Rectangle (Point recExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine)
+    :Figure(figureOrigin, graphicsName, graphicsCommandLine), extremity(recExtremity)
 // Algorithme :
 //
 {
-    extremity=recExtremity;
-    origin=figureOrigin;
-    name=graphicsName;
-    commandLine=graphicsCommandLine;
+    leftUpCorner.x=(origin.x<extremity.x)?origin.x:extremity.x;
+	leftUpCorner.y=(origin.y<extremity.y)?extremity.y:origin.y;
+
+	downRightCorner.x=(origin.x<extremity.x)?extremity.x:origin.x;
+	downRightCorner.y=(origin.y<extremity.y)?origin.y:extremity.y;
 #ifdef MAP
     cout << "Appel au constructeur de <Rectangle>" << endl;
 #endif
@@ -71,24 +73,7 @@ Rectangle::~Rectangle ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-bool Rectangle::isInside(Point p1, Point p2)
-// Algorithme :
-//
-{
 
-	if( (p1.x <=origin.x) &&
-		(p2.x >=extremity.x) &&
-		(p1.y >=origin.y) &&
-		(p2.y <=extremity.y) )
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-
-} //----- Fin de isInside
 
 string Rectangle::description()
 // Algorithme :
@@ -106,6 +91,11 @@ void Rectangle::move(long dx, long dy)
 	origin.y += dy;
 	extremity.x += dx;
 	extremity.y += dy;
+
+    leftUpCorner.x+=dx;
+    leftUpCorner.y+=dy;
+    downRightCorner.x+=dx;
+    downRightCorner.y+=dy;
 
 	commandLine="R "+name+" "+toString(origin.x)+" "+toString(origin.y)+" "+toString(extremity.x)+" "+toString(extremity.y);
 

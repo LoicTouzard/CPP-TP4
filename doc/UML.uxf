@@ -112,6 +112,8 @@ bg=blue</panel_attributes>
 /{Abstract}/
 --
 #origin: Point
+#leftUpCorner: Point
+#downRightCorner: Point
 *#name: String*
 *#commandLine: String*
 --

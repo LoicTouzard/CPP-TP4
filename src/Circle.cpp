@@ -38,6 +38,10 @@ Circle::Circle ( const Circle & unCircle )
 // Algorithme :
 //
 {
+    	leftUpCorner.x=origin.x-radius;
+        leftUpCorner.y=origin.y+radius;
+        downRightCorner.x=origin.x+radius;
+        downRightCorner.y=origin.y-radius;
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Circle>" << endl;
 #endif
@@ -67,24 +71,7 @@ Circle::~Circle ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
- bool Circle::isInside(Point p1, Point p2)
-// Algorithme :
-//
-{
 
-	if( (p1.x <=origin.x-radius) &&
-		(p2.x >=origin.x+radius) &&
-		(p1.y >=origin.y+radius) &&
-		(p2.y <=origin.y-radius) )
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-
-} //----- Fin de isInside
 
 string Circle::description()
 // Algorithme :
@@ -100,6 +87,11 @@ void Circle::move(long dx, long dy)
 {
 	origin.x += dx;
 	origin.y += dy;
+
+    leftUpCorner.x+=dx;
+    leftUpCorner.y+=dy;
+    downRightCorner.x+=dx;
+    downRightCorner.y+=dy;
 
 	commandLine="C "+name+" "+toString(origin.x)+" "+toString(origin.y)+" "+toString(radius);
 

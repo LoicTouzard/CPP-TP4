@@ -73,24 +73,7 @@ Line::~Line ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-bool Line::isInside(Point p1, Point p2)
-// Algorithme :
-//
-{
 
-	if( (p1.x <=leftUpCorner.x) &&
-		(p2.x >=downRightCorner.x) &&
-		(p1.y >=leftUpCorner.y) &&
-		(p2.y <=downRightCorner.y) )
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-
-} //----- Fin de isInside
 
 string Line:: description()
 // Algorithme :
@@ -108,6 +91,11 @@ void Line:: move(long dx, long dy)
 	origin.y += dy;
 	extremity.x += dx;
 	extremity.y += dy;
+
+    leftUpCorner.x+=dx;
+    leftUpCorner.y+=dy;
+    downRightCorner.x+=dx;
+    downRightCorner.y+=dy;
 
 	commandLine="L "+name+" "+toString(origin.x)+" "+toString(origin.y)+" "+toString(extremity.x)+" "+toString(extremity.y);
 

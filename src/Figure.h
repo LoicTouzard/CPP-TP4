@@ -61,7 +61,7 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-	virtual bool isInside(Point p1, Point p2)=0;
+	virtual bool isInside(Point p1, Point p2);
     // Mode d'emploi :
     //	Vérifie que la figure appartient au rectangle formé par p1, p2
     //
@@ -90,6 +90,10 @@ protected:
 //----------------------------------------------------- Attributs protégés
 
 	Point origin;
+
+	//Points facilitant le isInside()
+    Point leftUpCorner;
+    Point downRightCorner;
 
 private:
 //------------------------------------------------------- Attributs privés
