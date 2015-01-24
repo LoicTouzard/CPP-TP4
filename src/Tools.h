@@ -1,28 +1,31 @@
 /*************************************************************************
-                           DeleteCommand  -  description
+                           Tools  -  description
                              -------------------
     début                : ${date}
     copyright            : (C) ${year} par ${user}
 *************************************************************************/
 
-//---------- Interface de la classe <DeleteCommand> (fichier ComposedCommand.h) ------
-#if ! defined ( DELETECOMMAND_H )
-#define DELETECOMMAND_H
+//---------- Interface de la classe <Tools> (fichier Tools.h) ------
+#if ! defined ( TOOLS_H )
+#define TOOLS_H
+
+#include <iostream>
+#include <string>
+
 
 //--------------------------------------------------- Interfaces utilisées
-#include "ComposedCommand.h"
-#include <vector>
+
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <DeleteCommand>
+// Rôle de la classe <Tools>
 //
 //
 //------------------------------------------------------------------------
 
-class DeleteCommand : public ComposedCommand
+class Tools
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -34,41 +37,39 @@ public:
     // Contrat :
     //
 
-    virtual void execute();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    virtual void unexecute();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
 
 //------------------------------------------------- Surcharge d'opérateurs
 
-
 //-------------------------------------------- Constructeurs - destructeur
-    DeleteCommand ( const DeleteCommand & unDeleteCommand );
+    Tools ( const Tools & unTools );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    DeleteCommand ( std::vector<Command*> listC );
+    Tools ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~DeleteCommand ( );
+    virtual ~Tools ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
+
+
+    static int NombreEspaces(std::string s);
+
+
+    static bool Separateur(std::string s);
+
+
+    static std::string Decoupage(std::string s, int posSpace);
+
+
+    static bool TestFichierExiste(std::string nomFichier);
 
 //------------------------------------------------------------------ PRIVE
 
@@ -92,6 +93,6 @@ private:
 
 };
 
-//----------------------------------------- Types dépendants de <DeleteCommand>
+//----------------------------------------- Types dépendants de <Tools>
 
-#endif // DELETECOMMAND_H
+#endif // TOOLS_H

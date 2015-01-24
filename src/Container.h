@@ -150,7 +150,7 @@ protected:
 private:
 //------------------------------------------------------- Méthodes privées
 
-    bool NomLibre(string name);
+    bool NomLibre(string name, MapGraphics* mapToAnalyse);
     // Mode d'emploi :
     //
     // Contrat :

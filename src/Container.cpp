@@ -16,7 +16,11 @@ using namespace std;
 #include <map>
 #include <vector>
 #include <string>
+#include <cstdlib>
 //------------------------------------------------------ Include personnel
+#include "Tools.h"
+
+
 #include "Container.h"
 #include "Point.h"
 #include "Circle.h"
@@ -25,12 +29,12 @@ using namespace std;
 #include "Polyline.h"
 #include "Selection.h"
 #include "toString.h"
-
 #include "Command.h"
 #include "MoveCommand.h"
 #include "CreateElementCommand.h"
 #include "DeleteElementCommand.h"
 #include "DeleteCommand.h"
+#include "LoadCommand.h"
 //------------------------------------------------------------- Constantes
 const size_t UNDO_REDO_MAX_LEVEL = 20;
 //---------------------------------------------------- Variables de classe
@@ -153,15 +157,271 @@ void Container::moveElement(string name, long dX, long dY){
    }
 }
 
-void Container::Load(string nomFichier){
+void Container::Load(string nomFichier)
+{
+    // COPIE COLLE DU CODE MAIN ( A FACTORISER ? )
+    string entree;
+    ifstream loadFile (nomFichier);
+    if (loadFile.is_open())
+    {
 
+        MapGraphics tmpMap;
+        vector<Command*> listeCMD;
+
+        bool correctFile = true;
+        while ( getline (loadFile,entree) && correctFile)
+        {
+            if (entree.substr(0,1)=="C") {
+                string name;
+                string radius, centerX, centerY;
+                name=Tools::Decoupage(entree,1);
+                centerX=Tools::Decoupage(entree,2);
+                centerY=Tools::Decoupage(entree,3);
+                radius=Tools::Decoupage(entree,4);
+
+                if(Tools::NombreEspaces(entree)==4)
+                {
+                    long centerlX=atol(centerX.c_str());
+                    long centerlY=atol(centerY.c_str());
+                    long radiusl=atol(radius.c_str());
+
+                    if(!NomLibre(name, &listeGraphics) || !NomLibre(name, &tmpMap)){
+                        correctFile = false;
+                        cout<<"ERR"<<endl;
+                        cout<<"#name already taken"<<endl;
+                    }
+                    else if(radiusl < 0){
+                        correctFile = false;
+                        cout<<"ERR"<<endl;
+                        cout<<"#radius must be a postive interger"<<endl;
+                    }
+                    else{
+                        //Code pour ajouter un cercle
+                        Point center;
+                        center.x=centerlX;
+                        center.y=centerlY;
+                        Circle *c=new Circle(radiusl, center, name, entree);
+
+                        tmpMap.insert(make_pair(name, c));
+                        listeCMD.push_back(new CreateElementCommand(&listeGraphics, c));
+
+                        //Fin du code pour ajouter un cercle
+                    }
+                }
+                else{
+                    correctFile = false;
+                    cout<<"ERR"<<endl;
+                    cout<<"#invalid parameters : 4 parameters expected"<<endl;
+                }
+
+            }
+
+            else if (entree.substr(0,1)=="R") {
+
+                string name;
+                string corner1X, corner1Y, corner2X, corner2Y;
+                long coin1X, coin1Y, coin2X, coin2Y;
+                name=Tools::Decoupage(entree,1);
+                corner1X=Tools::Decoupage(entree,2);
+                corner1Y=Tools::Decoupage(entree,3);
+                corner2X=Tools::Decoupage(entree,4);
+                corner2Y=Tools::Decoupage(entree,5);
+
+                coin1X=atol(corner1X.c_str());
+                coin1Y=atol(corner1Y.c_str());
+                coin2X=atol(corner2X.c_str());
+                coin2Y=atol(corner2Y.c_str());
+
+                if(Tools::NombreEspaces(entree)==5){
+
+
+                    if(!NomLibre(name, &listeGraphics) || !NomLibre(name, &tmpMap)){
+                        correctFile = false;
+                        cout<<"ERR"<<endl;
+                        cout<<"#name already taken"<<endl;
+                        break;
+                    }
+                    Point origin;
+                    Point extremity;
+                    //origin doit prendre le x minimum et y maximum
+                    //extremity doir prendre le y minimum et x maximum
+                    if(coin1X>coin2X)
+                    {
+                        origin.x=coin2X;
+                        extremity.x=coin1X;
+                        cout<<"#Reverse corner's X coordonates"<<endl;
+                    }
+                    else
+                    {
+                        origin.x=coin1X;
+                        extremity.x=coin2X;
+                    }
+                    if(coin1Y<coin2Y)
+                    {
+                        origin.y=coin2Y;
+                        extremity.y=coin1Y;
+                        cout<<"#Reverse corner's Y coordonates"<<endl;
+                    }
+                    else
+                    {
+                        origin.y=coin1Y;
+                        extremity.y=coin2Y;
+                    }
+                    string cmd="R "+name+" "+toString(origin.x)+" "+toString(origin.y)+" "+toString(extremity.x)+" "+toString(extremity.y);
+                    Rectangle *r=new Rectangle(extremity, origin, name, cmd);
+
+                    tmpMap.insert(make_pair(name, r));
+                    listeCMD.push_back(new CreateElementCommand(&listeGraphics, r));
+
+                }
+                else{
+                    correctFile = false;
+                    cout<<"ERR"<<endl;
+                    cout<<"#invalid parameters"<<endl;
+                }
+            }
+
+            else if (entree.substr(0,2)=="PL") {
+                string name;
+                string cornerX, cornerY;
+                long coinX, coinY;
+                name=Tools::Decoupage(entree,1);
+
+                if( Tools::NombreEspaces(entree)%2==1 && Tools::NombreEspaces(entree)>=3){ //Un point minimum
+                    //Code pour ajouter un polyligne
+                    int nbPoints=(Tools::NombreEspaces(entree)-1)/2;
+                    Point origin;
+                    vector<Point> newPointList;
+                    cornerX=Tools::Decoupage(entree,2);
+                    cornerY=Tools::Decoupage(entree,3);
+                    coinX=atol(cornerX.c_str());
+                    coinY=atol(cornerY.c_str());
+                    origin.x=coinX;
+                    origin.y=coinY;
+                    for(int i=2; i<=nbPoints; i++){
+                        //Améliorer performances de découpage
+                        cornerX=Tools::Decoupage(entree,i*2);
+                        cornerY=Tools::Decoupage(entree,i*2+1);
+                        coinX=atol(cornerX.c_str());
+                        coinY=atol(cornerY.c_str());
+                        Point p;
+                        p.x=coinX;
+                        p.y=coinY;
+                        newPointList.push_back(p);
+                    }
+
+                    if(!NomLibre(name, &listeGraphics) || !NomLibre(name, &tmpMap)){
+                        correctFile = false;
+                        cout<<"ERR"<<endl;
+                        cout<<"#name already taken"<<endl;
+                        break;
+                    }
+                    string cmd="PL "+name+" "+toString(origin.x)+" "+toString(origin.y);
+                    vector<Point>::iterator it;
+                    for(it=newPointList.begin(); it!=newPointList.end(); ++it){
+                        cmd += " "+toString(it->x)+" "+toString(it->y);
+                    }
+                    Polyline *pl =new Polyline (newPointList, origin, name, cmd);
+
+                    tmpMap.insert(make_pair(name, pl));
+                    listeCMD.push_back(new CreateElementCommand(&listeGraphics, pl));
+
+                }
+                else{
+                    correctFile = false;
+                    cout<<"ERR"<<endl;
+                    cout<<"#invalid parameters"<<endl;
+                }
+            }
+
+            else if (entree.substr(0,1)=="L") {
+                string name;
+                string corner1X, corner1Y, corner2X, corner2Y;
+                long coin1X, coin1Y, coin2X, coin2Y;
+                name=Tools::Decoupage(entree,1);
+                corner1X=Tools::Decoupage(entree,2);
+                corner1Y=Tools::Decoupage(entree,3);
+                corner2X=Tools::Decoupage(entree,4);
+                corner2Y=Tools::Decoupage(entree,5);
+
+                coin1X=atol(corner1X.c_str());
+                coin1Y=atol(corner1Y.c_str());
+                coin2X=atol(corner2X.c_str());
+                coin2Y=atol(corner2Y.c_str());
+
+                 if(Tools::NombreEspaces(entree)==5){
+
+                        if(!NomLibre(name, &listeGraphics) || !NomLibre(name, &tmpMap)){
+                            correctFile = false;
+                            cout<<"ERR"<<endl;
+                            cout<<"#name already taken"<<endl;
+                            break;
+                        }
+
+                        Point origin;
+                        Point extremity;
+
+                        origin.x=coin1X;
+                        origin.y=coin1Y;
+                        extremity.x=coin2X;
+                        extremity.y=coin2Y;
+
+                        string cmd="L "+name+" "+toString(origin.x)+" "+toString(origin.y)+" "+toString(extremity.x)+" "+toString(extremity.y);
+                        Line *l=new Line(extremity, origin, name, entree);
+
+                        tmpMap.insert(make_pair(name, l));
+                        listeCMD.push_back(new CreateElementCommand(&listeGraphics, l));
+
+                }
+                else{
+                    correctFile = false;
+                    cout<<"ERR"<<endl;
+                    cout<<"#invalid parameters"<<endl;
+                }
+            }
+            else
+            {
+                correctFile = false;
+                cout<<"ERR"<<endl;
+                cout<<"#Unknown command"<<endl;
+            }
+
+        }
+        loadFile.close();
+        if(correctFile)
+        {
+            //la création est confirmée car tous les éléments sont corrects
+            listeGraphics.insert(tmpMap.begin(), tmpMap.end()); //merge
+            insertCommand(new LoadCommand(listeCMD));
+            cout << "#" << tmpMap.size() << "elements have been loaded successfully." << endl;
+            cout << "OK" << endl;
+        }
+        else
+        {
+            //il y a eu une erreur dans le fichier on libère ce qui a été créé
+            cout<<"#Error line : " << tmpMap.size()+1 << endl;
+            cout<<"#The load file couldn't be loaded. None of the elements have been created."<<endl;
+
+            MapGraphics::iterator it;
+            for (it = tmpMap.begin(); it != tmpMap.end(); ++it){
+                delete it->second;
+            }
+            tmpMap.clear();
+            listeCMD.clear();
+        }
+    }
+    else
+    {
+        cout << "ERR" << endl;
+        cout << "#Unable to open file";
+    }
 }
 
 void Container::Delete(vector<string> listeNoms)
 {
 	for(unsigned int i=0; i<listeNoms.size(); ++i)
 	{
-		if(NomLibre( listeNoms[i] ) )
+		if(NomLibre( listeNoms[i] , &listeGraphics) )
 		{
 			cout<<"ERR"<<endl;
 			cout<<"# can't find "+listeNoms[i]+ ". None of the elements have been removed"<<endl;
@@ -189,7 +449,7 @@ void Container::Delete(vector<string> listeNoms)
 
 void Container::AddCircle(string name, long radius, long centerX, long centerY, string commande)
 {
-	if(!NomLibre(name)){
+	if(!NomLibre(name, &listeGraphics)){
 		cout<<"ERR"<<endl;
 		cout<<"#name already taken"<<endl;
 		return;
@@ -215,7 +475,7 @@ void Container::AddCircle(string name, long radius, long centerX, long centerY, 
 void Container::AddRectangle(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande)
 {
 
-    if(!NomLibre(name)){
+    if(!NomLibre(name, &listeGraphics)){
 		cout<<"ERR"<<endl;
 		cout<<"#name already taken"<<endl;
 		return;
@@ -256,7 +516,7 @@ void Container::AddRectangle(string name, long coin1X, long coin1Y, long coin2X,
 
 void Container::AddLine(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande)
 {
-    if(!NomLibre(name)){
+    if(!NomLibre(name, &listeGraphics)){
 		cout<<"ERR"<<endl;
 		cout<<"#name already taken"<<endl;
 		return;
@@ -280,7 +540,7 @@ void Container::AddLine(string name, long coin1X, long coin1Y, long coin2X, long
 
 void Container::AddPolyline(string name, vector<Point> newPointList, Point origin, string commande)
 {
-    if(!NomLibre(name)){
+    if(!NomLibre(name, &listeGraphics)){
 		cout<<"ERR"<<endl;
 		cout<<"#name already taken"<<endl;
 		return;
@@ -335,13 +595,13 @@ void Container::Redo()
 }
 
 //------------------------------------------------------------------ PRIVE
-bool Container::NomLibre(string name)
+bool Container::NomLibre(string name, MapGraphics* mapToAnalyse)
 //Renvoie true si le nom n'est pa dans la map
 //Renvoie false si le nom est dans la map
 {
 	Graphics_iterator it;
-	it=listeGraphics.find(name);
-	if(it==listeGraphics.end()){
+	it=mapToAnalyse->find(name);
+	if(it==mapToAnalyse->end()){
 		return true;
 	}
 	return false;

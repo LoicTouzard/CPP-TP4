@@ -1,0 +1,100 @@
+C cercle1 0 0 1
+C cercle2 0 0 2
+C cercle3 0 0 3
+C cercle4 0 0 4
+C cercle5 0 0 5
+C cercle6 0 0 6
+C cercle7 0 0 7
+C cercle8 0 0 8
+C cercle9 0 0 9
+C cercle10 0 0 10
+C cercle11 0 0 11
+C cercle12 0 0 12
+C cercle13 0 0 13
+C cercle14 0 0 14
+C cercle15 0 0 15
+C cercle16 0 0 16
+C cercle17 0 0 17
+C cercle18 0 0 18
+C cercle19 0 0 19
+C cercle20 0 0 20
+C cercle21 0 0 21
+C cercle22 0 0 22
+C cercle23 0 0 23
+C cercle24 0 0 24
+C cercle25 0 0 25
+R rectangle1 0 0 1 1
+R rectangle2 0 0 2 2
+R rectangle3 0 0 3 3
+R rectangle4 0 0 4 4
+R rectangle5 0 0 5 5
+R rectangle6 0 0 6 6
+R rectangle7 0 0 7 7
+R rectangle8 0 0 8 8
+R rectangle9 0 0 9 9
+R rectangle10 0 0 10 10
+R rectangle11 0 0 11 11
+R rectangle12 0 0 12 12
+R rectangle13 0 0 13 13
+R rectangle14 0 0 14 14
+R rectangle15 0 0 15 15
+R rectangle16 0 0 16 16
+R rectangle17 0 0 17 17
+R rectangle18 0 0 18 18
+R rectangle19 0 0 19 19
+R rectangle20 0 0 20 20
+R rectangle21 0 0 21 21
+R rectangle22 0 0 22 22
+R rectangle23 0 0 23 23
+R rectangle24 0 0 24 24
+R rectangle25 0 0 25 25
+L line1 0 0 1 1
+L line2 0 0 2 2
+L line3 0 0 3 3
+L line4 0 0 4 4
+L line5 0 0 5 5
+L line6 0 0 6 6
+L line7 0 0 7 7
+L line8 0 0 8 8
+L line9 0 0 9 9
+L line10 0 0 10 10
+L line11 0 0 11 11
+L line12 0 0 12 12
+L line13 0 0 13 13
+L line14 0 0 14 14
+L line15 0 0 15 15
+L line16 0 0 16 16
+L line17 0 0 17 17
+L line18 0 0 18 18
+L line19 0 0 19 19
+L line20 0 0 20 20
+L line21 0 0 21 21
+L line22 0 0 22 22
+L line23 0 0 23 23
+L line24 0 0 24 24
+L line25 0 0 25 25
+PL polyline1 0 0 1 1 2 2 3 3
+PL polyline2 0 0 2 2 3 3 4 4
+PL polyline3 0 0 3 3 4 4 5 5
+PL polyline4 0 0 4 4 5 5 6 6
+PL polyline5 0 0 5 5 6 6 7 7
+PL polyline6 0 0 6 6 7 7 8 8
+PL polyline7 0 0 7 7 8 8 9 9
+PL polyline8 0 0 8 8 9 9 10 10
+PL polyline9 0 0 9 9 10 10 11 11
+PL polyline10 0 0 10 10 11 11 12 12
+PL polyline11 0 0 11 11 12 12 13 13
+PL polyline12 0 0 12 12 13 13 14 14
+PL polyline13 0 0 13 13 14 14 15 15
+PL polyline14 0 0 14 14 15 15 16 16
+PL polyline15 0 0 15 15 16 16 17 17
+PL polyline16 0 0 16 16 17 17 18 18
+PL polyline17 0 0 17 17 18 18 19 19
+PL polyline18 0 0 18 18 19 19 20 20
+PL polyline19 0 0 19 19 20 20 21 21
+PL polyline20 0 0 20 20 21 21 22 22
+PL polyline21 0 0 21 21 22 22 23 23
+PL polyline22 0 0 22 22 23 23 24 24
+PL polyline23 0 0 23 23 24 24 25 25
+PL polyline24 0 0 24 24 25 25 26 26
+PL polyline25 0 0 25 25 26 26 27 27

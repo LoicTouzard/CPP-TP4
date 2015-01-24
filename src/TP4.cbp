@@ -40,14 +40,20 @@
 		<Unit filename="ComposedCommand.h" />
 		<Unit filename="Container.cpp" />
 		<Unit filename="Container.h" />
-		<Unit filename="CreateCircleCommand.cpp" />
-		<Unit filename="CreateCircleCommand.h" />
+		<Unit filename="CreateElementCommand.cpp" />
+		<Unit filename="CreateElementCommand.h" />
+		<Unit filename="DeleteCommand.cpp" />
+		<Unit filename="DeleteCommand.h" />
+		<Unit filename="DeleteElementCommand.cpp" />
+		<Unit filename="DeleteElementCommand.h" />
 		<Unit filename="Figure.cpp" />
 		<Unit filename="Figure.h" />
 		<Unit filename="Graphics.cpp" />
 		<Unit filename="Graphics.h" />
 		<Unit filename="Line.cpp" />
 		<Unit filename="Line.h" />
+		<Unit filename="LoadCommand.cpp" />
+		<Unit filename="LoadCommand.h" />
 		<Unit filename="MoveCommand.cpp" />
 		<Unit filename="MoveCommand.h" />
 		<Unit filename="Point.h" />
@@ -59,6 +65,8 @@
 		<Unit filename="Selection.h" />
 		<Unit filename="SimpleCommand.cpp" />
 		<Unit filename="SimpleCommand.h" />
+		<Unit filename="Tools.cpp" />
+		<Unit filename="Tools.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="toString.h" />
 		<Extensions>
