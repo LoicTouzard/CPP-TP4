@@ -230,7 +230,7 @@ using namespace std;
             }
 
             else if (entree.substr(0,1)=="S") {
-    /*
+
                 string name;
                 string corner1X, corner1Y, corner2X, corner2Y;
                 long coin1X, coin1Y, coin2X, coin2Y;
@@ -245,10 +245,13 @@ using namespace std;
                 coin2X=atol(corner2X.c_str());
                 coin2Y=atol(corner2Y.c_str());
 
-
-    */
-                //Code pour ajouter une selection
-                //Fin du code pour ajouter une selection
+                if(Tools::NombreEspaces(entree)==5){
+                    espace.AddSelection(name, coin1X, coin1Y, coin2X, coin2Y, entree);
+                }
+                else{
+                    cout<<"ERR"<<endl;
+                    cout<<"#invalid parameters"<<endl;
+                }
             }
             else
             {

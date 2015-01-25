@@ -39,7 +39,13 @@ public:
     //
 
     Circle (long circleRadius, Point figureOrigin, string graphicsName, string graphicsCommandLine)
-		:Figure(figureOrigin, graphicsName, graphicsCommandLine), radius(circleRadius){}
+		:Figure(figureOrigin, graphicsName, graphicsCommandLine), radius(circleRadius){
+
+        leftUpCorner.x=origin.x-radius;
+        leftUpCorner.y=origin.y+radius;
+        downRightCorner.x=origin.x+radius;
+        downRightCorner.y=origin.y-radius;
+    }
     // Mode d'emploi :
     //
     // Contrat :

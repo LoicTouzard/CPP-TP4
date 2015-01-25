@@ -58,6 +58,7 @@ commandLine=graphicsCommandLine;
 #endif
 } //----- Fin de Graphics*/
 
+
 Graphics::Graphics (  ){}
 
 Graphics::~Graphics ( )
