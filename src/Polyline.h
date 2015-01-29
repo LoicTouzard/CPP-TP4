@@ -10,6 +10,7 @@
 #define POLYLINE_H
 #include "Point.h"
 #include "Figure.h"
+#include "Selection.h"
 #include <vector>
 using namespace std;
 //--------------------------------------------------- Interfaces utilisées

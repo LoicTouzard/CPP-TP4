@@ -15,6 +15,11 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Figure.h"
+#include "Selection.h"
+
+
+
+
 
 //------------------------------------------------------------- Constantes
 
@@ -26,6 +31,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 //-------------------------------------------------------- Fonctions amies
 
+
 //----------------------------------------------------- Méthodes publiques
 // type Figure::Méthode ( liste de paramètres )
 // Algorithme :
@@ -33,11 +39,10 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-bool Figure::isInside(Point p1, Point p2)
+bool Figure::IsInside(Point p1, Point p2)
 // Algorithme :
 //
 {
-
 	if( (p1.x <=leftUpCorner.x) &&
 		(p2.x >=downRightCorner.x) &&
 		(p1.y >=leftUpCorner.y) &&
@@ -50,44 +55,34 @@ bool Figure::isInside(Point p1, Point p2)
 		return false;
 	}
 
-} //----- Fin de isInside
+} //----- Fin de IsInside
+
+
+void Figure::AddSelect(Selection* s){
+    cout << "AddSelect dans " << name << " de : " << s->GetName() << endl;
+    whoOwnsMe.push_back(s);
+}
+
+void Figure::EraseSelect(Selection* s){
+    cout << "EraseSelect dans " << name << " de : " << s->GetName() << endl;
+    vector<Selection*>::iterator it;
+    for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
+        if( (*it)==s){
+            whoOwnsMe.erase(it);
+            it--;
+        }
+    }
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-Figure::Figure ( const Figure & unFigure )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Figure>" << endl;
-#endif
-} //----- Fin de Figure (constructeur de copie)
-
-
-/*Figure::Figure ( Point figureOrigin, string graphicsName2, string graphicsCommandLine2)
-    :Graphics(graphicsName2, graphicsCommandLine2), origin(figureOrigin)
-// Algorithme :
-//
-{
-name=graphicsName2;
-commandLine=graphicsCommandLine2;
-origin=figureOrigin;
-#ifdef MAP
-    cout << "Appel au constructeur de <Figure>" << endl;
-#endif
-} //----- Fin de Figure*/
-
-
-Figure::Figure ( ){
-
-}
 
 Figure::~Figure ( )
 // Algorithme :
 //
 {
-
+    cout << "Appel au destructeur de <Figure>" << endl;
 #ifdef MAP
     cout << "Appel au destructeur de <Figure>" << endl;
 #endif

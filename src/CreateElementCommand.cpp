@@ -85,6 +85,7 @@ CreateElementCommand::~CreateElementCommand ( )
 //
 {
     if(whichList==IN_REDO){
+        cout << "Appel au destructeur de <CreateElementCommand>" << endl;
         delete element;
     }
 #ifdef MAP

@@ -9,6 +9,7 @@
 #if ! defined ( CIRCLE_H )
 #define CIRCLE_H
 #include "Figure.h"
+#include "Selection.h"
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes
@@ -38,14 +39,7 @@ public:
     // Contrat :
     //
 
-    Circle (long circleRadius, Point figureOrigin, string graphicsName, string graphicsCommandLine)
-		:Figure(figureOrigin, graphicsName, graphicsCommandLine), radius(circleRadius){
-
-        leftUpCorner.x=origin.x-radius;
-        leftUpCorner.y=origin.y+radius;
-        downRightCorner.x=origin.x+radius;
-        downRightCorner.y=origin.y-radius;
-    }
+    Circle (long circleRadius, Point figureOrigin, string graphicsName, string graphicsCommandLine);
     // Mode d'emploi :
     //
     // Contrat :

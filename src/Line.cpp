@@ -32,7 +32,7 @@ using namespace std;
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-Line::Line ( const Line & unLine )
+Line::Line ( const Line & unLine ):Figure(unLine)
 // Algorithme :
 //
 {
@@ -64,6 +64,11 @@ Line::~Line ( )
 // Algorithme :
 //
 {
+    cout << "Appel au destructeur de <Line>" << endl;
+    vector<Selection*>::iterator it;
+    for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
+        (*it)->EraseFigure(this);
+    }
 #ifdef MAP
     cout << "Appel au destructeur de <Line>" << endl;
 #endif

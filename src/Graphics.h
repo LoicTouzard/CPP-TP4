@@ -44,14 +44,13 @@ public:
     //
 
 
-    Graphics (  );
-
+    Graphics (string graphicsName, string graphicsCommandLine )
+        :name(graphicsName), commandLine(graphicsCommandLine){}
     //Graphics (string graphicsName, string graphicsCommandLine );
     // Mode d'emploi :
     //
     // Contrat :
     //
-    Graphics (string graphicsName, string graphicsCommandLine ):name(graphicsName), commandLine(graphicsCommandLine){}
 
     virtual ~Graphics ( );
     // Mode d'emploi :
@@ -71,12 +70,6 @@ protected:
     //
 
     virtual string description()=0;
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    virtual bool isInside(Point p1, Point p2)=0;
     // Mode d'emploi :
     //
     // Contrat :

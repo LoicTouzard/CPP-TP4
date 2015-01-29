@@ -34,7 +34,7 @@ using namespace std;
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Circle::Circle ( const Circle & unCircle )
+Circle::Circle ( const Circle & unCircle ):Figure(unCircle)
 // Algorithme :
 //
 {
@@ -48,10 +48,14 @@ Circle::Circle ( const Circle & unCircle )
 } //----- Fin de Circle (constructeur de copie)
 
 
-/*Circle::Circle (long newRadius, Point figureOrigin, string graphicsName, string graphicsCommandLine)
-// Algorithme :
-//
+Circle::Circle (long circleRadius, Point figureOrigin, string graphicsName, string graphicsCommandLine)
+		:Figure(figureOrigin, graphicsName, graphicsCommandLine), radius(circleRadius)
 {
+
+        leftUpCorner.x=origin.x-radius;
+        leftUpCorner.y=origin.y+radius;
+        downRightCorner.x=origin.x+radius;
+        downRightCorner.y=origin.y-radius;
 #ifdef MAP
     cout << "Appel au constructeur de <Circle>" << endl;
 #endif
@@ -62,6 +66,11 @@ Circle::~Circle ( )
 // Algorithme :
 //
 {
+    cout << "Appel au destructeur de <Circle>" << endl;
+    vector<Selection*>::iterator it;
+    for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
+        (*it)->EraseFigure(this);
+    }
 #ifdef MAP
     cout << "Appel au destructeur de <Circle>" << endl;
 #endif

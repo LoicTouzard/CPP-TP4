@@ -47,24 +47,11 @@ Graphics::Graphics ( const Graphics & unGraphics )
 } //----- Fin de Graphics (constructeur de copie)
 
 
-/*Graphics::Graphics (string graphicsName, string graphicsCommandLine )
+Graphics::~Graphics()
 // Algorithme :
 //
 {
-name=graphicsName;
-commandLine=graphicsCommandLine;
-#ifdef MAP
-    cout << "Appel au constructeur de <Graphics>" << endl;
-#endif
-} //----- Fin de Graphics*/
-
-
-Graphics::Graphics (  ){}
-
-Graphics::~Graphics ( )
-// Algorithme :
-//
-{
+    cout << "Appel au destructeur de <Graphics>" << endl;
 #ifdef MAP
     cout << "Appel au destructeur de <Graphics>" << endl;
 #endif

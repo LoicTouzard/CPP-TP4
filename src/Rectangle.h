@@ -10,6 +10,7 @@
 #define RECTANGLE_H
 #include "Figure.h"
 #include "Point.h"
+#include "Selection.h"
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes

@@ -32,7 +32,7 @@ using namespace std;
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Polyline::Polyline ( const Polyline & unPolyline )
+Polyline::Polyline ( const Polyline & unPolyline ):Figure(unPolyline)
 // Algorithme :
 //
 {
@@ -84,6 +84,12 @@ Polyline::~Polyline ( )
 // Algorithme :
 //
 {
+    cout << "Appel au destructeur de <Polyline>" << endl;
+    vector<Selection*>::iterator it;
+    for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
+        (*it)->EraseFigure(this);
+    }
+
 #ifdef MAP
     cout << "Appel au destructeur de <Polyline>" << endl;
 #endif

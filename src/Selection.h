@@ -50,6 +50,12 @@ public:
     // Contrat :
     //
 
+    vector<Figure*>* getElements(){
+        return &figureList;
+    }
+
+    void EraseFigure(Figure* f);
+
 //------------------------------------------------------------------ PRIVE
 
 protected:
@@ -65,13 +71,7 @@ protected:
     // Mode d'emploi :
     //
     // Contrat :
-    //
 
-    bool isInside(Point p1, Point p2);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 private:
 //------------------------------------------------------- Méthodes privées
@@ -79,10 +79,9 @@ private:
 protected:
 //----------------------------------------------------- Attributs protégés
 
+Point origin;
+Point extremity;
 vector<Figure*> figureList;
-Point coinGauche;
-Point coinDroit;
-
 
 private:
 //------------------------------------------------------- Attributs privés

@@ -19,8 +19,6 @@ using namespace std;
 #include <cstdlib>
 //------------------------------------------------------ Include personnel
 #include "Tools.h"
-
-
 #include "Container.h"
 #include "Point.h"
 #include "Circle.h"
@@ -34,7 +32,7 @@ using namespace std;
 #include "CreateElementCommand.h"
 #include "DeleteElementCommand.h"
 #include "DeleteCommand.h"
-//#include "LoadCommand.h"
+#include "LoadCommand.h"
 //------------------------------------------------------------- Constantes
 const size_t UNDO_REDO_MAX_LEVEL = 20;
 //---------------------------------------------------- Variables de classe
@@ -129,17 +127,25 @@ void Container::List()
 //
 {
 	Graphics_iterator it;
-	if(listeGraphics.size()==0){
-		cout<<"#The list is empty"<<endl;
+	if(listeGraphics.size()!=0){
+        int compteurFigure=0;
+		for(it=listeGraphics.begin(); it!=listeGraphics.end();++it){
+            if(dynamic_cast<Figure *>(it->second)!=NULL){
+                compteurFigure++;
+                cout<<it->second->description();
+            }
+		}
+		if(compteurFigure==0){
+            cout<<"#The list is empty"<<endl;
+		}
 	}
 	else{
-		for(it=listeGraphics.begin(); it!=listeGraphics.end();++it){
-			cout<<it->second->description();
-		}
+		cout<<"#The list is empty"<<endl;
 	}
 }
 
-void Container::moveElement(string name, long dX, long dY){
+void Container::moveElement(string name, long dX, long dY)
+{
 	MapGraphics::iterator it;
 	it=listeGraphics.find(name);
 	if(it!=listeGraphics.end()){
@@ -160,7 +166,7 @@ void Container::moveElement(string name, long dX, long dY){
 
 void Container::Load(string nomFichier)
 {
-    /*// COPIE COLLE DU CODE MAIN ( A FACTORISER ? )
+    // COPIE COLLE DU CODE MAIN ( A FACTORISER ? )
     string entree;
     ifstream loadFile (nomFichier);
     if (loadFile.is_open())
@@ -367,7 +373,7 @@ void Container::Load(string nomFichier)
         {
             //la création est confirmée car tous les éléments sont corrects
             listeGraphics.insert(tmpMap.begin(), tmpMap.end()); //merge
-            insertCommand(new LoadCommand(listeCMD));
+            insertCommand(new LoadCommand (listeCMD));
             cout << "#" << tmpMap.size() << "elements have been loaded successfully." << endl;
             cout << "OK" << endl;
         }
@@ -389,7 +395,7 @@ void Container::Load(string nomFichier)
     {
         cout << "ERR" << endl;
         cout << "#Unable to open file";
-    }*/
+    }
 }
 
 void Container::Delete(vector<string> listeNoms)
@@ -412,8 +418,26 @@ void Container::Delete(vector<string> listeNoms)
 	    //et n'a pas été supprimé par un delete précédent de cette même commande
 	    // Ex : DELETE nameSelection nameObjetOfSelection
         {
-            listeCMD.push_back(new DeleteElementCommand(&listeGraphics, it->second));
-            listeGraphics.erase(it);
+            Figure *toDelete=NULL;
+            toDelete=dynamic_cast<Figure *>(it->second);
+
+            if(toDelete!=NULL){ //Si c'est une figure
+                listeCMD.push_back(new DeleteElementCommand(&listeGraphics, it->second));
+                listeGraphics.erase(it);
+            }
+            else{ //Si c'est une sélection
+                vector<Command*> listeCMDSelection;
+                vector<Figure*>* figureToDelete;
+                figureToDelete = (dynamic_cast<Selection *>(it->second))->getElements();
+                vector<Figure*>::iterator it2;
+                for(it2=figureToDelete->begin(); it2!=figureToDelete->end(); ++it2){
+                    listeCMDSelection.push_back(new DeleteElementCommand(&listeGraphics, *it2));
+                    listeGraphics.erase((*it2)->GetName());
+                }
+                listeGraphics.erase(it); //Erase de la selection
+                delete it->second;
+                listeCMD.push_back(new DeleteCommand(listeCMDSelection));
+            }
         }
 	}
 	insertCommand(new DeleteCommand(listeCMD));
@@ -490,7 +514,7 @@ void Container::AddLine(string name, long coin1X, long coin1Y, long coin2X, long
 	listeGraphics.insert(make_pair(name, l));
     insertCommand(new CreateElementCommand(&listeGraphics, l ));
 	cout<<"OK"<<endl;
-	cout<<"#New object :"<<name<<endl;
+	cout<<"#New object : "<<name<<endl;
 }
 
 void Container::AddPolyline(string name, vector<Point> newPointList, Point origin, string commande)
@@ -509,12 +533,12 @@ void Container::AddPolyline(string name, vector<Point> newPointList, Point origi
 	listeGraphics.insert(make_pair(name, pl));
     insertCommand(new CreateElementCommand(&listeGraphics, pl ));
 	cout<<"OK"<<endl;
-	cout<<"#New object :"<<name<<endl;
+	cout<<"#New object : "<<name<<endl;
 }
 
 void Container::AddSelection(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande)
 {
-     if(!NomLibre(name, &listeGraphics)){
+    if(!NomLibre(name, &listeGraphics)){
 		cout<<"ERR"<<endl;
 		cout<<"#name already taken"<<endl;
 		return;
@@ -523,26 +547,29 @@ void Container::AddSelection(string name, long coin1X, long coin1Y, long coin2X,
 	Point extremity;
 	//origin doit prendre le x minimum et y maximum
 	//extremity doir prendre le y minimum et x maximum
-    origin.x=coin1X;
-    extremity.x=coin2X;
-    origin.y=coin1Y;
-    extremity.y=coin2Y;
+    origin.x=(coin1X<coin2X)?coin1X:coin2X;
+	origin.y=(coin1Y<coin2Y)?coin2Y:coin1Y;
+
+	extremity.x=(coin1X<coin2X)?coin2X:coin1X;
+	extremity.y=(coin1Y<coin2Y)?coin1Y:coin2Y;
 
     vector<Figure*> figuresInside;
     Graphics_iterator it;
+    Figure *temp=NULL;
     for(it=listeGraphics.begin(); it!=listeGraphics.end(); ++it){
-        if( it->second->isInside(origin, extremity) ){
-            figuresInside.push_back(dynamic_cast<Figure *>(it->second));
-            //Dynamic_cast permet de ne récupérer que la partie Figure de it (qui est un iterator de Graphics)
-            //Pb : Si une selection est déjà présente dans le container : on ne peut pas la cast en Figure
-            // -> Pas d'exception et tout se passe bien je sais pas pourquoi (peut etre que le exception sont dans cette méthode dynamic_cast ?
+        temp=dynamic_cast<Figure *>(it->second);
+        if(temp!=NULL){ //Si c'est bien une figure
+            if( temp->IsInside(origin, extremity) ){
+                //temp->whoOwnsMe.push_back();
+                figuresInside.push_back(temp);
+                //Dynamic_cast permet de ne récupérer que la partie Figure de it (qui est un iterator de Graphics)
+            }
         }
     }
     Selection *s =new Selection (figuresInside, origin, extremity, name, commande);
 	listeGraphics.insert(make_pair(name, s));
-    insertCommand(new CreateElementCommand(&listeGraphics, s ));
 	cout<<"OK"<<endl;
-	cout<<"#New object :"<<name<<endl;
+	cout<<"#New object : "<<name<<endl;
 }
 
 void Container::Undo()

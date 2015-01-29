@@ -34,7 +34,7 @@ using namespace std;
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Rectangle::Rectangle ( const Rectangle & unRectangle )
+Rectangle::Rectangle ( const Rectangle & unRectangle ):Figure(unRectangle)
 // Algorithme :
 //
 {
@@ -64,6 +64,11 @@ Rectangle::~Rectangle ( )
 // Algorithme :
 //
 {
+    cout << "Appel au destructeur de <Rectangle>" << endl;
+    vector<Selection*>::iterator it;
+    for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
+        (*it)->EraseFigure(this);
+    }
 #ifdef MAP
     cout << "Appel au destructeur de <Rectangle>" << endl;
 #endif

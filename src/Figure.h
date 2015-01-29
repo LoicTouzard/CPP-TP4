@@ -9,13 +9,16 @@
 #if ! defined ( FIGURE_H )
 #define FIGURE_H
 #include <sstream>
+#include <vector>
 #include "Point.h"
 #include "Graphics.h"
+
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
+class Selection;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Figure>
@@ -35,13 +38,12 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Figure ( const Figure & unFigure );
+    Figure ( const Figure & unFigure ):Graphics(unFigure){}
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Figure ( );
 
     Figure (Point figureOrigin, string graphicsName2, string graphicsCommandLine2)
     :Graphics(graphicsName2, graphicsCommandLine2), origin(figureOrigin){}
@@ -56,12 +58,7 @@ public:
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE
-
-protected:
-//----------------------------------------------------- Méthodes protégées
-
-	virtual bool isInside(Point p1, Point p2);
+    virtual bool IsInside(Point p1, Point p2);
     // Mode d'emploi :
     //	Vérifie que la figure appartient au rectangle formé par p1, p2
     //
@@ -69,6 +66,17 @@ protected:
     //	P1 = coin supérieur gauche du rectangle
     //	P2 = coin inférieur droit du rectangle
     //
+
+    void AddSelect(Selection* s);
+
+    void EraseSelect(Selection* s);
+
+//------------------------------------------------------------------ PRIVE
+
+protected:
+//----------------------------------------------------- Méthodes protégées
+
+
 
     virtual string description()=0;
     // Mode d'emploi :
@@ -90,8 +98,8 @@ protected:
 //----------------------------------------------------- Attributs protégés
 
 	Point origin;
-
-	//Points facilitant le isInside()
+    vector<Selection*> whoOwnsMe;
+	//Points facilitant le IsInside()
     Point leftUpCorner;
     Point downRightCorner;
 
@@ -99,6 +107,7 @@ private:
 //------------------------------------------------------- Attributs privés
 
 //---------------------------------------------------------- Classes amies
+
 friend class Selection;
 //-------------------------------------------------------- Classes privées
 

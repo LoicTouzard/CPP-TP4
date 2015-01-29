@@ -10,6 +10,7 @@
 #define LINE_X
 #include "Point.h"
 #include "Figure.h"
+#include "Selection.h"
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes

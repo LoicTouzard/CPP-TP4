@@ -37,7 +37,7 @@ using namespace std;
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-Selection::Selection ( const Selection & unSelection )
+Selection::Selection ( const Selection & unSelection ):Graphics(unSelection)
 // Algorithme :
 //
 {
@@ -47,17 +47,15 @@ Selection::Selection ( const Selection & unSelection )
 } //----- Fin de Selection (constructeur de copie)
 
 
- Selection::Selection (vector <Figure*> newFigureList, Point p1, Point p2, string graphicsName, string graphicsCommandLine)
+ Selection::Selection (vector<Figure*> newFigureList, Point p1, Point p2, string graphicsName, string graphicsCommandLine)
+  :Graphics(graphicsName, graphicsCommandLine), origin(p1), extremity(p2), figureList(newFigureList)
  // Algorithme :
 //
 {
-   coinGauche=p1;
-   coinDroit=p2;
-   name=graphicsName;
-   commandLine=graphicsCommandLine;
-
-    figureList.swap(newFigureList);
-
+    vector<Figure*>::iterator it;
+    for(it=figureList.begin(); it!=figureList.end(); ++it){
+        (*it)->AddSelect(this);
+    }
 #ifdef MAP
     cout << "Appel au constructeur de <Selection>" << endl;
 #endif
@@ -67,11 +65,26 @@ Selection::~Selection ( )
 // Algorithme :
 //
 {
+    cout << "Appel au destructeur de <Selection>" << endl;vector<Figure*>::iterator it;
+    for(it=figureList.begin(); it!=figureList.end(); ++it){
+        (*it)->EraseSelect(this);
+    }
 #ifdef MAP
     cout << "Appel au destructeur de <Selection>" << endl;
 #endif
 } //----- Fin de ~Selection
 
+
+void Selection::EraseFigure(Figure* f){
+    cout << "EraseFigure dans " << name << " de : " << f->GetName() << endl;
+    vector<Figure*>::iterator it;
+    for(it=figureList.begin(); it!=figureList.end(); ++it){
+        if( (*it)==f){
+            figureList.erase(it);
+            it--;
+        }
+    }
+}
 
 //------------------------------------------------------------------ PRIVE
 
@@ -84,19 +97,6 @@ Selection::~Selection ( )
         return "";
     } //----- Fin de description
 
-    bool Selection::isInside(Point p1, Point p2){
-        if( (p1.x <=coinGauche.x) &&
-		(p2.x >=coinDroit.x) &&
-		(p1.y >=coinGauche.y) &&
-		(p2.y <=coinDroit.y) )
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-    }
 
     void Selection::move(long dx, long dy)
     // type Selection::Méthode ( liste de paramètres )
@@ -104,14 +104,11 @@ Selection::~Selection ( )
     {
     vector<Figure*>::iterator it;
     for(it=figureList.begin(); it!=figureList.end(); ++it){
-        if( (*it)->isInside(coinGauche, coinDroit) ){
-            (*it)->move(dx,dy);
-        }
+        (*it)->move(dx,dy);
     }
-    coinGauche.x += dx;
-	coinGauche.y += dy;
-	coinDroit.x += dx;
-	coinDroit.y += dy;
-	commandLine="S "+name+" "+toString(coinGauche.x)+" "+toString(coinGauche.y)+" "+toString(coinDroit.x)+" "+toString(coinDroit.y);
+    origin.x += dx;
+	origin.y += dy;
+	extremity.x += dx;
+	extremity.y += dy;
     } //----- Fin de move
 //------------------------------------------------------- Méthodes privées
