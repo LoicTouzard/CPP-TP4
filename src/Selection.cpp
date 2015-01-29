@@ -47,7 +47,7 @@ Selection::Selection ( const Selection & unSelection )
 } //----- Fin de Selection (constructeur de copie)
 
 
- /*Selection::Selection (vector <Figure*> newFigureList, Point p1, Point p2, string graphicsName, string graphicsCommandLine)
+ Selection::Selection (vector <Figure*> newFigureList, Point p1, Point p2, string graphicsName, string graphicsCommandLine)
  // Algorithme :
 //
 {
@@ -55,14 +55,13 @@ Selection::Selection ( const Selection & unSelection )
    coinDroit=p2;
    name=graphicsName;
    commandLine=graphicsCommandLine;
-   figureList=new vector<Figure>;
 
+    figureList.swap(newFigureList);
 
 #ifdef MAP
     cout << "Appel au constructeur de <Selection>" << endl;
 #endif
-} //----- Fin de Selection*/
-
+} //----- Fin de Selection
 
 Selection::~Selection ( )
 // Algorithme :
@@ -85,10 +84,34 @@ Selection::~Selection ( )
         return "";
     } //----- Fin de description
 
+    bool Selection::isInside(Point p1, Point p2){
+        if( (p1.x <=coinGauche.x) &&
+		(p2.x >=coinDroit.x) &&
+		(p1.y >=coinGauche.y) &&
+		(p2.y <=coinDroit.y) )
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+    }
+
     void Selection::move(long dx, long dy)
     // type Selection::Méthode ( liste de paramètres )
     // Algorithme :
     {
-
+    vector<Figure*>::iterator it;
+    for(it=figureList.begin(); it!=figureList.end(); ++it){
+        if( (*it)->isInside(coinGauche, coinDroit) ){
+            (*it)->move(dx,dy);
+        }
+    }
+    coinGauche.x += dx;
+	coinGauche.y += dy;
+	coinDroit.x += dx;
+	coinDroit.y += dy;
+	commandLine="S "+name+" "+toString(coinGauche.x)+" "+toString(coinGauche.y)+" "+toString(coinDroit.x)+" "+toString(coinDroit.y);
     } //----- Fin de move
 //------------------------------------------------------- Méthodes privées

@@ -38,8 +38,7 @@ public:
     // Contrat :
     //
 
-    Selection (vector <Figure*> newFigureList, Point p1, Point p2, string graphicsName, string graphicsCommandLine)
-    :Graphics(graphicsName, graphicsCommandLine), figureList(newFigureList), coinGauche(p1), coinDroit(p2){}
+    Selection (vector <Figure*> newFigureList, Point p1, Point p2, string graphicsName, string graphicsCommandLine);
     // Mode d'emploi :
     //
     // Contrat :
@@ -63,6 +62,12 @@ protected:
     //
 
     void move(long dx, long dy);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    bool isInside(Point p1, Point p2);
     // Mode d'emploi :
     //
     // Contrat :

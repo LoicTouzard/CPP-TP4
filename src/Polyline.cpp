@@ -49,6 +49,10 @@ Polyline::Polyline (vector<Point> newPointList, Point figureOrigin, string graph
 {
 
     vector<Point>::iterator it;
+    leftUpCorner.x=pointList[0].x;
+    leftUpCorner.y=pointList[0].y;
+    downRightCorner.x=pointList[0].x;
+    downRightCorner.y=pointList[0].y;
     for(it=pointList.begin(); it!=pointList.end(); ++it)
     {
         if(it->x > downRightCorner.x)

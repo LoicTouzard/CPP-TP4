@@ -34,7 +34,7 @@ using namespace std;
 #include "CreateElementCommand.h"
 #include "DeleteElementCommand.h"
 #include "DeleteCommand.h"
-#include "LoadCommand.h"
+//#include "LoadCommand.h"
 //------------------------------------------------------------- Constantes
 const size_t UNDO_REDO_MAX_LEVEL = 20;
 //---------------------------------------------------- Variables de classe
@@ -147,6 +147,7 @@ void Container::moveElement(string name, long dX, long dY){
 		Point pt;
 		pt.x = dX;
 		pt.y = dY;
+
 		//on l'ajoute a la pile des undo et on clear les redo
 		insertCommand(new MoveCommand(&listeGraphics, it->second , pt));
 		cout<<"OK"<<endl;
@@ -159,7 +160,7 @@ void Container::moveElement(string name, long dX, long dY){
 
 void Container::Load(string nomFichier)
 {
-    // COPIE COLLE DU CODE MAIN ( A FACTORISER ? )
+    /*// COPIE COLLE DU CODE MAIN ( A FACTORISER ? )
     string entree;
     ifstream loadFile (nomFichier);
     if (loadFile.is_open())
@@ -388,7 +389,7 @@ void Container::Load(string nomFichier)
     {
         cout << "ERR" << endl;
         cout << "#Unable to open file";
-    }
+    }*/
 }
 
 void Container::Delete(vector<string> listeNoms)
@@ -411,7 +412,6 @@ void Container::Delete(vector<string> listeNoms)
 	    //et n'a pas été supprimé par un delete précédent de cette même commande
 	    // Ex : DELETE nameSelection nameObjetOfSelection
         {
-
             listeCMD.push_back(new DeleteElementCommand(&listeGraphics, it->second));
             listeGraphics.erase(it);
         }
@@ -500,11 +500,11 @@ void Container::AddPolyline(string name, vector<Point> newPointList, Point origi
 		cout<<"#name already taken"<<endl;
 		return;
 	}
-	//string cmd="PL "+name+" "+toString(origin.x)+" "+toString(origin.y);
-	//vector<Point>::iterator it;
-	//for(it=newPointList.begin(); it!=newPointList.end(); ++it){
-	//	cmd += " "+toString(it->x)+" "+toString(it->y);
-	//}
+	/*string cmd="PL "+name+" "+toString(origin.x)+" "+toString(origin.y);
+	vector<Point>::iterator it;
+	for(it=newPointList.begin(); it!=newPointList.end(); ++it){
+		cmd += " "+toString(it->x)+" "+toString(it->y);
+	}*/
 	Polyline *pl =new Polyline (newPointList, origin, name, commande);
 	listeGraphics.insert(make_pair(name, pl));
     insertCommand(new CreateElementCommand(&listeGraphics, pl ));
@@ -512,9 +512,37 @@ void Container::AddPolyline(string name, vector<Point> newPointList, Point origi
 	cout<<"#New object :"<<name<<endl;
 }
 
-void Container::AddSelection()
+void Container::AddSelection(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande)
 {
+     if(!NomLibre(name, &listeGraphics)){
+		cout<<"ERR"<<endl;
+		cout<<"#name already taken"<<endl;
+		return;
+	}
+	Point origin;
+	Point extremity;
+	//origin doit prendre le x minimum et y maximum
+	//extremity doir prendre le y minimum et x maximum
+    origin.x=coin1X;
+    extremity.x=coin2X;
+    origin.y=coin1Y;
+    extremity.y=coin2Y;
 
+    vector<Figure*> figuresInside;
+    Graphics_iterator it;
+    for(it=listeGraphics.begin(); it!=listeGraphics.end(); ++it){
+        if( it->second->isInside(origin, extremity) ){
+            figuresInside.push_back(dynamic_cast<Figure *>(it->second));
+            //Dynamic_cast permet de ne récupérer que la partie Figure de it (qui est un iterator de Graphics)
+            //Pb : Si une selection est déjà présente dans le container : on ne peut pas la cast en Figure
+            // -> Pas d'exception et tout se passe bien je sais pas pourquoi (peut etre que le exception sont dans cette méthode dynamic_cast ?
+        }
+    }
+    Selection *s =new Selection (figuresInside, origin, extremity, name, commande);
+	listeGraphics.insert(make_pair(name, s));
+    insertCommand(new CreateElementCommand(&listeGraphics, s ));
+	cout<<"OK"<<endl;
+	cout<<"#New object :"<<name<<endl;
 }
 
 void Container::Undo()

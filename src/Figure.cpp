@@ -37,6 +37,7 @@ bool Figure::isInside(Point p1, Point p2)
 // Algorithme :
 //
 {
+
 	if( (p1.x <=leftUpCorner.x) &&
 		(p2.x >=downRightCorner.x) &&
 		(p1.y >=leftUpCorner.y) &&
@@ -65,10 +66,10 @@ Figure::Figure ( const Figure & unFigure )
 
 
 /*Figure::Figure ( Point figureOrigin, string graphicsName2, string graphicsCommandLine2)
+    :Graphics(graphicsName2, graphicsCommandLine2), origin(figureOrigin)
 // Algorithme :
 //
 {
-
 name=graphicsName2;
 commandLine=graphicsCommandLine2;
 origin=figureOrigin;

@@ -9,6 +9,7 @@
 #if ! defined ( GRAPHICS_H )
 #define GRAPHICS_H
 #include <string>
+#include "Point.h"
 //--------------------------------------------------- Interfaces utilisées
 using namespace std;
 //------------------------------------------------------------- Constantes
@@ -75,6 +76,11 @@ protected:
     // Contrat :
     //
 
+    virtual bool isInside(Point p1, Point p2)=0;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 
 private:

@@ -123,7 +123,7 @@ typedef MapGraphics::const_iterator Graphics_const_iterator;
     // Contrat :
     //
 
-    void AddSelection();
+    void AddSelection(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande);
     // Mode d'emploi :
     //
     // Contrat :
