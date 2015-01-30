@@ -1,8 +1,8 @@
 /*************************************************************************
                            Circle  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Réalisation de la classe <Circle> (fichier Circle.cpp) --
@@ -22,16 +22,13 @@ using namespace std;
 
 //----------------------------------------------------------- Types privés
 
-
 //----------------------------------------------------------------- PUBLIC
+
 //-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Méthodes publiques
 
-
 //------------------------------------------------- Surcharge d'opérateurs
-
-
 
 //-------------------------------------------- Constructeurs - destructeur
 Circle::Circle ( const Circle & unCircle ):Figure(unCircle)
@@ -50,8 +47,9 @@ Circle::Circle ( const Circle & unCircle ):Figure(unCircle)
 
 Circle::Circle (long circleRadius, Point figureOrigin, string graphicsName, string graphicsCommandLine)
 		:Figure(figureOrigin, graphicsName, graphicsCommandLine), radius(circleRadius)
+// Algorithme :
+//
 {
-
         leftUpCorner.x=origin.x-radius;
         leftUpCorner.y=origin.y+radius;
         downRightCorner.x=origin.x+radius;
@@ -59,14 +57,13 @@ Circle::Circle (long circleRadius, Point figureOrigin, string graphicsName, stri
 #ifdef MAP
     cout << "Appel au constructeur de <Circle>" << endl;
 #endif
-} //----- Fin de Circle*/
+} //----- Fin de Circle
 
 
 Circle::~Circle ( )
 // Algorithme :
 //
 {
-    cout << "Appel au destructeur de <Circle>" << endl;
     vector<Selection*>::iterator it;
     for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
         (*it)->EraseFigure(this);

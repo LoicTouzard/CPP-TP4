@@ -1,8 +1,8 @@
 /*************************************************************************
                            Figure  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Réalisation de la classe <Figure> (fichier Figure.cpp) --
@@ -17,10 +17,6 @@ using namespace std;
 #include "Figure.h"
 #include "Selection.h"
 
-
-
-
-
 //------------------------------------------------------------- Constantes
 
 //---------------------------------------------------- Variables de classe
@@ -33,11 +29,6 @@ using namespace std;
 
 
 //----------------------------------------------------- Méthodes publiques
-// type Figure::Méthode ( liste de paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 bool Figure::IsInside(Point p1, Point p2)
 // Algorithme :
@@ -59,12 +50,10 @@ bool Figure::IsInside(Point p1, Point p2)
 
 
 void Figure::AddSelect(Selection* s){
-    cout << "AddSelect dans " << name << " de : " << s->GetName() << endl;
     whoOwnsMe.push_back(s);
 }
 
 void Figure::EraseSelect(Selection* s){
-    cout << "EraseSelect dans " << name << " de : " << s->GetName() << endl;
     vector<Selection*>::iterator it;
     for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
         if( (*it)==s){
@@ -82,7 +71,6 @@ Figure::~Figure ( )
 // Algorithme :
 //
 {
-    cout << "Appel au destructeur de <Figure>" << endl;
 #ifdef MAP
     cout << "Appel au destructeur de <Figure>" << endl;
 #endif

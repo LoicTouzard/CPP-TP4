@@ -1,8 +1,8 @@
 /*************************************************************************
                            DeleteElementCommand  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Réalisation de la classe <DeleteElementCommand> (fichier DeleteElementCommand.cpp}) --
@@ -34,7 +34,7 @@ using namespace std;
 //} //----- Fin de Méthode
 
 
-void DeleteElementCommand::execute()
+void DeleteElementCommand::Execute()
 // Mode d'emploi :
 //
 // Contrat :
@@ -42,14 +42,14 @@ void DeleteElementCommand::execute()
 {
     //cout << "#tentative de suppression de " << element->GetName() << endl;
     //cout << "#il y a " << linkedMap->size() << "elements" << endl;
-    //l'element est gardé en mémoire pour un futur execute plus rapide (pas de réallocation)
+    //l'element est gardé en mémoire pour un futur Execute plus rapide (pas de réallocation)
     linkedMap->erase(element->GetName());
     //cout << "#il y a " << linkedMap->size() << "elements" << endl;
     whichList=IN_UNDO;
 
 }
 
-void DeleteElementCommand::unexecute()
+void DeleteElementCommand::UnExecute()
 // Mode d'emploi :
 //
 // Contrat :

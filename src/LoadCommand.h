@@ -1,8 +1,8 @@
 /*************************************************************************
                            LoadCommand  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Interface de la classe <LoadCommand> (fichier LoadCommand.h) ------
@@ -28,19 +28,14 @@ class LoadCommand : public ComposedCommand
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste de paramètres );
+
+    virtual void Execute();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual void execute();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    virtual void unexecute();
+    virtual void UnExecute();
     // Mode d'emploi :
     //
     // Contrat :

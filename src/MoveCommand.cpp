@@ -1,8 +1,8 @@
 /*************************************************************************
                            MoveCommand  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Réalisation de la classe <MoveCommand> (fichier MoveCommand.cpp}) --
@@ -27,31 +27,26 @@ using namespace std;
 //-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Méthodes publiques
-// type MoveCommand::Méthode ( liste de paramètres )
-// Algorithme :
+
+void MoveCommand::Execute()
+// Mode d'emploi :
 //
-//{
-//} //----- Fin de Méthode
+// Contrat :
+//
+{
+    element->move(origin.x, origin.y);
+    whichList=IN_UNDO;
+}
 
-    void MoveCommand::execute()
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-    {
-        element->move(origin.x, origin.y);
-        whichList=IN_UNDO;
-    }
-
-    void MoveCommand::unexecute()
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-    {
-        element->move(-(origin.x), -(origin.y));
-        whichList=IN_REDO;
-    }
+void MoveCommand::UnExecute()
+// Mode d'emploi :
+//
+// Contrat :
+//
+{
+    element->move(-(origin.x), -(origin.y));
+    whichList=IN_REDO;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 

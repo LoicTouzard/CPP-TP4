@@ -1,8 +1,8 @@
 /*************************************************************************
                            CreateElementCommand  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Interface de la classe <CreateElementCommand> (fichier CreateElementCommand.h) ------
@@ -34,13 +34,13 @@ public:
     // Contrat :
     //
 
-    virtual void execute();
+    virtual void Execute();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual void unexecute();
+    virtual void UnExecute();
     // Mode d'emploi :
     //
     // Contrat :

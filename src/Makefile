@@ -1,5 +1,6 @@
 EXE=tp4
-INT=Circle.h Container.h Figure.h Graphics.h Line.h Polyline.h Rectangle.h Selection.h
+INT=Circle.h Container.h Figure.h Graphics.h Line.h Polyline.h Rectangle.h Selection.h Command.h ComposedCommand.h CreateElementCommand.h DeleteCommand.h DeleteElementCommand.h LoadCommand.h MoveCommand.h SimpleCommand.h Tools.h
+
 SRC=$(INT:.h=.cpp)
 OBJ=$(INT:.h=.o)
 	
@@ -8,15 +9,21 @@ MainOBJ=$(MainSRC:.cpp=.o)
 	
 ECHO=@echo
 
+CLEAN=clean
+RM=rm
+RMFlags=-f
+
 Compilator=@g++
 CompilationsOptions=-Wall -pedantic -std=c++11
 Linker=@g++
 LinkerOptions=
 
+all: $(EXE)
+
 $(EXE): $(MainOBJ) $(OBJ)
 	$(ECHO) "Edition des liens de $(EXE)"
 	$(Linker) -o $(EXE) $(MainOBJ) $(OBJ) $(LinkerOptions)
-
+	
 $(MainOBJ): $(MainSRC) $(INT)
 	$(ECHO) "Compilation de $(MainSRC)"
 	$(Compilator) -o $(MainOBJ) -c $(MainSRC) $(CompilationsOptions)
@@ -26,9 +33,6 @@ $(MainOBJ): $(MainSRC) $(INT)
 	$(Compilator) -c $< $(CompilationsOptions)
 	
 # ***** CLEAN ***** #
-CLEAN=clean
-RM=rm
-RMFlags=-f
 
 .PHONY: $(CLEAN)
 $(CLEAN):

@@ -1,11 +1,10 @@
 /*************************************************************************
                            toString  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
-//---------- Interface de la classe <Figure> (fichier Figure.h) ------
 #if ! defined ( TOSTRING_H )
 #define TOSTRING_H
 

@@ -1,8 +1,8 @@
 /*************************************************************************
                            Comand  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Interface de la classe <Command> (fichier Command.h) ------
@@ -27,13 +27,13 @@ class Command
 public:
 //----------------------------------------------------- Méthodes publiques
 
-    virtual void execute()=0;
+    virtual void Execute()=0;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual void unexecute()=0;
+    virtual void UnExecute()=0;
     // Mode d'emploi :
     //
     // Contrat :

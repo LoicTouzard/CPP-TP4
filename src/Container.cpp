@@ -1,8 +1,8 @@
 /*************************************************************************
                            Container  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Réalisation de la classe <Container> (fichier Container.cpp) --
@@ -168,7 +168,7 @@ void Container::Load(string nomFichier)
 {
     // COPIE COLLE DU CODE MAIN ( A FACTORISER ? )
     string entree;
-    ifstream loadFile (nomFichier);
+    ifstream loadFile (nomFichier.c_str());
     if (loadFile.is_open())
     {
 
@@ -578,7 +578,7 @@ void Container::Undo()
     {
         Command* tmpCommand = undoCommands.front(); //on prend la commande du haut de la pile
         undoCommands.pop_front();
-        tmpCommand->unexecute();
+        tmpCommand->UnExecute();
         redoCommands.push_front(tmpCommand);//on met la command au sommet de la pile de undo
         cout<<"OK"<<endl;
     }
@@ -594,7 +594,7 @@ void Container::Redo()
     {
         Command* tmpCommand = redoCommands.front(); //on prend la commande du haut de la pile
         redoCommands.pop_front();
-        tmpCommand->execute();
+        tmpCommand->Execute();
         undoCommands.push_front(tmpCommand);//on met la command au sommet de la pile de undo
         cout<<"OK"<<endl;
     }

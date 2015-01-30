@@ -1,8 +1,8 @@
 /*************************************************************************
                            Tools  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Réalisation de la classe <Tools> (fichier Tools.cpp) --
@@ -29,11 +29,6 @@ using namespace std;
 //-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Méthodes publiques
-// type Tools::Méthode ( liste de paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 int Tools::NombreEspaces(std::string s)
 // Algorithme : Compte le nombre d'espaces dans un string (utile pour savoir si le format d'entrée est respecté)

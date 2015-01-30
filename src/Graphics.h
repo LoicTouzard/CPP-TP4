@@ -1,8 +1,8 @@
 /*************************************************************************
                            Graphics  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Interface de la classe <Graphics> (fichier Graphics.h) ------

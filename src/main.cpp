@@ -3,8 +3,9 @@
 #include <string>
 #include <fstream>
 #include <algorithm>
-#include "Tools.h"
+#include <ctime> //Juste pour les tests de perfromances
 
+#include "Tools.h"
 #include "Point.h"
 #include "Container.h"
 #include "Circle.h"
@@ -17,6 +18,16 @@ using namespace std;
 
 	int main(){
 		Container espace; //Espace qui contient toutes les figures et selections
+
+
+        /* A décommenter pour les tests
+        clock_t    start;
+        start = clock();
+        espace.Load("Test_100_formes.txt");
+        cout << "Time: " << (clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << endl;
+
+        Commenter tout ce qui suit si onveut juste faire les tests*/
+
         string entree;
         getline(cin,entree);
         while(entree.substr(0,4)!="EXIT"){
@@ -40,6 +51,9 @@ using namespace std;
             }
 
             else if (entree.substr(0,4)=="LOAD") {
+                //Lancer le timer pour les tests de performances
+
+
                 //Code pour LOAD
                 if(Tools::NombreEspaces(entree)==1){
                     string nomFichier;
@@ -58,6 +72,8 @@ using namespace std;
                     cout<<"ERR"<<endl;
                     cout<<"#invalid parameters"<<endl;
                 }
+
+                 //Arreter le timer pour les tests de performances
             }
 
             else if (entree.substr(0,4)=="SAVE") {
@@ -122,6 +138,7 @@ using namespace std;
             }
 
             else if (entree.substr(0,1)=="C") {
+
                 string name;
                 string radius, centerX, centerY;
                 name=Tools::Decoupage(entree,1);

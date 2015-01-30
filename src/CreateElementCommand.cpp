@@ -1,8 +1,8 @@
 /*************************************************************************
                            CreateElementCommand  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Réalisation de la classe <CreateElementCommand> (fichier CreateElementCommand.cpp}) --
@@ -33,7 +33,7 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-    void CreateElementCommand::execute()
+    void CreateElementCommand::Execute()
     // Mode d'emploi :
     //
     // Contrat :
@@ -45,13 +45,13 @@ using namespace std;
         whichList=IN_UNDO;
     }
 
-    void CreateElementCommand::unexecute()
+    void CreateElementCommand::UnExecute()
     // Mode d'emploi :
     //
     // Contrat :
     //
     {
-        //l'element est gardé en mémoire pour un futur execute plus rapide (pas de réallocation)
+        //l'element est gardé en mémoire pour un futur Execute plus rapide (pas de réallocation)
         linkedMap->erase(element->GetName());
         whichList=IN_REDO;
     }
@@ -85,7 +85,6 @@ CreateElementCommand::~CreateElementCommand ( )
 //
 {
     if(whichList==IN_REDO){
-        cout << "Appel au destructeur de <CreateElementCommand>" << endl;
         delete element;
     }
 #ifdef MAP

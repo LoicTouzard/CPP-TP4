@@ -1,8 +1,8 @@
 /*************************************************************************
                            DeleteCommand  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Réalisation de la classe <DeleteCommand> (fichier DeleteCommand.h) --
@@ -35,7 +35,7 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-void DeleteCommand::execute()
+void DeleteCommand::Execute()
 // Mode d'emploi :
 //
 // Contrat :
@@ -44,13 +44,13 @@ void DeleteCommand::execute()
     vector<Command*>::iterator it;
     for(it=listCommands.begin(); it!=listCommands.end(); ++it)
     {
-        (*it)->execute();
+        (*it)->Execute();
     }
     whichList=IN_UNDO;
 
 }
 
-void DeleteCommand::unexecute()
+void DeleteCommand::UnExecute()
 // Mode d'emploi :
 //
 // Contrat :
@@ -59,7 +59,7 @@ void DeleteCommand::unexecute()
     vector<Command*>::iterator it;
     for(it=listCommands.begin(); it!=listCommands.end(); ++it)
     {
-        (*it)->unexecute();
+        (*it)->UnExecute();
     }
     whichList=IN_REDO;
 }

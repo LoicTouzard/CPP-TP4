@@ -1,8 +1,8 @@
 /*************************************************************************
                            Graphics  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Réalisation de la classe <Graphics> (fichier Graphics.cpp) --
@@ -51,7 +51,6 @@ Graphics::~Graphics()
 // Algorithme :
 //
 {
-    cout << "Appel au destructeur de <Graphics>" << endl;
 #ifdef MAP
     cout << "Appel au destructeur de <Graphics>" << endl;
 #endif

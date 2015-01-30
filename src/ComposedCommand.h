@@ -1,8 +1,8 @@
 /*************************************************************************
                            ComposedCommand  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Interface de la classe <ComposedCommand> (fichier ComposedCOmmand.h) ------
@@ -28,25 +28,18 @@ class ComposedCommand : public Command
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste de paramètres );
+
+    virtual void Execute()=0;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual void execute()=0;
+    virtual void UnExecute()=0;
     // Mode d'emploi :
     //
     // Contrat :
     //
-
-    virtual void unexecute()=0;
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
 
 //------------------------------------------------- Surcharge d'opérateurs
 

@@ -1,8 +1,8 @@
 /*************************************************************************
                            Polyline  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Réalisation de la classe <Polyline> (fichier Polyline.cpp) --
@@ -84,7 +84,6 @@ Polyline::~Polyline ( )
 // Algorithme :
 //
 {
-    cout << "Appel au destructeur de <Polyline>" << endl;
     vector<Selection*>::iterator it;
     for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
         (*it)->EraseFigure(this);

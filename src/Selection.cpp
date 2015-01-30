@@ -1,8 +1,8 @@
 /*************************************************************************
                            Selection  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    début                : 30/01/2015
+    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
 *************************************************************************/
 
 //---------- Réalisation de la classe <Selection> (fichier Selection.cpp) --
@@ -27,11 +27,6 @@ using namespace std;
 //-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Méthodes publiques
-// type Selection::Méthode ( liste de paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -65,7 +60,7 @@ Selection::~Selection ( )
 // Algorithme :
 //
 {
-    cout << "Appel au destructeur de <Selection>" << endl;vector<Figure*>::iterator it;
+    vector<Figure*>::iterator it;
     for(it=figureList.begin(); it!=figureList.end(); ++it){
         (*it)->EraseSelect(this);
     }
@@ -76,7 +71,6 @@ Selection::~Selection ( )
 
 
 void Selection::EraseFigure(Figure* f){
-    cout << "EraseFigure dans " << name << " de : " << f->GetName() << endl;
     vector<Figure*>::iterator it;
     for(it=figureList.begin(); it!=figureList.end(); ++it){
         if( (*it)==f){
