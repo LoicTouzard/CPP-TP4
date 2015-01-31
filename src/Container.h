@@ -27,8 +27,8 @@ typedef map<string, Graphics*> MapGraphics;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Container>
-//
-//
+// Le container est objet qui contient une liste de Graphics
+// On peut 'assimiler à un espace dans lequels on manipule des objets Graphics
 //------------------------------------------------------------------------
 
 class Container
@@ -64,49 +64,49 @@ typedef MapGraphics::const_iterator Graphics_const_iterator;
     Graphics_iterator Graphics_end(){ return listeGraphics.end(); }
 
     void List();
-	// Mode d'emploi :
+	// Mode d'emploi : Affiche la commande de chaque Graphics
     //
     // Contrat :
     //
 
     void Clear();
-	// Mode d'emploi :
+	// Mode d'emploi : Vide le container de tous les Graphics
     //
     // Contrat :
     //
 
     void Save(string nomFichier);
-	// Mode d'emploi :
+	// Mode d'emploi : Sauvegarde tous les Graphics dans un fichier
     //
     // Contrat :
     //
 
     void moveElement(string name, long dX, long dY);
-	// Mode d'emploi :
+	// Mode d'emploi : Permet de déplacer un Graphics en ajoutant dX à sa coordonnée en X et dY à sa coordonnée en Y
     //
     // Contrat :
     //
 
     void Load(string nomFichier);
-	// Mode d'emploi :
+	// Mode d'emploi : Charge toutes les commandes présentent dans un fichier
     //
     // Contrat :
     //
 
     void Delete(vector<string> listeNoms);
-	// Mode d'emploi :
+	// Mode d'emploi : Permet de supprimer un ou plusieurs Graphics
     //
     // Contrat :
     //
 
 	void AddCircle(string name, long radius, long centerX, long centerY, string commande);
-    // Mode d'emploi :
+    // Mode d'emploi : Ajoute un cercle qui s'appelle name au container (aux coordonnées centerX, centerY et de rayon radius)
     //
     // Contrat :
     //
 
 	void AddRectangle(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string entree);
-    // Mode d'emploi :
+    // Mode d'emploi :Ajoute un rectangle qui s'appelle name au container
     //
     // Contrat :
     //
@@ -130,13 +130,13 @@ typedef MapGraphics::const_iterator Graphics_const_iterator;
     //
 
     void Undo();
-    // Mode d'emploi :
+    // Mode d'emploi : Annule la dernière commande
     //
     // Contrat :
     //
 
      void Redo();
-    // Mode d'emploi :
+    // Mode d'emploi : Re-éxécute la dernière commande annulée
     //
     // Contrat :
     //
@@ -151,7 +151,7 @@ private:
 //------------------------------------------------------- Méthodes privées
 
     bool NomLibre(string name, MapGraphics* mapToAnalyse);
-    // Mode d'emploi :
+    // Mode d'emploi : Vérifie que le nom n'est pas déjà utilisé par un autre Graphics
     //
     // Contrat :
     //

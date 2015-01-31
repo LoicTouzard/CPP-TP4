@@ -16,7 +16,7 @@ using namespace std;
 //------------------------------------------------------------------ Types
 //------------------------------------------------------------------------
 // Rôle de la classe <Command>
-//
+// Permet de définir si la figure caractérisée par cette commande se situe dans la pile des UNDO ou dans la pile des REDO
 //
 //------------------------------------------------------------------------
 

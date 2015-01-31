@@ -30,11 +30,7 @@ using namespace std;
 //-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Méthodes publiques
-// type DeleteCommand::Méthode ( liste de paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+
 void DeleteCommand::Execute()
 // Mode d'emploi :
 //

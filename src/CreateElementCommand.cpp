@@ -27,34 +27,25 @@ using namespace std;
 //-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Méthodes publiques
-// type CreateElementCommand::Méthode ( liste de paramètres )
+
+void CreateElementCommand::Execute()
 // Algorithme :
 //
-//{
-//} //----- Fin de Méthode
+{
+    //on insère directement l'élément pas de vérification à faire car le nom est forcément libre
+    //de plus l'objet est déjà bien construit
+    linkedMap->insert(make_pair(element->GetName(), element));
+    whichList=IN_UNDO;
+}
 
-    void CreateElementCommand::Execute()
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-    {
-        //on insère directement l'élément pas de vérification à faire car le nom est forcément libre
-        //de plus l'objet est déjà bien construit
-        linkedMap->insert(make_pair(element->GetName(), element));
-        whichList=IN_UNDO;
-    }
-
-    void CreateElementCommand::UnExecute()
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-    {
-        //l'element est gardé en mémoire pour un futur Execute plus rapide (pas de réallocation)
-        linkedMap->erase(element->GetName());
-        whichList=IN_REDO;
-    }
+void CreateElementCommand::UnExecute()
+// Algorithme :
+//
+{
+    //l'element est gardé en mémoire pour un futur Execute plus rapide (pas de réallocation)
+    linkedMap->erase(element->GetName());
+    whichList=IN_REDO;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 

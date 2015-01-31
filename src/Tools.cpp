@@ -58,7 +58,7 @@ bool Tools::Separateur(std::string s)
 
 
 std::string Tools::Decoupage(std::string s, int posSpace)
-// Algotihme : On extrait la chaine de caractères à paritir du posSpace-ème espace
+// Algorithme : On extrait la chaine de caractères à contenue entre deux espaces consécutifs
 //
 {
     unsigned int i;

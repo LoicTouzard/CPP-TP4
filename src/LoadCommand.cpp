@@ -30,11 +30,7 @@ using namespace std;
 //-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Méthodes publiques
-// type LoadCommand::Méthode ( liste de paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+
 void LoadCommand::Execute()
 // Mode d'emploi :
 //

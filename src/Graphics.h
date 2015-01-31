@@ -46,7 +46,6 @@ public:
 
     Graphics (string graphicsName, string graphicsCommandLine )
         :name(graphicsName), commandLine(graphicsCommandLine){}
-    //Graphics (string graphicsName, string graphicsCommandLine );
     // Mode d'emploi :
     //
     // Contrat :

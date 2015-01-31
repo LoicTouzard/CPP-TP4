@@ -27,12 +27,6 @@ using namespace std;
 //-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Méthodes publiques
-// type Graphics::Méthode ( liste de paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
-
 
 //------------------------------------------------- Surcharge d'opérateurs
 

@@ -34,7 +34,7 @@ using namespace std;
 #include "DeleteCommand.h"
 #include "LoadCommand.h"
 //------------------------------------------------------------- Constantes
-const size_t UNDO_REDO_MAX_LEVEL = 20;
+const size_t UNDO_REDO_MAX_LEVEL = 20; //Taille maxi de la pile des UNDO définie par le CdC
 //---------------------------------------------------- Variables de classe
 
 //----------------------------------------------------------- Types privés
@@ -80,15 +80,16 @@ Container::~Container ( )
 
 
 void Container::Save(string nomFichier)
-// Algorithme :
-//
+// Algorithme : Permet de sauvegarder toutes les commandes propres à chaque Graphics
+// Le nom du fichier à créer est passé en paramètre
+// On parcourt tous les Graphics situés dans le container et pour chacun d'entre eux on stocke leur commande dans le fichier
 {
 	ofstream fichier;
     fichier.open(nomFichier.c_str(),ios::trunc);
 	if(fichier){
 		Graphics_iterator it;
 		for(it=listeGraphics.begin(); it!=listeGraphics.end();++it){
-			fichier<<it->second->description();
+			fichier<<it->second->description(); //On récupère toutes les commandes
 		}
 		fichier.close();
 		cout<<"OK"<<endl;
@@ -96,11 +97,12 @@ void Container::Save(string nomFichier)
 	else{
 		cout<<"#Can't create the file "<<nomFichier<<endl;
 	}
-}
+} //----- Fin de Save
 
 void Container::Clear()
-// Algorithme :
-//
+// Algorithme : Vide le container de tous les Graphics qu'il contient
+// On parcours le container, on stocke toutes les commandes dans une liste pour anticiper un éventiuel UNDO
+// Puis on vide la liste de Graphics
 {
 	if(listeGraphics.size()==0){
 		cout<<"OK"<<endl;
@@ -123,8 +125,8 @@ void Container::Clear()
 }
 
 void Container::List()
-// Algorithme :
-//
+// Algorithme : Liste toutes les figures (pas les sélections) situées dans le container
+// On parcours la liste de Graphics et on ne récupère que les figures pour ensuite afficher leur commande
 {
 	Graphics_iterator it;
 	if(listeGraphics.size()!=0){
@@ -145,6 +147,9 @@ void Container::List()
 }
 
 void Container::moveElement(string name, long dX, long dY)
+// Algorithme : Déplace un Graphics dans le container
+// On cherche le nom de la figure passée en param-tre dans la liste de Graphics
+// Si elle existe on ajoute dX à sa coordonnée x et dY à sa coordonnée en y
 {
 	MapGraphics::iterator it;
 	it=listeGraphics.find(name);
@@ -165,6 +170,9 @@ void Container::moveElement(string name, long dX, long dY)
 }
 
 void Container::Load(string nomFichier)
+// Algorithme : Permet de charger un fichier
+// On parcours tout le fichier et on récupère toutes les commandes
+// On exécute ensuite chaque commande (sans l'affichage)
 {
     // COPIE COLLE DU CODE MAIN ( A FACTORISER ? )
     string entree;
@@ -399,6 +407,9 @@ void Container::Load(string nomFichier)
 }
 
 void Container::Delete(vector<string> listeNoms)
+// Algorithme : Permet de supprimer un ou plusieurs Graphics
+// On parcours la liste de Graphics et si tous les paramètres sont valides, on supprime les Graphics qui portent ce nom
+// On stocke auparavant les commandes pour anticiper un éventuel UNDO
 {
 	for(unsigned int i=0; i<listeNoms.size(); ++i)
 	{
@@ -446,6 +457,9 @@ void Container::Delete(vector<string> listeNoms)
 }
 
 void Container::AddCircle(string name, long radius, long centerX, long centerY, string commande)
+// Algorithme : Création d'un objet cercle (de type Figure) à partir des valeurs passées en paramètres
+// On vérifie que le nom n'est pas déjà pris par une autre figure ou sélection
+// On peut ensuite créer l'objet en ayant pris soin de vérifier que le rayon ne soit pas négatif
 {
 	if(!NomLibre(name, &listeGraphics)){
 		cout<<"ERR"<<endl;
@@ -471,6 +485,9 @@ void Container::AddCircle(string name, long radius, long centerX, long centerY, 
 }
 
 void Container::AddRectangle(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande)
+// Algorithme : Création d'un objet rectangle (de type Figure) à partir des valeurs passées en paramètres
+// On vérifie que le nom n'est pas déjà pris par une autre figure ou sélection
+// On peut ensuite créer l'objet en ayant calculé les coordonnées du coin supérieur gauche et du coin inférieur droit  du rectangle
 {
 
     if(!NomLibre(name, &listeGraphics)){
@@ -495,6 +512,9 @@ void Container::AddRectangle(string name, long coin1X, long coin1Y, long coin2X,
 }
 
 void Container::AddLine(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande)
+// Algorithme : Création d'un objet line (de type Figure) à partir des valeurs passées en paramètres
+// On vérifie que le nom n'est pas déjà pris par une autre figure ou sélection
+// On peut ensuite créer l'objet en ayant calculé les coordonnées du coin supérieur gauche et du coin inférieur droit  du rectangle dans lequel est contenu cette ligne
 {
     if(!NomLibre(name, &listeGraphics)){
 		cout<<"ERR"<<endl;
@@ -518,6 +538,10 @@ void Container::AddLine(string name, long coin1X, long coin1Y, long coin2X, long
 }
 
 void Container::AddPolyline(string name, vector<Point> newPointList, Point origin, string commande)
+// Algorithme : Création d'un objet polyline (de type Figure) à partir des valeurs passées en paramètres
+// On vérifie que le nom n'est pas déjà pris par une autre figure ou sélection
+// On peut ensuite créer l'objet en ayant calculé les coordonnées du coin supérieur gauche et du coin inférieur droit  du rectangle dans lequel sont contenus
+// l'ensemble des points de l'objet polyline
 {
     if(!NomLibre(name, &listeGraphics)){
 		cout<<"ERR"<<endl;
@@ -537,6 +561,11 @@ void Container::AddPolyline(string name, vector<Point> newPointList, Point origi
 }
 
 void Container::AddSelection(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande)
+// Algorithme : Création d'un objet selection (de type Selection) à partir des valeurs passées en paramètres
+// On vérifie que le nom n'est pas déjà pris par une autre figure ou sélection
+// On calcule les coordonnées du coin supérieur gauche et du coin inférieur droit  du rectangle définissant la sélection
+// On ajoute chaque figure se trouvant dans la sélection à la liste de figures que possède la sélection (permet de savoir quelles figures elle contient)
+
 {
     if(!NomLibre(name, &listeGraphics)){
 		cout<<"ERR"<<endl;
@@ -573,6 +602,8 @@ void Container::AddSelection(string name, long coin1X, long coin1Y, long coin2X,
 }
 
 void Container::Undo()
+// Algorithme : Permet d'annuler la dernière opération
+// Il suffit de récupérer la dernière commande que l'on a ajouté à la pile des UNDO et de l'annuler
 {
     if(!undoCommands.empty())
     {
@@ -589,6 +620,8 @@ void Container::Undo()
 }
 
 void Container::Redo()
+// Algorithme : Permet de réexécuter une action que l'on vient d'annuler (contraire du UNDO)
+// Il suffit de récupérer la derniere commande que l'on a ajouté à la pile des REDO et de l'exécuter
 {
     if(!redoCommands.empty())
     {
@@ -606,8 +639,7 @@ void Container::Redo()
 
 //------------------------------------------------------------------ PRIVE
 bool Container::NomLibre(string name, MapGraphics* mapToAnalyse)
-//Renvoie true si le nom n'est pa dans la map
-//Renvoie false si le nom est dans la map
+// Algorithme : Renvoie true si le nom est disponible (aucun Graphics dans le container ne le possède)
 {
 	Graphics_iterator it;
 	it=mapToAnalyse->find(name);
@@ -618,6 +650,7 @@ bool Container::NomLibre(string name, MapGraphics* mapToAnalyse)
 }
 
 void Container::insertCommand(Command* cmd)
+// Algorithme : Insère une commande dans la pile des UNDO et vide la pile des REDO
 {
     if(undoCommands.size() >= UNDO_REDO_MAX_LEVEL)
     //s'il y a deja x evenement dans la liste
@@ -628,6 +661,7 @@ void Container::insertCommand(Command* cmd)
         delete tmpCmd;
     }
     undoCommands.push_front(cmd);
+    //On clean la pile des REDO car on ne peut pas faire un REDO après l'exécution d'une commande à la main (pas par un UNDO)
     list<Command*>::iterator it;
     for (it = redoCommands.begin(); it != redoCommands.end(); ++it){
         delete *it;

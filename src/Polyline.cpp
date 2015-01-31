@@ -44,8 +44,8 @@ Polyline::Polyline ( const Polyline & unPolyline ):Figure(unPolyline)
 
 Polyline::Polyline (vector<Point> newPointList, Point figureOrigin, string graphicsName, string graphicsCommandLine)
 	:Figure(figureOrigin, graphicsName, graphicsCommandLine), pointList(newPointList)
-// Algorithme :
-//
+// Algorithme : Constructeur qui permet de créer cette figure
+// On initialise le rectangle "fictif" dans lequel sera contenu la figure
 {
 
     vector<Point>::iterator it;
@@ -81,8 +81,9 @@ Polyline::Polyline (vector<Point> newPointList, Point figureOrigin, string graph
 
 
 Polyline::~Polyline ( )
-// Algorithme :
-//
+// Algorithme : Supprime tous les points caractéristiques de cette figure et supprime la figure de toutes les sélections dont elle faisait partie
+// On ne delete pas l'objet car il peut potentiellement être rappelé  par un UNDO
+// Si c'est le cas, il ne fait plus partie des sélections dans lequelles il était présent
 {
     vector<Selection*>::iterator it;
     for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
@@ -100,7 +101,7 @@ Polyline::~Polyline ( )
 //----------------------------------------------------- Méthodes protégées
 
 string Polyline::description()
-// Algorithme :
+// Algorithme : Renvoie la commande propore à cette figure
 //
 {
 	return commandLine+"\r\n";
@@ -108,7 +109,7 @@ string Polyline::description()
 } //----- Fin de description
 
 void Polyline::move(long dx, long dy)
-// Algorithme :
+// Algorithme : Déplace tous les points caractéristiques de cette figure de dx et dy et met à jour la commande propre à cette figure
 //
 {
 

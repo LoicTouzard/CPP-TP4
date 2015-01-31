@@ -16,7 +16,7 @@
 using namespace std;
 
 
-	int main(){
+int main(){
 		Container espace; //Espace qui contient toutes les figures et selections
 
 

@@ -46,8 +46,8 @@ Rectangle::Rectangle ( const Rectangle & unRectangle ):Figure(unRectangle)
 
 Rectangle::Rectangle (Point recExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine)
     :Figure(figureOrigin, graphicsName, graphicsCommandLine), extremity(recExtremity)
-// Algorithme :
-//
+// Algorithme : Constructeur qui permet de créer cette figure
+// On initialise le rectangle "fictif" dans lequel sera contenu la figure
 {
     leftUpCorner.x=(origin.x<extremity.x)?origin.x:extremity.x;
 	leftUpCorner.y=(origin.y<extremity.y)?extremity.y:origin.y;
@@ -61,8 +61,9 @@ Rectangle::Rectangle (Point recExtremity, Point figureOrigin, string graphicsNam
 
 
 Rectangle::~Rectangle ( )
-// Algorithme :
-//
+// Algorithme : Supprime tous les points caractéristiques de cette figure et supprime la figure de toutes les sélections dont elle faisait partie
+// On ne delete pas l'objet car il peut potentiellement être rappelé  par un UNDO
+// Si c'est le cas, il ne fait plus partie des sélections dans lequelles il était présent
 {
     vector<Selection*>::iterator it;
     for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
@@ -80,7 +81,7 @@ Rectangle::~Rectangle ( )
 
 
 string Rectangle::description()
-// Algorithme :
+// Algorithme : Renvoie la commande propore à cette figure
 //
 {
 	return commandLine+"\r\n";
@@ -88,7 +89,7 @@ string Rectangle::description()
 } //----- Fin de description
 
 void Rectangle::move(long dx, long dy)
-// Algorithme :
+// Algorithme : Déplace tous les points caractéristiques de cette figure de dx et dy et met à jour la commande propre à cette figure
 //
 {
 	origin.x += dx;

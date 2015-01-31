@@ -27,12 +27,6 @@ using namespace std;
 //-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Méthodes publiques
-// type Command::Méthode ( liste de paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
-
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -51,7 +45,7 @@ Command::Command ( )
 // Algorithme :
 //
 {
-whichList=IN_UNDO;
+whichList=IN_UNDO; //A la construction de la commande, on la stocke dans la pile des UNDO
 #ifdef MAP
     cout << "Appel au constructeur de <Command>" << endl;
 #endif

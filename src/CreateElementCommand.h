@@ -28,11 +28,6 @@ class CreateElementCommand : public SimpleCommand
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste de paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     virtual void Execute();
     // Mode d'emploi :

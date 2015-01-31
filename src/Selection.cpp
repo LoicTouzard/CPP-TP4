@@ -44,8 +44,9 @@ Selection::Selection ( const Selection & unSelection ):Graphics(unSelection)
 
  Selection::Selection (vector<Figure*> newFigureList, Point p1, Point p2, string graphicsName, string graphicsCommandLine)
   :Graphics(graphicsName, graphicsCommandLine), origin(p1), extremity(p2), figureList(newFigureList)
- // Algorithme :
-//
+ // Algorithme : Création d'une selection à partir des paramètres
+// Pour chaque figure contenue (entièrement) dans cette sélection, on lui ajoute la selection dans son vector whoOwnsMe
+// (qui repertorie toutes les sélections dans lesquelles la figure est incluse)
 {
     vector<Figure*>::iterator it;
     for(it=figureList.begin(); it!=figureList.end(); ++it){
@@ -57,8 +58,8 @@ Selection::Selection ( const Selection & unSelection ):Graphics(unSelection)
 } //----- Fin de Selection
 
 Selection::~Selection ( )
-// Algorithme :
-//
+// Algorithme : Pour chaque figure contenue dans cette selection on lui retire la selection courante de son vector whoOwnsMe
+// (qui repertorie toutes les sélections dans lesquelles la figure est incluse)
 {
     vector<Figure*>::iterator it;
     for(it=figureList.begin(); it!=figureList.end(); ++it){
@@ -70,7 +71,10 @@ Selection::~Selection ( )
 } //----- Fin de ~Selection
 
 
-void Selection::EraseFigure(Figure* f){
+void Selection::EraseFigure(Figure* f)
+// Algorithme : Permet de retirer une figure contenue dans une selection
+// Si une figure est détruite, il faut spécifier aux sélections qui la contenaient qu'elle ne fait plus partie de leur liste de figures
+{
     vector<Figure*>::iterator it;
     for(it=figureList.begin(); it!=figureList.end(); ++it){
         if( (*it)==f){
@@ -85,16 +89,14 @@ void Selection::EraseFigure(Figure* f){
 //----------------------------------------------------- Méthodes protégées
 
     string Selection::description()
-    // type Selection::Méthode ( liste de paramètres )
-    // Algorithme :
+    // Algorithme : Renvoie une chaine vide : Méthode utile pour les figures mais inutile pour les sélections (obligé de la redéfinir car description() est virtual pure dans Gaphics)
     {
         return "";
     } //----- Fin de description
 
 
     void Selection::move(long dx, long dy)
-    // type Selection::Méthode ( liste de paramètres )
-    // Algorithme :
+    // Algorithme : Déplace la sélection et les figures qu'elle contient de dX et dY
     {
     vector<Figure*>::iterator it;
     for(it=figureList.begin(); it!=figureList.end(); ++it){

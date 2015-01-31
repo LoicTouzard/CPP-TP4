@@ -29,9 +29,7 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 void MoveCommand::Execute()
-// Mode d'emploi :
-//
-// Contrat :
+ // Algorithme :
 //
 {
     element->move(origin.x, origin.y);
@@ -39,9 +37,7 @@ void MoveCommand::Execute()
 }
 
 void MoveCommand::UnExecute()
-// Mode d'emploi :
-//
-// Contrat :
+ // Algorithme :
 //
 {
     element->move(-(origin.x), -(origin.y));
