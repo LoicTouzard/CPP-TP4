@@ -1,0 +1,4 @@
+LOAD test3_5.txt
+UNDO
+LIST
+EXIT

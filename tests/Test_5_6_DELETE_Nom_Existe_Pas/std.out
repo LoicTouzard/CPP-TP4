@@ -1,0 +1,11 @@
+OK
+#New object :cercle
+OK
+#New object :rect
+OK
+#New object : line
+ERR
+# can't find polyline. None of the elements have been removed
+C cercle 0 0 1
+L line 0 2 2 0
+R rect -5 3 3 -5

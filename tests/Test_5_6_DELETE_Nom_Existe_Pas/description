@@ -1,0 +1,2 @@
+Si on essaye de delete une suite de Graphics et qu'un d'entre eux n'existe pas, rien n'est supprimé
+On obtient un message d’erreur et un commentaire explicatif
