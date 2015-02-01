@@ -21,7 +21,8 @@ using namespace std;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Polyline>
-//
+// Crée une figure particulière : la polyligne
+// La polyligne est composée de plusieurs ligne (donc de plusieurs points)
 //
 //------------------------------------------------------------------------
 
@@ -42,8 +43,9 @@ public:
     //
 
     Polyline (vector<Point> newPointList, Point figureOrigin, string graphicsName, string graphicsCommandLine);
-    // Mode d'emploi :
-    //
+    // Mode d'emploi :Création d'une polyligne définie par son point d'origine, l'ensemble de ses points, son nom et sa commande
+    // Origin correspond au premier point et les autres points sont stockés dans le vector
+    // Initialise aussi le rectangle "fictif" dans lequel est inscrit la polyligne
     // Contrat :
     //
 
@@ -60,13 +62,13 @@ protected:
 
 
     string description();
-    // Mode d'emploi :
+    // Mode d'emploi :Renvoie la commande propre à chaque figure
     //
     // Contrat :
     //
 
     void move(long dx, long dy);
-    // Mode d'emploi :
+    // Mode d'emploi :Déplace la figure en ajoutant dx et dy à ses coordonnées
     //
     // Contrat :
     //
@@ -80,7 +82,7 @@ protected:
 private:
 //------------------------------------------------------- Attributs privés
 
-vector<Point> pointList;
+vector<Point> pointList; //Liste de tous les points composant la polyligne sauf le premier (origin)
 
 //---------------------------------------------------------- Classes amies
 

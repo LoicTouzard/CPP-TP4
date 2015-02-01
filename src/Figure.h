@@ -22,7 +22,8 @@ class Selection;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Figure>
-//
+// Une figure est un objet Graphics depuis lequel vont descendre toutes les formes
+// Une forme est une figure (mais pas une sélection)
 //
 //------------------------------------------------------------------------
 
@@ -47,7 +48,7 @@ public:
 
     Figure (Point figureOrigin, string graphicsName2, string graphicsCommandLine2)
     :Graphics(graphicsName2, graphicsCommandLine2), origin(figureOrigin){}
-    // Mode d'emploi :
+    // Mode d'emploi : Création d'une figure définie par son point d'origine, son nom et sa commande
     //
     // Contrat :
     //
@@ -68,9 +69,16 @@ public:
     //
 
     void AddSelect(Selection* s);
+    // Mode d'emploi : Ajoute une sélection au vecteur whoOwnsMe
+    // Permet de savoir qu'une nouvelle sélection contient la figure
+    // Contrat :
+    //
 
     void EraseSelect(Selection* s);
-
+    // Mode d'emploi : Supprime une sélection du vecteur whoOwnsMe
+    // Permet de savoir qu'une sélection dont faisait partie la figure a été détruite
+    // Contrat :
+    //
 //------------------------------------------------------------------ PRIVE
 
 protected:
@@ -79,14 +87,14 @@ protected:
 
 
     virtual string description()=0;
-    // Mode d'emploi :
+    // Mode d'emploi : Renvoie la commande propre à chaque figure
     //
     // Contrat :
     //
 
 
     virtual void move(long dx, long dy)=0;
-    // Mode d'emploi :
+    // Mode d'emploi : Déplace la figure en ajoutant dx et dy à ses coordonnées
     //
     // Contrat :
     //
@@ -97,11 +105,10 @@ private:
 protected:
 //----------------------------------------------------- Attributs protégés
 
-	Point origin;
-    vector<Selection*> whoOwnsMe;
-	//Points facilitant le IsInside()
-    Point leftUpCorner;
-    Point downRightCorner;
+	Point origin; //Center pour un cercle, coin supérieur gauche pour un rectangle et le premier point pour une ligne/polyligne
+    vector<Selection*> whoOwnsMe; //Liste de toutes les sélections qui contiennent la figure
+    Point leftUpCorner; //Cooronnées du coin supérieur gauche du rectangle "fictif" dans lequel est inscrit la figure
+    Point downRightCorner; //Cooronnées du coin inférieur droit du rectangle "fictif" dans lequel est inscrit la figure
 
 private:
 //------------------------------------------------------- Attributs privés

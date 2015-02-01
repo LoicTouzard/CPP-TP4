@@ -21,8 +21,10 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Tools>
-//
-//
+// Classe où sont stockées toutes les méthodes qui permettent de gérer le traitement des commandes et des fichiers
+// Tout est public et accessible depuis les autres classes
+// Permet une meilleure visibilité
+// Tout est mis ensemble pour être plus simple et facile d'accès
 //------------------------------------------------------------------------
 
 class Tools
@@ -55,16 +57,30 @@ public:
 
 
     static int NombreEspaces(std::string s);
-
+    // Mode d'emploi : Compte le nombre d'espaces dans une chaine de caractères
+    //
+    // Contrat :
+    //
 
     static bool Separateur(std::string s);
-
+    // Mode d'emploi :Vérifie si la chaine de caractères contient des espaces
+    //
+    // Contrat :
+    //
 
     static std::string Decoupage(std::string s, int posSpace);
-
+    // Mode d'emploi : Récupère la chaine de caractères comprise entre deux espaces consécutifs
+    // On passe en paramètre le numéro du premier espace à partir duquel on commence à récupérer
+    // la chaine de caractères et on s'arrête au prochain espace
+    //
+    // Contrat :
+    //
 
     static bool TestFichierExiste(std::string nomFichier);
-
+    // Mode d'emploi : Vérifie si le nom du fichier est déjà présent dans le répertoire courant
+    //
+    // Contrat :
+    //
 //------------------------------------------------------------------ PRIVE
 
 protected:

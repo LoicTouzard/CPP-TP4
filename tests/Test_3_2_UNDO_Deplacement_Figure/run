@@ -1,1 +1,5 @@
-C c11 12 15 45
+C c1 0 0 1
+MOVE c1 5 5
+UNDO
+LIST
+EXIT

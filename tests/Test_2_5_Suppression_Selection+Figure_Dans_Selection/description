@@ -1,1 +1,2 @@
-Test simple de création d'un cercle (même exemple que le dans sujet du TP)
+On DELETE la sélection et une figure qui fait partie de la sélection dans une même commande
+Il n'y a pas d'erreur même si la sélection est détruite avant la figure

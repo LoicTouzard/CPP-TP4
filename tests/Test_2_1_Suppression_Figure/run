@@ -1,1 +1,4 @@
-C c11 12 15 45
+C c 0 0 1
+DELETE c
+LIST
+EXIT

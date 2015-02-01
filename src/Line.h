@@ -19,8 +19,8 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Line>
-//
-//
+// Crée une figure particulière : la ligne
+// La ligne est composée de deux points (origin et extremity)
 //------------------------------------------------------------------------
 
 class Line : public Figure
@@ -40,8 +40,9 @@ public:
     //
 
     Line (Point lineExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine);
-    // Mode d'emploi :
-    //
+    // Mode d'emploi :Création d'une ligne définie par son point d'origine, son point d'extremité, son nom et sa commande
+    // Origin correspond au premier point et extremity correspond au second point
+    // Initialise aussi le rectangle "fictif" dans lequel est inscrit la ligne
     // Contrat :
     //
 
@@ -57,13 +58,13 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
     string description();
-    // Mode d'emploi :
+    // Mode d'emploi : Renvoie la commande propre à chaque figure
     //
     // Contrat :
     //
 
     void move(long dx, long dy);
-    // Mode d'emploi :
+    // Mode d'emploi : Déplace la figure en ajoutant dx et dy à ses coordonnées
     //
     // Contrat :
     //
@@ -77,7 +78,7 @@ protected:
 private:
 //------------------------------------------------------- Attributs privés
 
-Point extremity;
+Point extremity; //Dernier point de la ligne (le premier étant origin)
 //---------------------------------------------------------- Classes amies
 
 //-------------------------------------------------------- Classes privées

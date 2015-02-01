@@ -20,8 +20,9 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Rectangle>
-//
-//
+// Crée une figure particulière : le rectangle
+// Le rectangle est composée de deux points (origin et extremity)
+// qui correspondent aux coin supérieur gauche et au coin inférieur droit
 //------------------------------------------------------------------------
 
 class Rectangle : public Figure
@@ -41,8 +42,9 @@ public:
     //
 
     Rectangle (Point recExtremity, Point figureOrigin, string graphicsName, string graphicsCommandLine);
-    // Mode d'emploi :
-    //
+    // Mode d'emploi :Création d'un rectangle définie par son point d'origine, son point d'extremité, son nom et sa commande
+    // Origin correspond au premier point (le coin supérieur gauche) et extremity correspond au second point (le coin inférieur droit)
+    // Initialise aussi le rectangle "fictif" dans lequel est inscrit le rectangle
     // Contrat :
     //
 
@@ -58,13 +60,13 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
     string description();
-    // Mode d'emploi :
+    // Mode d'emploi :Renvoie la commande propre à chaque figure
     //
     // Contrat :
     //
 
     void move(long dx, long dy);
-    // Mode d'emploi :
+    // Mode d'emploi :Déplace la figure en ajoutant dx et dy à ses coordonnées
     //
     // Contrat :
     //
@@ -79,7 +81,7 @@ protected:
 private:
 //------------------------------------------------------- Attributs privés
 
-Point extremity;
+Point extremity; //Coin inférieur droit du rectangle (le coin supérieur gauche étant origin)
 
 //---------------------------------------------------------- Classes amies
 

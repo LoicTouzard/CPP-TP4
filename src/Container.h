@@ -107,25 +107,28 @@ typedef MapGraphics::const_iterator Graphics_const_iterator;
 
 	void AddRectangle(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string entree);
     // Mode d'emploi :Ajoute un rectangle qui s'appelle name au container
-    //
+    // Coordonnées du coin supérieur droit (coin1X, coin1Y)
+    // Coordonnées du coin inférieur gauche (coin2X, coin2Y)
     // Contrat :
     //
 
 	void AddLine(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande);
-    // Mode d'emploi :
-    //
+    // Mode d'emploi : Ajoute une ligne qui s'appelle name au container
+    // Coordonnées du coin supérieur droit (coin1X, coin1Y)
+    // Coordonnées du coin inférieur gauche (coin2X, coin2Y)
     // Contrat :
     //
 
 	void AddPolyline(string name, vector<Point> newPointList, Point origin, string commande);
-    // Mode d'emploi :
-    //
+    // Mode d'emploi : Ajoute une polyligne qui s'appelle name au container
+    // La polyligne est une succession de lignes reliées entre elles
     // Contrat :
     //
 
     void AddSelection(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande);
-    // Mode d'emploi :
-    //
+    // Mode d'emploi : Ajoute une sélection qui s'appelle name au container
+    // Coordonnées du coin supérieur droit (coin1X, coin1Y)
+    // Coordonnées du coin inférieur gauche (coin2X, coin2Y)
     // Contrat :
     //
 
@@ -169,9 +172,11 @@ private:
 //------------------------------------------------------- Attributs privés
 
 
-MapGraphics listeGraphics;
-list<Command*> undoCommands;
-list<Command*> redoCommands;
+MapGraphics listeGraphics; //Map contenant tous les Graphics (figures et sélection)
+//Clé = name
+//Valeur = Graphics
+list<Command*> undoCommands; //Liste des commandes que l'on peut annuler
+list<Command*> redoCommands; //Liste des commandes que l'on peut ré-exécuter après les avoir annulé
 
 
 //---------------------------------------------------------- Classes amies

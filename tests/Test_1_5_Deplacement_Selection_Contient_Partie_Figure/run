@@ -1,1 +1,5 @@
-C c11 12 15 45
+C c 0 0 5
+S s1 -3 3 3 -3
+MOVE s2 2 2
+LIST
+EXIT

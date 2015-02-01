@@ -40,7 +40,9 @@ public:
     //
 
     Circle (long circleRadius, Point figureOrigin, string graphicsName, string graphicsCommandLine);
-    // Mode d'emploi : Initialise le rectangle "fictif" dans lequel est inscrit le cercle
+    // Mode d'emploi :Création d'un cercle défini par son point d'origine, son rayon, son nom et sa commande
+    // Origin correspond au centre du cercle
+    // Initialise aussi le rectangle "fictif" dans lequel est inscrit le cercle
     //
     // Contrat :
     //

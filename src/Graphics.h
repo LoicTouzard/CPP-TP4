@@ -18,7 +18,8 @@ using namespace std;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Graphics>
-//
+// Classe définissant tout ce qui est commun à toutes les formes et sélections
+// Les classes Figure et Selection sont héritées de Graphics
 //
 //------------------------------------------------------------------------
 
@@ -46,7 +47,7 @@ public:
 
     Graphics (string graphicsName, string graphicsCommandLine )
         :name(graphicsName), commandLine(graphicsCommandLine){}
-    // Mode d'emploi :
+    // Mode d'emploi : Création d'un Graphics qui sera défini par son nom et sa commade
     //
     // Contrat :
     //
@@ -63,13 +64,13 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 	virtual void move(long dx, long dy)=0;
-    // Mode d'emploi :
+    // Mode d'emploi : Déplace le Graphics en ajoutant dx et dy à ses coordonnées
     //
     // Contrat :
     //
 
     virtual string description()=0;
-    // Mode d'emploi :
+    // Mode d'emploi : Renvoie la commande propre à chaque Graphics
     //
     // Contrat :
     //
@@ -81,8 +82,8 @@ private:
 protected:
 //----------------------------------------------------- Attributs protégés
 
-	string name;
-	string commandLine;
+	string name; //Nom du Graphics
+	string commandLine; //Commande permettant de créer le Graphics (tapée par l'utilisateur)
 
 private:
 //------------------------------------------------------- Attributs privés

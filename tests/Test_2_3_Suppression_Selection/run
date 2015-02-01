@@ -1,1 +1,6 @@
-C c11 12 15 45
+C c1 0 0 1
+R rect -1 1 1 -1
+S s -3 3 3 -3
+DELETE s
+LIST
+EXIT
