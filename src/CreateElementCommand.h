@@ -2,7 +2,7 @@
                            CreateElementCommand  -  description
                              -------------------
     début                : 30/01/2015
-    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
+    copyright            : (C) 2015 par TOUZARD Loïc, GOUZI Gaëtan et GONZALEZ TOLEDO Gabriela
 *************************************************************************/
 
 //---------- Interface de la classe <CreateElementCommand> (fichier CreateElementCommand.h) ------

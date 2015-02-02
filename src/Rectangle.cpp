@@ -2,7 +2,7 @@
                            Rectangle  -  description
                              -------------------
     début                : 30/01/2015
-    copyright            : (C) 2015 par Touzard Loïc et GOUZI Gaëtan
+    copyright            : (C) 2015 par TOUZARD Loïc, GOUZI Gaëtan et GONZALEZ TOLEDO Gabriela
 *************************************************************************/
 
 //---------- Réalisation de la classe <Rectangle> (fichier Rectangle.cpp) --
