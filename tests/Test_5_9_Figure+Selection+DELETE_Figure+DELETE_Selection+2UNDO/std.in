@@ -1,0 +1,9 @@
+C cercle 0 0 1
+S select -1 1 1 -1
+DELETE cercle
+DELETE select
+UNDO
+UNDO
+LIST
+MOVE select 2 2
+EXIT
