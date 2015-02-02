@@ -1,0 +1,5 @@
+C c 0 0 1
+S s1 -3 3 3 -3
+MOVE c 2 2
+LIST
+EXIT

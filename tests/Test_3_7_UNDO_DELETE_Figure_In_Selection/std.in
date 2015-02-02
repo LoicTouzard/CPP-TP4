@@ -1,0 +1,7 @@
+C c1 0 0 1
+S s -2 2 2 -2
+DELETE c1
+UNDO
+MOVE s 2 2
+LIST
+EXIT

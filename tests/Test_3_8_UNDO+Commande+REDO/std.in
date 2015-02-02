@@ -1,0 +1,6 @@
+C c1 0 0 1
+C c2 0 0 2
+UNDO
+MOVE c1 2 2
+REDO
+EXIT

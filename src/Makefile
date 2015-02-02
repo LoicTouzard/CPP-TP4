@@ -1,4 +1,4 @@
-EXE=tp4
+EXE=B3325
 INT=Circle.h Container.h Figure.h Graphics.h Line.h Polyline.h Rectangle.h Selection.h Command.h ComposedCommand.h CreateElementCommand.h DeleteCommand.h DeleteElementCommand.h LoadCommand.h MoveCommand.h SimpleCommand.h Tools.h
 
 SRC=$(INT:.h=.cpp)

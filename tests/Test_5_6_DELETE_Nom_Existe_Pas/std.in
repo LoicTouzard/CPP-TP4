@@ -1,0 +1,6 @@
+C cercle 0 0 1
+R rect -5 3 3 -5
+L line 0 2 2 0
+DELETE cercle line polyline
+LIST
+EXIT

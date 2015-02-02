@@ -1,0 +1,4 @@
+C c 0 0 1
+DELETE c
+LIST
+EXIT

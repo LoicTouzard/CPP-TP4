@@ -1,6 +1,1 @@
-C c 0 0 1
-R rect 0 2 2 0
-S s -3 3 3 -3
-MOVE s 2 2
-LIST
-EXIT
+../../B3325
