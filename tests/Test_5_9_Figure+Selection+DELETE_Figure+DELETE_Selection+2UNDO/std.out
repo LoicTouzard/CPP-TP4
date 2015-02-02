@@ -1,0 +1,12 @@
+OK
+#New object :cercle
+OK
+#New object : select
+OK
+OK
+OK
+OK
+C cercle 0 0 1
+ERR
+#select not found
+

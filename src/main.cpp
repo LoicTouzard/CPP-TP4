@@ -18,17 +18,38 @@ using namespace std;
 
 int main(){
 		Container espace; //Espace qui contient toutes les figures et selections
-
-
-        /* A décommenter pour les tests
+        
+        
+		/*ofstream fichier;
+		fichier.open("doc/Load_10000000_formes.txt", ios::trunc);
+        for(int i=1; i<=2500000;i++){
+			fichier<<"C "<<"cercle"<<i<<" 0 0 "<<i<<endl;
+		}
+		for(int i=1; i<=2500000;i++){
+			fichier<<"R "<<"rect"<<i<<" 0 0 "<<i<<" "<<i+1<<endl;
+		}
+		for(int i=1; i<=2500000;i++){
+			fichier<<"L "<<"line"<<i<<" 0 0 "<<i<<" "<<i+1<<endl;
+		}
+		for(int i=1; i<=2500000;i++){
+			fichier<<"PL "<<"poly"<<i<<" 0 0 "<<i<<" "<<i+1<<" "<<i+2<<" "<<i+3<<endl;
+		}
+        
+        
+        
+        //A décommenter pour les tests
+       
+        string entree;
+        getline(cin,entree);
+        
         clock_t    start;
         start = clock();
-        espace.Load("Test_100_formes.txt");
+        espace.Load("doc/Load_"+entree+"_formes.txt");
         cout << "Time: " << (clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << endl;
 
-        Commenter tout ce qui suit si onveut juste faire les tests*/
+        Commenter tout ce qui suit si on veut juste faire les tests*/
 
-        string entree;
+		string entree;
         getline(cin,entree);
 
         list<string> args;
@@ -282,7 +303,7 @@ int main(){
             {
                 cout<<"#invalid command"<<endl;
             }
-
+            
             args.clear();
             getline(cin,entree);
             Tools::Split(entree, args);
