@@ -35,7 +35,7 @@ int main(){
 			fichier<<"PL "<<"poly"<<i<<" 0 0 "<<i<<" "<<i+1<<" "<<i+2<<" "<<i+3<<endl;
 		}
         
-        */
+        
         
         //A décommenter pour les tests
        
@@ -47,9 +47,9 @@ int main(){
         espace.Load("doc/Load_"+entree+"_formes.txt");
         cout << "Time: " << (clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << endl;
 
-        /*Commenter tout ce qui suit si on veut juste faire les tests*/
+        Commenter tout ce qui suit si on veut juste faire les tests*/
 
-       /* string entree;
+		string entree;
         getline(cin,entree);
         while(entree.substr(0,4)!="EXIT"){
 
