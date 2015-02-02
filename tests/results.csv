@@ -24,7 +24,7 @@ Test_3_6_UNDO_Creation_Selection;1;1;2;2;1
 Test_3_7_UNDO_DELETE_Figure_In_Selection;1;1;2;2;1
 Test_3_8_UNDO+Commande+REDO;1;1;2;2;1
 Test_3_9_UNDO_21_Fois;1;1;2;2;1
-Test_4_1_SAVE;1;1;2;2;1
+Test_4_1_SAVE;1;1;2;1;1
 Test_4_2_LOAD;1;1;2;2;1
 Test_5_1_Pas_Bons_Parametres;1;1;2;2;1
 Test_5_2_Rayon_Negatif;1;1;2;2;1
@@ -34,3 +34,4 @@ Test_5_5_Nom_Deja_Pris;1;1;2;2;1
 Test_5_6_DELETE_Nom_Existe_Pas;1;1;2;2;1
 Test_5_7_Selection_Vide;1;1;2;2;1
 Test_5_8_Forme+Selection+2UNDO+2REDO;1;1;2;2;1
+Test_5_9_Figure+Selection+DELETE_Figure+DELETE_Selection+2UNDO;1;1;2;2;1

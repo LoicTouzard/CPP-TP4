@@ -1,1 +1,2 @@
 Test du SAVE. On vérifie que le fichier a bien été crée
+Note : Supprimer le fichier qui vient de se créer test4_1.txt avant de relancer à nouveau le script
