@@ -306,9 +306,9 @@ int main(){
             {
                 cout<<"#invalid command"<<endl;
             }
-            
-            args.clear();
+
             getline(cin,entree);
+            args.clear();
             Tools::Split(entree, args);
             if(args.size()==0)
             {
