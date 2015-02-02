@@ -434,18 +434,21 @@ void Container::Delete(vector<string> listeNoms)
 
             if(toDelete!=NULL){ //Si c'est une figure
                 listeCMD.push_back(new DeleteElementCommand(&listeGraphics, it->second));
+                toDelete->SetInDraw(GRAPHICS_STATE_NOT_IN_DRAW);
                 listeGraphics.erase(it);
             }
             else{ //Si c'est une sélection
                 vector<Command*> listeCMDSelection;
-                vector<Figure*>* figureToDelete;
-                figureToDelete = (dynamic_cast<Selection *>(it->second))->getElements();
+                vector<Figure*> figureToDelete;
+                figureToDelete = (dynamic_cast<Selection *>(it->second))->GetInDrawElements();
                 vector<Figure*>::iterator it2;
-                for(it2=figureToDelete->begin(); it2!=figureToDelete->end(); ++it2){
+                for(it2=figureToDelete.begin(); it2!=figureToDelete.end(); ++it2){
                     listeCMDSelection.push_back(new DeleteElementCommand(&listeGraphics, *it2));
+                    (*it2)->SetInDraw(GRAPHICS_STATE_NOT_IN_DRAW);
                     listeGraphics.erase((*it2)->GetName());
                 }
                 listeGraphics.erase(it); //Erase de la selection
+                it->second->SetInDraw(GRAPHICS_STATE_NOT_IN_DRAW);
                 delete it->second;
                 listeCMD.push_back(new DeleteCommand(listeCMDSelection));
             }

@@ -14,6 +14,9 @@
 using namespace std;
 //------------------------------------------------------------- Constantes
 
+const short GRAPHICS_STATE_IN_DRAW = 0;
+const short GRAPHICS_STATE_NOT_IN_DRAW = 1;
+
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
@@ -37,6 +40,9 @@ public:
         return this->name;
     }
 
+    void SetInDraw(short inDraw){
+        state = inDraw;
+    }
 //-------------------------------------------- Constructeurs - destructeur
     Graphics ( const Graphics & unGraphics );
     // Mode d'emploi (constructeur de copie) :
@@ -46,7 +52,7 @@ public:
 
 
     Graphics (string graphicsName, string graphicsCommandLine )
-        :name(graphicsName), commandLine(graphicsCommandLine){}
+        :name(graphicsName), commandLine(graphicsCommandLine), state(GRAPHICS_STATE_IN_DRAW) {}
     // Mode d'emploi : Création d'un Graphics qui sera défini par son nom et sa commade
     //
     // Contrat :
@@ -84,6 +90,7 @@ protected:
 
 	string name; //Nom du Graphics
 	string commandLine; //Commande permettant de créer le Graphics (tapée par l'utilisateur)
+    short state;
 
 private:
 //------------------------------------------------------- Attributs privés

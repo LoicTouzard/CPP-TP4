@@ -44,6 +44,7 @@ void DeleteElementCommand::Execute()
     //cout << "#il y a " << linkedMap->size() << "elements" << endl;
     //l'element est gardé en mémoire pour un futur Execute plus rapide (pas de réallocation)
     linkedMap->erase(element->GetName());
+    element->SetInDraw(GRAPHICS_STATE_NOT_IN_DRAW);
     //cout << "#il y a " << linkedMap->size() << "elements" << endl;
     whichList=IN_UNDO;
 
@@ -60,6 +61,7 @@ void DeleteElementCommand::UnExecute()
     //cout << "#il y a " << linkedMap->size() << "elements" << endl;
     //cout << "#tentative d'ajout de " << element->GetName() << endl;
     linkedMap->insert(make_pair(element->GetName(), element));
+    element->SetInDraw(GRAPHICS_STATE_IN_DRAW);
     //cout << "#il y a " << linkedMap->size() << "elements" << endl;
     whichList=IN_REDO;
 }

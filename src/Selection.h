@@ -50,9 +50,7 @@ public:
     // Contrat :
     //
 
-    vector<Figure*>* getElements(){
-        return &figureList;
-    }
+    vector<Figure*> GetInDrawElements();
 
     void EraseFigure(Figure* f);
 

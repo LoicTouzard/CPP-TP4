@@ -84,6 +84,16 @@ void Selection::EraseFigure(Figure* f)
     }
 }
 
+vector<Figure*> Selection::GetInDrawElements(){
+    vector<Figure*> figureInDraw;
+    vector<Figure*>::iterator it;
+    for(it=figureList.begin(); it!=figureList.end(); ++it){
+        if( (*it)->state==GRAPHICS_STATE_IN_DRAW){
+            figureInDraw.push_back(*it);
+        }
+    }
+    return figureInDraw;
+}
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
