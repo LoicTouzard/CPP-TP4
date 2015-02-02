@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <string>
+#include <list>
 
 
 //--------------------------------------------------- Interfaces utilisées
@@ -68,6 +69,10 @@ public:
     // Contrat :
     //
 
+    static std::list<std::string> &Split(const std::string &s, std::list<std::string> &elems, char delim=' ');
+
+    static std::list<std::string> Split(const std::string &s, char delim=' ');
+
     static std::string Decoupage(std::string s, int posSpace);
     // Mode d'emploi : Récupère la chaine de caractères comprise entre deux espaces consécutifs
     // On passe en paramètre le numéro du premier espace à partir duquel on commence à récupérer
@@ -76,7 +81,7 @@ public:
     // Contrat :
     //
 
-    static bool TestFichierExiste(std::string nomFichier);
+    static bool FileExists(std::string nomFichier);
     // Mode d'emploi : Vérifie si le nom du fichier est déjà présent dans le répertoire courant
     //
     // Contrat :

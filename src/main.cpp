@@ -30,127 +30,32 @@ int main(){
 
         string entree;
         getline(cin,entree);
-        while(entree.substr(0,4)!="EXIT"){
 
-            if (entree.substr(0,4)=="LIST") {
-                //Code pour afficher tous les descripteurs d'objets
-                espace.List();
-                //Fin du code pour afficher tous les descripteurs d'objets
-            }
+        list<string> args;
+        Tools::Split(entree, args);
+        if(args.size()==0)
+        {
+            args.push_back("");
+        }
+        string commandType = args.front();
+        args.pop_front();
 
-            else if (entree.substr(0,4)=="UNDO") {
-                //Code pour UNDO
-                espace.Undo();
-                //Fin du code pour UNDO
-            }
+        while(commandType!="EXIT"){
+            //les tests de detection de commande sont triés selon leur potentielle fréquence d'apparition pour optimiser la vitesse
 
-            else if (entree.substr(0,4)=="REDO") {
-                //Code pour REDO
-                espace.Redo();
-                //Fin du code pour REDO
-            }
+            if (commandType=="C") {
 
-            else if (entree.substr(0,4)=="LOAD") {
-                //Lancer le timer pour les tests de performances
-
-
-                //Code pour LOAD
-                if(Tools::NombreEspaces(entree)==1){
-                    string nomFichier;
-                    nomFichier=Tools::Decoupage(entree,1);
-                    if(!Tools::TestFichierExiste(nomFichier))
-                    {
-                        cout<<"ERR"<<endl;
-                        cout<<"#can't find "<<nomFichier<<endl;
-                    }
-                    else
-                    {
-                        espace.Load(nomFichier);
-                    }
-                }
-                else{
-                    cout<<"ERR"<<endl;
-                    cout<<"#invalid parameters"<<endl;
-                }
-
-                 //Arreter le timer pour les tests de performances
-            }
-
-            else if (entree.substr(0,4)=="SAVE") {
-                //Code pour SAVE
-                if(Tools::NombreEspaces(entree)==1){
-                    string nomFichier;
-                    nomFichier=Tools::Decoupage(entree,1);
-                    if(Tools::TestFichierExiste(nomFichier)){
-                        cout<<"ERR"<<endl;
-                        cout<<"#"<<nomFichier<<" already used"<<endl;
-                    }
-                    else
-                    {
-                        espace.Save(nomFichier);
-                    }
-                }
-                else{
-                    cout<<"ERR"<<endl;
-                    cout<<"#invalid parameters"<<endl;
-                }
-                //Fin du code pour SAVE
-            }
-
-            else if (entree.substr(0,5)=="CLEAR") {
-                //Code pour CLEAR
-                espace.Clear();
-                //Fin du code pour CLEAR
-            }
-
-            else if (entree.substr(0,6)=="DELETE") {
-                //Code pour DELETE
-                string name;
-                vector<string> listeNoms;
-                for(int i=0; i<Tools::NombreEspaces(entree); ++i){
-                    name=Tools::Decoupage(entree,i+1);
-                    listeNoms.push_back(name);
-                }
-                espace.Delete(listeNoms);
-                //Fin du code pour DELETE
-            }
-
-            else if (entree.substr(0,4)=="MOVE") {
-                //Code pour MOVE
-                string name;
-                string deltaX,deltaY;
-                long dX,dY;
-                name=Tools::Decoupage(entree,1);
-                deltaX=Tools::Decoupage(entree,2);
-                deltaY=Tools::Decoupage(entree,3);
-                dX=atol(deltaX.c_str());
-                dY=atol(deltaY.c_str());
-
-                //Faire les tests si on ne rentre pas des entiers
-
-                if(Tools::NombreEspaces(entree)==3){
-                    espace.moveElement(name, dX, dY);
-                }
-                else{
-                    cout<<"ERR"<<endl;
-                    cout<<"#invalid parameters"<<endl;
-                }
-            }
-
-            else if (entree.substr(0,1)=="C") {
-
-                string name;
-                string radius, centerX, centerY;
-                name=Tools::Decoupage(entree,1);
-                centerX=Tools::Decoupage(entree,2);
-                centerY=Tools::Decoupage(entree,3);
-                radius=Tools::Decoupage(entree,4);
-
-                if(Tools::NombreEspaces(entree)==4)
+                if(args.size()==4)
                 {
-                    long centerlX=atol(centerX.c_str());
-                    long centerlY=atol(centerY.c_str());
-                    long radiusl=atol(radius.c_str());
+                    string name;
+                    name = args.front();
+                    args.pop_front();
+                    long centerlX = atol(args.front().c_str());
+                    args.pop_front();
+                    long centerlY = atol(args.front().c_str());
+                    args.pop_front();
+                    long radiusl = atol(args.front().c_str());
+
                     espace.AddCircle(name, radiusl, centerlX, centerlY, entree );
                 }
                 else{
@@ -160,23 +65,23 @@ int main(){
 
             }
 
-            else if (entree.substr(0,1)=="R") {
+            else if (commandType=="R") {
 
-                string name;
-                string corner1X, corner1Y, corner2X, corner2Y;
-                long coin1X, coin1Y, coin2X, coin2Y;
-                name=Tools::Decoupage(entree,1);
-                corner1X=Tools::Decoupage(entree,2);
-                corner1Y=Tools::Decoupage(entree,3);
-                corner2X=Tools::Decoupage(entree,4);
-                corner2Y=Tools::Decoupage(entree,5);
+                if(args.size()==5){
+                    string name;
+                    long coin1X, coin1Y, coin2X, coin2Y;
 
-                coin1X=atol(corner1X.c_str());
-                coin1Y=atol(corner1Y.c_str());
-                coin2X=atol(corner2X.c_str());
-                coin2Y=atol(corner2Y.c_str());
+                    name=args.front();
+                    args.pop_front();
+                    coin1X=atol(args.front().c_str());
+                    args.pop_front();
+                    coin1Y=atol(args.front().c_str());
+                    args.pop_front();
+                    coin2X=atol(args.front().c_str());
+                    args.pop_front();
+                    coin2Y=atol(args.front().c_str());
+                    args.pop_front();
 
-                if(Tools::NombreEspaces(entree)==5){
                     espace.AddRectangle(name, coin1X, coin1Y, coin2X, coin2Y, entree);
                 }
                 else{
@@ -186,32 +91,29 @@ int main(){
 
             }
 
-            else if (entree.substr(0,2)=="PL") {
-                string name;
-                string cornerX, cornerY;
-                long coinX, coinY;
-                name=Tools::Decoupage(entree,1);
+            else if (commandType=="PL") {
 
-                if( Tools::NombreEspaces(entree)%2==1 && Tools::NombreEspaces(entree)>=3){ //Un point minimum
+                if( args.size()%2==1 && args.size()>=3){ //Un point minimum
+
+                    int nbPoints=(args.size()-1)/2;
+                    string name = args.front();
+                    args.pop_front();
+
                     //Code pour ajouter un polyligne
-                    int nbPoints=(Tools::NombreEspaces(entree)-1)/2;
                     Point origin;
                     vector<Point> newPointList;
-                    cornerX=Tools::Decoupage(entree,2);
-                    cornerY=Tools::Decoupage(entree,3);
-                    coinX=atol(cornerX.c_str());
-                    coinY=atol(cornerY.c_str());
-                    origin.x=coinX;
-                    origin.y=coinY;
+                    origin.x=atol(args.front().c_str());
+                    args.pop_front();
+                    origin.y=atol(args.front().c_str());
+                    args.pop_front();
+
                     for(int i=2; i<=nbPoints; i++){
-                        //Améliorer performances de découpage
-                        cornerX=Tools::Decoupage(entree,i*2);
-                        cornerY=Tools::Decoupage(entree,i*2+1);
-                        coinX=atol(cornerX.c_str());
-                        coinY=atol(cornerY.c_str());
                         Point p;
-                        p.x=coinX;
-                        p.y=coinY;
+                        p.x=atol(args.front().c_str());
+                        args.pop_front();
+                        p.y=atol(args.front().c_str());
+                        args.pop_front();
+
                         newPointList.push_back(p);
                     }
                     espace.AddPolyline(name, newPointList, origin, entree);
@@ -222,22 +124,21 @@ int main(){
                 }
             }
 
-            else if (entree.substr(0,1)=="L") {
-                string name;
-                string corner1X, corner1Y, corner2X, corner2Y;
-                long coin1X, coin1Y, coin2X, coin2Y;
-                name=Tools::Decoupage(entree,1);
-                corner1X=Tools::Decoupage(entree,2);
-                corner1Y=Tools::Decoupage(entree,3);
-                corner2X=Tools::Decoupage(entree,4);
-                corner2Y=Tools::Decoupage(entree,5);
+            else if (commandType=="L") {
 
-                coin1X=atol(corner1X.c_str());
-                coin1Y=atol(corner1Y.c_str());
-                coin2X=atol(corner2X.c_str());
-                coin2Y=atol(corner2Y.c_str());
+                 if(args.size()==5){
+                    string name;
+                    long coin1X, coin1Y, coin2X, coin2Y;
 
-                 if(Tools::NombreEspaces(entree)==5){
+                    name=args.front();
+                    args.pop_front();
+                    coin1X=atol(args.front().c_str());
+                    args.pop_front();
+                    coin1Y=atol(args.front().c_str());
+                    args.pop_front();
+                    coin2X=atol(args.front().c_str());
+                    args.pop_front();
+                    coin2Y=atol(args.front().c_str());
                     espace.AddLine(name, coin1X, coin1Y, coin2X, coin2Y, entree);
                 }
                 else{
@@ -246,23 +147,21 @@ int main(){
                 }
             }
 
-            else if (entree.substr(0,1)=="S") {
+            else if (commandType=="S") {
 
-                string name;
-                string corner1X, corner1Y, corner2X, corner2Y;
-                long coin1X, coin1Y, coin2X, coin2Y;
-                name=Tools::Decoupage(entree,1);
-                corner1X=Tools::Decoupage(entree,2);
-                corner1Y=Tools::Decoupage(entree,3);
-                corner2X=Tools::Decoupage(entree,4);
-                corner2Y=Tools::Decoupage(entree,5);
+                if(args.size()==5){
+                    string name;
+                    long coin1X, coin1Y, coin2X, coin2Y;
 
-                coin1X=atol(corner1X.c_str());
-                coin1Y=atol(corner1Y.c_str());
-                coin2X=atol(corner2X.c_str());
-                coin2Y=atol(corner2Y.c_str());
-
-                if(Tools::NombreEspaces(entree)==5){
+                    name=args.front();
+                    args.pop_front();
+                    coin1X=atol(args.front().c_str());
+                    args.pop_front();
+                    coin1Y=atol(args.front().c_str());
+                    args.pop_front();
+                    coin2X=atol(args.front().c_str());
+                    args.pop_front();
+                    coin2Y=atol(args.front().c_str());
                     espace.AddSelection(name, coin1X, coin1Y, coin2X, coin2Y, entree);
                 }
                 else{
@@ -270,11 +169,129 @@ int main(){
                     cout<<"#invalid parameters"<<endl;
                 }
             }
+
+            else if (commandType=="LIST"){
+                //Code pour afficher tous les descripteurs d'objets
+                espace.List();
+                //Fin du code pour afficher tous les descripteurs d'objets
+            }
+
+            else if (commandType=="DELETE") {
+                //Code pour DELETE
+                if(args.size()>0){
+                    vector<string> listeNoms;
+                    list<string>::iterator it;
+                    for(it=args.begin();it!=args.end(); ++it){
+                        listeNoms.push_back(*it);
+                    }
+                    espace.Delete(listeNoms);
+                    //Fin du code pour DELETE
+                }
+                else{
+                    cout<<"ERR"<<endl;
+                    cout<<"#missing parameters"<<endl;
+                }
+            }
+
+            else if (commandType=="MOVE") {
+
+
+                if(args.size()==3){
+                    //Code pour MOVE
+                    string name;
+                    long dX,dY;
+                    name=args.front();
+                    args.pop_front();
+                    dX=atol(args.front().c_str());
+                    args.pop_front();
+                    dY=atol(args.front().c_str());
+                    espace.moveElement(name, dX, dY);
+                }
+                else{
+                    cout<<"ERR"<<endl;
+                    cout<<"#invalid parameters"<<endl;
+                }
+            }
+
+            else if (commandType=="UNDO") {
+                //Code pour UNDO
+                espace.Undo();
+                //Fin du code pour UNDO
+            }
+
+            else if (commandType=="REDO") {
+                //Code pour REDO
+                espace.Redo();
+                //Fin du code pour REDO
+            }
+
+            else if (commandType=="LOAD") {
+                //Lancer le timer pour les tests de performances
+
+
+                //Code pour LOAD
+                if(args.size()==1){
+                    string Filename;
+                    Filename=args.front();
+                    if(!Tools::FileExists(Filename))
+                    {
+                        cout<<"ERR"<<endl;
+                        cout<<"#can't find "<<Filename<<endl;
+                    }
+                    else
+                    {
+                        espace.Load(Filename);
+                    }
+                }
+                else{
+                    cout<<"ERR"<<endl;
+                    cout<<"#invalid parameters"<<endl;
+                }
+
+                 //Arreter le timer pour les tests de performances
+            }
+
+            else if (commandType=="SAVE") {
+                //Code pour SAVE
+                if(args.size()==1){
+                    string filename;
+                    filename=args.front();
+                    if(Tools::FileExists(filename)){
+                        cout<<"ERR"<<endl;
+                        cout<<"#"<<filename<<" already used"<<endl;
+                    }
+                    else
+                    {
+                        espace.Save(filename);
+                    }
+                }
+                else{
+                    cout<<"ERR"<<endl;
+                    cout<<"#invalid parameters"<<endl;
+                }
+                //Fin du code pour SAVE
+            }
+
+            else if (commandType=="CLEAR") {
+                //Code pour CLEAR
+                espace.Clear();
+                //Fin du code pour CLEAR
+            }
+
             else
             {
                 cout<<"#invalid command"<<endl;
             }
+
+            args.clear();
             getline(cin,entree);
+            Tools::Split(entree, args);
+            if(args.size()==0)
+            {
+                args.push_back("");
+            }
+            commandType = args.front();
+            args.pop_front();
         }
         return 0;
     }

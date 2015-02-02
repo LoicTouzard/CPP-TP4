@@ -13,6 +13,7 @@
 using namespace std;
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <fstream>
 //------------------------------------------------------ Include personnel
 #include "Tools.h"
@@ -56,6 +57,21 @@ bool Tools::Separateur(std::string s)
     }
 }
 
+std::list<std::string> &Tools::Split(const std::string &s, std::list<std::string> &elems, char delim) {
+    std::stringstream ss(s);
+    std::string item;
+    while (std::getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+}
+
+
+std::list<std::string> Tools::Split(const std::string &s, char delim) {
+    std::list<std::string> elems;
+    Tools::Split(s, elems, delim);
+    return elems;
+}
 
 std::string Tools::Decoupage(std::string s, int posSpace)
 // Algorithme : On extrait la chaine de caractères à contenue entre deux espaces consécutifs
@@ -80,23 +96,24 @@ std::string Tools::Decoupage(std::string s, int posSpace)
             break;
         }
     }
+    delete space;
     return result;
 }
 
 
-bool Tools::TestFichierExiste(std::string nomFichier)
+bool Tools::FileExists(std::string filename)
 // Algorithme : Renvoie true si le fichier existe déjà
 //
 {
-    std::ifstream fichierATester(nomFichier.c_str());
-    if (fichierATester.good()){
-        fichierATester.close();
+    std::ifstream file(filename.c_str());
+    if (file.good()){
+        file.close();
         return true;
     }
     else {
         return false;
     }
-} //----- Fin de TestFichierExiste
+} //----- Fin de FileExists
 
 
 //------------------------------------------------- Surcharge d'opérateurs

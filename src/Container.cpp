@@ -478,7 +478,7 @@ void Container::AddCircle(string name, long radius, long centerX, long centerY, 
 		Point center;
 		center.x=centerX;
 		center.y=centerY;
-		Circle *c=new Circle(radius, center, name, commande);
+		Circle* c=new Circle(radius, center, name, commande);
 		listeGraphics.insert(make_pair(name, c));
 		insertCommand(new CreateElementCommand(&listeGraphics, c ));
 		//Fin du code pour ajouter un cerlce

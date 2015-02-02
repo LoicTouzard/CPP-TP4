@@ -11,10 +11,10 @@
 #include <iostream>
 #include <string>
 template <typename T>
-	// Mode d'emploi :Convertir un entier en chaine de caractere
+	// Mode d'emploi :Convertir un objet en chaine de caractere
 	//
 	// Contrat :
-	//
+	//  Cette classe doit surcharger l'opérateur <<
 	string toString(T valeur)
 	{
 		ostringstream oss;
