@@ -23,7 +23,6 @@ C cercle22 0 0 22
 C cercle23 0 0 23
 C cercle24 0 0 24
 C cercle25 0 0 25
-
 DELETE cercle1
 DELETE cercle2
 DELETE cercle3
@@ -49,10 +48,6 @@ DELETE cercle22
 DELETE cercle23
 DELETE cercle24
 DELETE cercle25
-
-
-
-
 UNDO
 UNDO
 UNDO
@@ -69,7 +64,8 @@ UNDO
 UNDO
 UNDO
 UNDO
-
 R rect 1 2 2 1
 PL poly 1 1 2 2 3 3 4 4
 L line 0 0 9 9
+SAVE Save_test.txt
+EXIT

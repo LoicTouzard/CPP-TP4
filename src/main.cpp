@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 #include <algorithm>
-#include <ctime> //Juste pour les tests de perfromances
+#include <ctime> //Juste pour les tests de performances
 
 #include "Tools.h"
 #include "Point.h"
@@ -19,9 +19,12 @@ using namespace std;
 int main(){
 		Container espace; //Espace qui contient toutes les figures et selections
         
+        /*string entree;
+        getline(cin,entree);
         
-		/*ofstream fichier;
-		fichier.open("doc/Load_10000000_formes.txt", ios::trunc);
+        string nomFichier="doc/Save_"+entree"_formes.txt";
+		ifstream loadFile(nomFichier.c_str());
+		
         for(int i=1; i<=2500000;i++){
 			fichier<<"C "<<"cercle"<<i<<" 0 0 "<<i<<endl;
 		}
@@ -46,8 +49,8 @@ int main(){
         start = clock();
         espace.Load("doc/Load_"+entree+"_formes.txt");
         cout << "Time: " << (clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << endl;
-
-        Commenter tout ce qui suit si on veut juste faire les tests*/
+		*/
+        //Commenter tout ce qui suit si on veut juste faire les tests
 
 		string entree;
         getline(cin,entree);
