@@ -60,9 +60,6 @@ typedef MapGraphics::const_iterator Graphics_const_iterator;
     // Contrat :
     //
 
-    Graphics_iterator Graphics_begin(){ return listeGraphics.begin(); }
-    Graphics_iterator Graphics_end(){ return listeGraphics.end(); }
-
     void List();
 	// Mode d'emploi : Affiche la commande de chaque Graphics
     //

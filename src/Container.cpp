@@ -73,6 +73,22 @@ Container::~Container ( )
 // Algorithme :
 //
 {
+    MapGraphics::iterator it;
+    for (it = listeGraphics.begin(); it != listeGraphics.end(); ++it){
+        delete it->second;
+    }
+    listeGraphics.clear();
+
+    list<Command*>::iterator it2;
+    for (it2 = redoCommands.begin(); it2 != redoCommands.end(); ++it2){
+        delete *it2;
+    }
+    redoCommands.clear();
+
+    for (it2 = undoCommands.begin(); it2 != undoCommands.end(); ++it2){
+        delete *it2;
+    }
+    undoCommands.clear();
 #ifdef MAP
     cout << "Appel au destructeur de <Container>" << endl;
 #endif
@@ -393,6 +409,11 @@ void Container::Load(string nomFichier)
                 delete it->second;
             }
             tmpMap.clear();
+
+            vector<Command*>::iterator it2;
+            for (it2 = listeCMD.begin(); it2 != listeCMD.end(); ++it2){
+                delete *it2;
+            }
             listeCMD.clear();
         }
     }
