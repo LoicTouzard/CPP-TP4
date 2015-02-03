@@ -35,6 +35,7 @@ void CreateElementCommand::Execute()
     //on insère directement l'élément pas de vérification à faire car le nom est forcément libre
     //de plus l'objet est déjà bien construit
     linkedMap->insert(make_pair(element->GetName(), element));
+    linkedHash->insert( element->GetName() );
     element->SetInDraw(GRAPHICS_STATE_IN_DRAW);
     whichList=IN_UNDO;
 }
@@ -45,6 +46,7 @@ void CreateElementCommand::UnExecute()
 {
     //l'element est gardé en mémoire pour un futur Execute plus rapide (pas de réallocation)
     linkedMap->erase(element->GetName());
+    linkedHash->erase( element->GetName() );
     element->SetInDraw(GRAPHICS_STATE_NOT_IN_DRAW);
     whichList=IN_REDO;
 }
@@ -62,8 +64,8 @@ CreateElementCommand::CreateElementCommand ( const CreateElementCommand & unCrea
 } //----- Fin de CreateElementCommand (constructeur de copie)
 
 
-CreateElementCommand::CreateElementCommand ( MapGraphics* mapToLink, Graphics* elt)
-    :SimpleCommand(mapToLink, elt)
+CreateElementCommand::CreateElementCommand ( MapGraphics* mapToLink, unordered_set<string>* hashToLink, Graphics* elt)
+    :SimpleCommand(mapToLink, hashToLink, elt)
 // Algorithme :
 //
 {

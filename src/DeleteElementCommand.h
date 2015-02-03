@@ -50,7 +50,7 @@ public:
     // Contrat :
     //
 
-    DeleteElementCommand ( MapGraphics* mapToLink, Graphics* elt);
+    DeleteElementCommand ( MapGraphics* mapToLink, unordered_set<string>* hashToLink, Graphics* elt);
     // Mode d'emploi :
     //
     // Contrat :

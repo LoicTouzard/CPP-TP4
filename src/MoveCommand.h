@@ -50,7 +50,7 @@ public:
     // Contrat :
     //
 
-    MoveCommand ( MapGraphics* mapToLink, Graphics* name, Point newOrigin );
+    MoveCommand ( MapGraphics* mapToLink, unordered_set<string>* hashToLink, Graphics* name, Point newOrigin );
     // Mode d'emploi :
     //
     // Contrat :

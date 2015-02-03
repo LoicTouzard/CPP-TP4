@@ -50,7 +50,7 @@ public:
     // Contrat :
     //
 
-    CreateElementCommand ( MapGraphics* mapToLink, Graphics* name);
+    CreateElementCommand ( MapGraphics* mapToLink, unordered_set<string>* hashToLink, Graphics* name);
     // Mode d'emploi :
     //
     // Contrat :

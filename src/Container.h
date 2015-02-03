@@ -13,6 +13,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <unordered_set>
 #include <list>
 #include "Graphics.h"
 #include "Point.h"
@@ -150,12 +151,6 @@ protected:
 private:
 //------------------------------------------------------- Méthodes privées
 
-    bool NomLibre(const string name, const MapGraphics* const mapToAnalyse) const;
-    // Mode d'emploi : Vérifie que le nom n'est pas déjà utilisé par un autre Graphics
-    //
-    // Contrat :
-    //
-
     void insertCommand(Command* const cmd);
     // Mode d'emploi :
     //
@@ -172,6 +167,7 @@ private:
 MapGraphics listeGraphics; //Map contenant tous les Graphics (figures et sélection)
 //Clé = name
 //Valeur = Graphics
+unordered_set<string> hashedName;
 list<Command*> undoCommands; //Liste des commandes que l'on peut annuler
 list<Command*> redoCommands; //Liste des commandes que l'on peut ré-exécuter après les avoir annulé
 

@@ -12,6 +12,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <map>
 #include <string>
+#include <unordered_set>
 #include "Graphics.h"
 #include "Point.h"
 #include "Command.h"
@@ -57,7 +58,7 @@ public:
     // Contrat :
     //
 
-    SimpleCommand ( MapGraphics* mapToLink, Graphics* elt);
+    SimpleCommand ( MapGraphics* mapToLink, unordered_set<string>* hashToLink, Graphics* elt);
     // Mode d'emploi :
     //
     // Contrat :
@@ -80,6 +81,7 @@ private:
 protected:
 //----------------------------------------------------- Attributs protégés
 MapGraphics* linkedMap;
+unordered_set<string>* linkedHash;
 Graphics* element;
 
 private:

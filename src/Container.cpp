@@ -130,7 +130,7 @@ void Container::Clear()
         Graphics_iterator it;
         for(it = listeGraphics.begin(); it!=listeGraphics.end(); ++it)
         {
-            listeCMD.push_back(new DeleteElementCommand(&listeGraphics, it->second));
+            listeCMD.push_back(new DeleteElementCommand(&listeGraphics, &hashedName, it->second));
         }
         //on considère le CLEAR comme un DELETE de tous les elements (même comportement)
         insertCommand(new DeleteCommand(listeCMD));
@@ -176,7 +176,7 @@ void Container::moveElement(const string name, const long dX, const long dY)
 		pt.y = dY;
 
 		//on l'ajoute a la pile des undo et on clear les redo
-		insertCommand(new MoveCommand(&listeGraphics, it->second , pt));
+		insertCommand(new MoveCommand(&listeGraphics, &hashedName, it->second , pt));
 		cout<<"OK"<<endl;
 	}
 	else{
@@ -226,7 +226,7 @@ void Container::Load(const string nomFichier)
 
                         long radiusl = atol(args.front().c_str());
 
-                        if(!NomLibre(name, &listeGraphics)){
+                        if(hashedName.find(name)!=hashedName.end()){
                             correctFile = false;
                             cout<<"ERR"<<endl;
                             cout<<"#name already taken"<<endl;
@@ -240,7 +240,8 @@ void Container::Load(const string nomFichier)
 
                             Circle *c=new Circle(radiusl, center, name, entree);
                             listeGraphics.insert(make_pair(name, c));
-                            listeCMD.push_back(new CreateElementCommand(&listeGraphics, c));
+                            hashedName.insert(name);
+                            listeCMD.push_back(new CreateElementCommand(&listeGraphics, &hashedName, c));
 
                             //Fin du code pour ajouter un cercle
                         }
@@ -261,7 +262,7 @@ void Container::Load(const string nomFichier)
                         name = args.front();
                         args.pop_front();
 
-                        if(!NomLibre(name, &listeGraphics)){
+                        if(hashedName.find(name)!=hashedName.end()){
                             correctFile = false;
                             cout<<"ERR"<<endl;
                             cout<<"#name already taken"<<endl;
@@ -280,7 +281,8 @@ void Container::Load(const string nomFichier)
                         Rectangle *r=new Rectangle(extremity, origin, name, entree);
 
                         listeGraphics.insert(make_pair(name, r));
-                        listeCMD.push_back(new CreateElementCommand(&listeGraphics, r));
+                        hashedName.insert(name);
+                        listeCMD.push_back(new CreateElementCommand(&listeGraphics, &hashedName, r));
 
                     }
                     else{
@@ -299,7 +301,7 @@ void Container::Load(const string nomFichier)
                         name=args.front();
                         args.pop_front();
 
-                        if(!NomLibre(name, &listeGraphics)){
+                        if(hashedName.find(name)!=hashedName.end()){
                             correctFile = false;
                             cout<<"ERR"<<endl;
                             cout<<"#name already taken"<<endl;
@@ -326,7 +328,8 @@ void Container::Load(const string nomFichier)
                         Polyline *pl =new Polyline (newPointList, origin, name, entree);
 
                         listeGraphics.insert(make_pair(name, pl));
-                        listeCMD.push_back(new CreateElementCommand(&listeGraphics, pl));
+                        hashedName.insert(name);
+                        listeCMD.push_back(new CreateElementCommand(&listeGraphics, &hashedName, pl));
 
                     }
                     else{
@@ -344,7 +347,7 @@ void Container::Load(const string nomFichier)
                         name=args.front();
                         args.pop_front();
 
-                        if(!NomLibre(name, &listeGraphics)){
+                        if(hashedName.find(name)!=hashedName.end()){
                             correctFile = false;
                             cout<<"ERR"<<endl;
                             cout<<"#name already taken"<<endl;
@@ -364,7 +367,8 @@ void Container::Load(const string nomFichier)
                         Line *l=new Line(extremity, origin, name, entree);
 
                         listeGraphics.insert(make_pair(name, l));
-                        listeCMD.push_back(new CreateElementCommand(&listeGraphics, l));
+                        hashedName.insert(name);
+                        listeCMD.push_back(new CreateElementCommand(&listeGraphics, &hashedName, l));
 
                     }
                     else{
@@ -425,7 +429,7 @@ void Container::Delete(const vector<string> listeNoms)
 {
 	for(unsigned int i=0; i<listeNoms.size(); ++i)
 	{
-		if(NomLibre( listeNoms[i] , &listeGraphics) )
+		if(hashedName.find(listeNoms[i])==hashedName.end())
 		{
 			cout<<"ERR"<<endl;
 			cout<<"# can't find "+listeNoms[i]+ ". None of the elements have been removed"<<endl;
@@ -445,9 +449,10 @@ void Container::Delete(const vector<string> listeNoms)
             toDelete=dynamic_cast<Figure *>(it->second);
 
             if(toDelete!=NULL){ //Si c'est une figure
-                listeCMD.push_back(new DeleteElementCommand(&listeGraphics, it->second));
+                listeCMD.push_back(new DeleteElementCommand(&listeGraphics, &hashedName, it->second));
                 toDelete->SetInDraw(GRAPHICS_STATE_NOT_IN_DRAW);
                 listeGraphics.erase(it);
+                hashedName.erase( toDelete->GetName() );
             }
             else{ //Si c'est une sélection
                 vector<Command*> listeCMDSelection;
@@ -455,11 +460,13 @@ void Container::Delete(const vector<string> listeNoms)
                 figureToDelete = (dynamic_cast<Selection *>(it->second))->GetInDrawElements();
                 vector<Figure*>::iterator it2;
                 for(it2=figureToDelete.begin(); it2!=figureToDelete.end(); ++it2){
-                    listeCMDSelection.push_back(new DeleteElementCommand(&listeGraphics, *it2));
+                    listeCMDSelection.push_back(new DeleteElementCommand(&listeGraphics, &hashedName, *it2));
                     (*it2)->SetInDraw(GRAPHICS_STATE_NOT_IN_DRAW);
                     listeGraphics.erase((*it2)->GetName());
+                    hashedName.erase( (*it2)->GetName() );
                 }
                 listeGraphics.erase(it); //Erase de la selection
+                hashedName.erase( it->first );
                 it->second->SetInDraw(GRAPHICS_STATE_NOT_IN_DRAW);
                 delete it->second;
                 listeCMD.push_back(new DeleteCommand(listeCMDSelection));
@@ -476,7 +483,7 @@ void Container::AddCircle(const string name, const long radius, const long cente
 // On vérifie que le nom n'est pas déjà pris par une autre figure ou sélection
 // On peut ensuite créer l'objet en ayant pris soin de vérifier que le rayon ne soit pas négatif
 {
-	if(!NomLibre(name, &listeGraphics)){
+	if(hashedName.find(name)!=hashedName.end()){
 		cout<<"ERR"<<endl;
 		cout<<"#name already taken"<<endl;
 		return;
@@ -492,7 +499,8 @@ void Container::AddCircle(const string name, const long radius, const long cente
 		center.y=centerY;
 		Circle* c=new Circle(radius, center, name, commande);
 		listeGraphics.insert(make_pair(name, c));
-		insertCommand(new CreateElementCommand(&listeGraphics, c ));
+		hashedName.insert(name);
+		insertCommand(new CreateElementCommand(&listeGraphics, &hashedName, c ));
 		//Fin du code pour ajouter un cerlce
 		cout<<"OK"<<endl;
 		cout<<"#New object :"<<name<<endl;
@@ -505,7 +513,7 @@ void Container::AddRectangle(const string name, const long coin1X, const long co
 // On peut ensuite créer l'objet en ayant calculé les coordonnées du coin supérieur gauche et du coin inférieur droit  du rectangle
 {
 
-    if(!NomLibre(name, &listeGraphics)){
+    if(hashedName.find(name)!=hashedName.end()){
 		cout<<"ERR"<<endl;
 		cout<<"#name already taken"<<endl;
 		return;
@@ -521,7 +529,8 @@ void Container::AddRectangle(const string name, const long coin1X, const long co
 
 	Rectangle *r=new Rectangle(extremity, origin, name, commande);
 	listeGraphics.insert(make_pair(name, r));
-	insertCommand(new CreateElementCommand(&listeGraphics, r ));
+	hashedName.insert(name);
+	insertCommand(new CreateElementCommand(&listeGraphics, &hashedName, r ));
 	cout<<"OK"<<endl;
 	cout<<"#New object :"<<name<<endl;
 }
@@ -531,7 +540,7 @@ void Container::AddLine(const string name, const long coin1X, const long coin1Y,
 // On vérifie que le nom n'est pas déjà pris par une autre figure ou sélection
 // On peut ensuite créer l'objet en ayant calculé les coordonnées du coin supérieur gauche et du coin inférieur droit  du rectangle dans lequel est contenu cette ligne
 {
-    if(!NomLibre(name, &listeGraphics)){
+    if(hashedName.find(name)!=hashedName.end()){
 		cout<<"ERR"<<endl;
 		cout<<"#name already taken"<<endl;
 		return;
@@ -547,7 +556,8 @@ void Container::AddLine(const string name, const long coin1X, const long coin1Y,
 
 	Line *l=new Line(extremity, origin, name, commande);
 	listeGraphics.insert(make_pair(name, l));
-    insertCommand(new CreateElementCommand(&listeGraphics, l ));
+	hashedName.insert(name);
+    insertCommand(new CreateElementCommand(&listeGraphics, &hashedName, l ));
 	cout<<"OK"<<endl;
 	cout<<"#New object : "<<name<<endl;
 }
@@ -558,19 +568,15 @@ void Container::AddPolyline(const string name, const vector<Point> newPointList,
 // On peut ensuite créer l'objet en ayant calculé les coordonnées du coin supérieur gauche et du coin inférieur droit  du rectangle dans lequel sont contenus
 // l'ensemble des points de l'objet polyline
 {
-    if(!NomLibre(name, &listeGraphics)){
+    if(hashedName.find(name)!=hashedName.end()){
 		cout<<"ERR"<<endl;
 		cout<<"#name already taken"<<endl;
 		return;
 	}
-	/*string cmd="PL "+name+" "+toString(origin.x)+" "+toString(origin.y);
-	vector<Point>::iterator it;
-	for(it=newPointList.begin(); it!=newPointList.end(); ++it){
-		cmd += " "+toString(it->x)+" "+toString(it->y);
-	}*/
 	Polyline *pl =new Polyline (newPointList, origin, name, commande);
 	listeGraphics.insert(make_pair(name, pl));
-    insertCommand(new CreateElementCommand(&listeGraphics, pl ));
+	hashedName.insert(name);
+    insertCommand(new CreateElementCommand(&listeGraphics, &hashedName, pl ));
 	cout<<"OK"<<endl;
 	cout<<"#New object : "<<name<<endl;
 }
@@ -582,7 +588,7 @@ void Container::AddSelection(const string name, const long coin1X, const long co
 // On ajoute chaque figure se trouvant dans la sélection à la liste de figures que possède la sélection (permet de savoir quelles figures elle contient)
 
 {
-    if(!NomLibre(name, &listeGraphics)){
+    if(hashedName.find(name)!=hashedName.end()){
 		cout<<"ERR"<<endl;
 		cout<<"#name already taken"<<endl;
 		return;
@@ -604,7 +610,6 @@ void Container::AddSelection(const string name, const long coin1X, const long co
         temp=dynamic_cast<Figure *>(it->second);
         if(temp!=NULL){ //Si c'est bien une figure
             if( temp->IsInside(origin, extremity) ){
-                //temp->whoOwnsMe.push_back();
                 figuresInside.push_back(temp);
                 //Dynamic_cast permet de ne récupérer que la partie Figure de it (qui est un iterator de Graphics)
             }
@@ -612,6 +617,7 @@ void Container::AddSelection(const string name, const long coin1X, const long co
     }
     Selection *s =new Selection (figuresInside, origin, extremity, name, commande);
 	listeGraphics.insert(make_pair(name, s));
+	hashedName.insert(name);
 	cout<<"OK"<<endl;
 	cout<<"#New object : "<<name<<endl;
 }
@@ -653,16 +659,6 @@ void Container::Redo()
 }
 
 //------------------------------------------------------------------ PRIVE
-bool Container::NomLibre(const string name, const MapGraphics* const mapToAnalyse) const
-// Algorithme : Renvoie true si le nom est disponible (aucun Graphics dans le container ne le possède)
-{
-	Graphics_const_iterator it;
-	it=mapToAnalyse->find(name);
-	if(it==mapToAnalyse->end()){
-		return true;
-	}
-	return false;
-}
 
 void Container::insertCommand(Command* const cmd)
 // Algorithme : Insère une commande dans la pile des UNDO et vide la pile des REDO
