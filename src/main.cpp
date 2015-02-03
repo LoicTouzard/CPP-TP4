@@ -41,7 +41,7 @@ int main(){
         
         
         //A décommenter pour les tests
-       
+       /*
         string entree;
         getline(cin,entree);
         
@@ -49,9 +49,9 @@ int main(){
         start = clock();
         espace.Load("doc/Load_"+entree+"_formes.txt");
         cout << "Time: " << (clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << endl;
-		
+		*/
         //Commenter tout ce qui suit si on veut juste faire les tests
-/*
+
 		string entree;
         getline(cin,entree);
 
@@ -316,7 +316,7 @@ int main(){
             }
             commandType = args.front();
             args.pop_front();
-        }*/
+        }
         return 0;
     }
 
