@@ -226,7 +226,7 @@ void Container::Load(string nomFichier)
 
                         long radiusl = atol(args.front().c_str());
 
-                        if(!NomLibre(name, &listeGraphics) || !NomLibre(name, &tmpMap)){
+                        if(!NomLibre(name, &listeGraphics)){
                             correctFile = false;
                             cout<<"ERR"<<endl;
                             cout<<"#name already taken"<<endl;
@@ -239,7 +239,7 @@ void Container::Load(string nomFichier)
                         else{
 
                             Circle *c=new Circle(radiusl, center, name, entree);
-                            tmpMap.insert(make_pair(name, c));
+                            listeGraphics.insert(make_pair(name, c));
                             listeCMD.push_back(new CreateElementCommand(&listeGraphics, c));
 
                             //Fin du code pour ajouter un cercle
@@ -261,7 +261,7 @@ void Container::Load(string nomFichier)
                         name = args.front();
                         args.pop_front();
 
-                        if(!NomLibre(name, &listeGraphics) || !NomLibre(name, &tmpMap)){
+                        if(!NomLibre(name, &listeGraphics)){
                             correctFile = false;
                             cout<<"ERR"<<endl;
                             cout<<"#name already taken"<<endl;
@@ -279,7 +279,7 @@ void Container::Load(string nomFichier)
                         extremity.y=atol(args.front().c_str());
                         Rectangle *r=new Rectangle(extremity, origin, name, entree);
 
-                        tmpMap.insert(make_pair(name, r));
+                        listeGraphics.insert(make_pair(name, r));
                         listeCMD.push_back(new CreateElementCommand(&listeGraphics, r));
 
                     }
@@ -299,7 +299,7 @@ void Container::Load(string nomFichier)
                         name=args.front();
                         args.pop_front();
 
-                        if(!NomLibre(name, &listeGraphics) || !NomLibre(name, &tmpMap)){
+                        if(!NomLibre(name, &listeGraphics)){
                             correctFile = false;
                             cout<<"ERR"<<endl;
                             cout<<"#name already taken"<<endl;
@@ -325,7 +325,7 @@ void Container::Load(string nomFichier)
 
                         Polyline *pl =new Polyline (newPointList, origin, name, entree);
 
-                        tmpMap.insert(make_pair(name, pl));
+                        listeGraphics.insert(make_pair(name, pl));
                         listeCMD.push_back(new CreateElementCommand(&listeGraphics, pl));
 
                     }
@@ -344,7 +344,7 @@ void Container::Load(string nomFichier)
                         name=args.front();
                         args.pop_front();
 
-                        if(!NomLibre(name, &listeGraphics) || !NomLibre(name, &tmpMap)){
+                        if(!NomLibre(name, &listeGraphics)){
                             correctFile = false;
                             cout<<"ERR"<<endl;
                             cout<<"#name already taken"<<endl;
@@ -363,7 +363,7 @@ void Container::Load(string nomFichier)
 
                         Line *l=new Line(extremity, origin, name, entree);
 
-                        tmpMap.insert(make_pair(name, l));
+                        listeGraphics.insert(make_pair(name, l));
                         listeCMD.push_back(new CreateElementCommand(&listeGraphics, l));
 
                     }
@@ -393,26 +393,20 @@ void Container::Load(string nomFichier)
         if(correctFile)
         {
             //la création est confirmée car tous les éléments sont corrects
-            listeGraphics.insert(tmpMap.begin(), tmpMap.end()); //merge
             insertCommand(new LoadCommand (listeCMD));
-            cout << "#" << tmpMap.size() << "elements have been loaded successfully." << endl;
+            cout << "#" << listeCMD.size() << "elements have been loaded successfully." << endl;
             cout << "OK" << endl;
         }
         else
         {
             //il y a eu une erreur dans le fichier on libère ce qui a été créé
-            cout<<"#Error line : " << tmpMap.size()+1 << endl;
+            cout<<"#Error line : " << listeCMD.size()+1 << endl;
             cout<<"#The load file couldn't be loaded. None of the elements have been created."<<endl;
-
-            MapGraphics::iterator it;
-            for (it = tmpMap.begin(); it != tmpMap.end(); ++it){
-                delete it->second;
-            }
-            tmpMap.clear();
 
             vector<Command*>::iterator it2;
             for (it2 = listeCMD.begin(); it2 != listeCMD.end(); ++it2){
-                delete *it2;
+                (*it2)->UnExecute();//suppression des elements de la map
+                delete *it2;//suppression de la commande et de la forme de la mémoire.
             }
             listeCMD.clear();
         }
