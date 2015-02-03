@@ -70,8 +70,15 @@ public:
     //
 
     static std::list<std::string> &Split(const std::string &s, std::list<std::string> &elems, char delim=' ');
-
+    // Mode d'emploi : 
+    //
+    // Contrat :
+    //
     static std::list<std::string> Split(const std::string &s, char delim=' ');
+    // Mode d'emploi : Renvoie une liste où chaque élément correspond à chaque mot de la chaine de caractères (séparation des mots par des délimiteurs)
+    //
+    // Contrat :
+    //
 
     static std::string Decoupage(std::string s, int posSpace);
     // Mode d'emploi : Récupère la chaine de caractères comprise entre deux espaces consécutifs

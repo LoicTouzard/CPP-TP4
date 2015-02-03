@@ -4,48 +4,56 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>140</x>
-      <y>56</y>
-      <w>175</w>
-      <h>147</h>
+      <x>112</x>
+      <y>0</y>
+      <w>196</w>
+      <h>252</h>
     </coordinates>
     <panel_attributes>Container
 --
--GraphicsList: map&lt;String, Graphics*&gt;
+-listeGraphics: map&lt;String, Graphics*&gt;
+-hashedName: unordered_set&lt;string&gt;
+-undoCommands: list&lt;Command*&gt;
+-redoCommands: list&lt;Command*&gt;
+
 --
-+Save()
++Save(nomFichier: string)
 +Clear()
 +List()
-+AddCircle(name: string, radius: long)
-+AddRectangle()
-+AddLine()
-+AddPolyline()
-+AddSelection()
-+MoveElement()
-+Delete() [a developper?]</panel_attributes>
++Load(nomFichier: string)
++AddCircle(name: string, ....)
++AddRectangle(name: string, ...)
++AddLine(name: string, ...)
++AddPolyline()...)
++AddSelection(name: string, ...)
++MoveElement(name: string, ...)
++Delete(listeNoms: vector&lt;string&gt;)
++Undo()
++Redo()
+-insertCommand(cmd: Command*)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>308</x>
-      <y>63</y>
-      <w>196</w>
+      <x>301</x>
+      <y>49</y>
+      <w>210</w>
       <h>35</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
 m2=0..n
 est composé de</panel_attributes>
-    <additional_attributes>10.0;20.0;260.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;280.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
-      <y>70</y>
+      <x>497</x>
+      <y>56</y>
       <w>119</w>
-      <h>84</h>
+      <h>112</h>
     </coordinates>
     <panel_attributes>/Graphics/
 /{Abstract}/
@@ -53,7 +61,8 @@ est composé de</panel_attributes>
 #name: String
 #commandLine: String
 --
-#move()
++GetName()
+#move(dx: long, ...)
 #description()
 </panel_attributes>
     <additional_attributes/>
@@ -61,17 +70,21 @@ est composé de</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>721</x>
-      <y>168</y>
+      <x>749</x>
+      <y>196</y>
       <w>189</w>
-      <h>119</h>
+      <h>133</h>
     </coordinates>
     <panel_attributes>Selection
 --
-#listFigure: vector&lt;Figure*&gt;
+#figureList: vector&lt;Figure*&gt;
 *#name: String*
 *#commandLine: String*
+*#origin: Point*
+#extremity: Point
 --
++GetInDrawElements()
++EraseFigure(f: Figure*)
 *#move()*
 *#description()*
 </panel_attributes>
@@ -80,8 +93,8 @@ est composé de</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>336</x>
-      <y>105</y>
+      <x>343</x>
+      <y>91</y>
       <w>98</w>
       <h>42</h>
     </coordinates>
@@ -92,8 +105,8 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>371</x>
-      <y>70</y>
+      <x>378</x>
+      <y>56</y>
       <w>28</w>
       <h>49</h>
     </coordinates>
@@ -103,21 +116,24 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>441</x>
-      <y>210</y>
+      <x>448</x>
+      <y>189</y>
       <w>182</w>
-      <h>112</h>
+      <h>161</h>
     </coordinates>
     <panel_attributes>/Figure/
 /{Abstract}/
 --
 #origin: Point
-#leftUpCorner: Point
+#whoOwnsMe: vector&lt;Selection*&gt;
 #downRightCorner: Point
+#LeftUpCorner: Point
 *#name: String*
 *#commandLine: String*
 --
-#isInside(pt1: Point, pt2: Point):boolean
++IsInside(P1: point...)
++AddSelect(s: Selection *)
++EraseSelection(s: Selection*)
 *#move()*
 *#description()*
 </panel_attributes>
@@ -126,8 +142,8 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>154</x>
-      <y>217</y>
+      <x>168</x>
+      <y>273</y>
       <w>63</w>
       <h>42</h>
     </coordinates>
@@ -140,22 +156,22 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>210</x>
-      <y>217</y>
-      <w>245</w>
-      <h>49</h>
+      <x>224</x>
+      <y>259</y>
+      <w>238</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
 m2=1
 est l'origine de </panel_attributes>
-    <additional_attributes>330.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>320.0;20.0;10.0;30.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>231</x>
-      <y>245</y>
+      <x>287</x>
+      <y>329</y>
       <w>147</w>
       <h>56</h>
     </coordinates>
@@ -170,21 +186,21 @@ bg=blue
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>266</x>
-      <y>224</y>
-      <w>28</w>
-      <h>35</h>
+      <x>308</x>
+      <y>273</y>
+      <w>42</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>20.0;30.0;10.0;10.0</additional_attributes>
+    <additional_attributes>40.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>749</x>
-      <y>350</y>
+      <x>763</x>
+      <y>469</y>
       <w>196</w>
-      <h>112</h>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Circle
 --
@@ -193,8 +209,7 @@ bg=blue
 *#name: String*
 *#commandLine: String*
 --
-*#isInside(pt1: Point, pt2: Point):boolean*
-*#move()*
+*#move(dx: long,...)*
 *#description()*
 </panel_attributes>
     <additional_attributes/>
@@ -202,32 +217,32 @@ bg=blue
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>532</x>
-      <y>147</y>
+      <x>539</x>
+      <y>161</y>
       <w>21</w>
-      <h>77</h>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>588</x>
-      <y>315</y>
-      <w>273</w>
-      <h>49</h>
+      <x>595</x>
+      <y>343</y>
+      <w>280</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;370.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;380.0;180.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>623</x>
-      <y>483</y>
+      <x>560</x>
+      <y>469</y>
       <w>196</w>
-      <h>112</h>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Rectangle
 --
@@ -236,7 +251,6 @@ bg=blue
 *#name: String*
 *#commandLine: String*
 --
-*#isInside(pt1: Point, pt2: Point):boolean*
 *#move()*
 *#description()*
 </panel_attributes>
@@ -245,19 +259,19 @@ bg=blue
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>434</x>
-      <y>315</y>
+      <x>441</x>
+      <y>343</y>
       <w>91</w>
-      <h>182</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>110.0;10.0;10.0;240.0</additional_attributes>
+    <additional_attributes>110.0;10.0;10.0;180.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>483</y>
+      <x>357</x>
+      <y>469</y>
       <w>196</w>
       <h>126</h>
     </coordinates>
@@ -270,7 +284,6 @@ bg=blue
 *#name: String*
 *#commandLine: String*
 --
-*#isInside(pt1: Point, pt2: Point):boolean*
 *#move()*
 *#description()*
 </panel_attributes>
@@ -279,21 +292,20 @@ bg=blue
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>140</x>
-      <y>406</y>
+      <x>154</x>
+      <y>469</y>
       <w>196</w>
       <h>126</h>
     </coordinates>
     <panel_attributes>Polyline
 --
-#ListPoint: vector&lt;Point&gt;
+#pointList: vector&lt;Point&gt;
 #leftUpCorner: Point
 #downRightCorner: Point
 *#origin: Point*
 *#name: String*
 *#commandLine: String*
 --
-*#isInside(pt1: Point, pt2: Point):boolean*
 *#move()*
 *#description()*
 </panel_attributes>
@@ -302,44 +314,44 @@ bg=blue
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>546</x>
-      <y>315</y>
-      <w>161</w>
-      <h>182</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;210.0;240.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>238</x>
-      <y>315</y>
-      <w>245</w>
-      <h>105</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>330.0;10.0;10.0;130.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>175</x>
-      <y>252</y>
+      <x>553</x>
+      <y>343</y>
       <w>91</w>
-      <h>168</h>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>343</y>
+      <w>238</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>320.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>189</x>
+      <y>308</y>
+      <w>91</w>
+      <h>175</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
 m2=0..n
 est composée de</panel_attributes>
-    <additional_attributes>10.0;220.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;230.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>70</x>
-      <y>308</y>
+      <x>49</x>
+      <y>336</y>
       <w>98</w>
       <h>49</h>
     </coordinates>
@@ -350,37 +362,37 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>161</x>
-      <y>329</y>
-      <w>35</w>
-      <h>21</h>
+      <x>140</x>
+      <y>315</y>
+      <w>63</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;30.0;10.0</additional_attributes>
+    <additional_attributes>10.0;70.0;70.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>602</x>
-      <y>112</y>
-      <w>161</w>
-      <h>70</h>
+      <x>609</x>
+      <y>98</y>
+      <w>182</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;210.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;240.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>616</x>
-      <y>238</y>
-      <w>119</w>
+      <x>623</x>
+      <y>266</y>
+      <w>140</w>
       <h>35</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
 m2=0..n
 &lt; est composée de</panel_attributes>
-    <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>

@@ -67,7 +67,10 @@ std::list<std::string> &Tools::Split(const std::string &s, std::list<std::string
 }
 
 
-std::list<std::string> Tools::Split(const std::string &s, char delim) {
+std::list<std::string> Tools::Split(const std::string &s, char delim)
+// Algorithme : Renvoie une liste contenant tous les mots de la chaine de caractères séparés par un délimiteur
+//
+{
     std::list<std::string> elems;
     Tools::Split(s, elems, delim);
     return elems;
