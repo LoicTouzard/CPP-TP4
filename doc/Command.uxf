@@ -24,14 +24,14 @@ fontsize=10
 
 
 // This text will be stored with each diagram;  use it for notes.</help_text>
-  <zoom_level>10</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>540</x>
+      <x>531</x>
       <y>0</y>
-      <w>160</w>
-      <h>120</h>
+      <w>144</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>/Command/
 /{Abstract}/
@@ -41,36 +41,37 @@ fontsize=10
 --
 #whichList :short
 --
-/+Abstract execute()/
-/+Abstract unexecute()/</panel_attributes>
+/+Abstract Execute()/
+/+Abstract Unexecute()/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>220</x>
-      <y>540</y>
-      <w>190</w>
-      <h>110</h>
+      <x>243</x>
+      <y>486</y>
+      <w>171</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>CreateElementCommand
 --
 *#linkedMap: map&lt;string, Graphics*&gt;**
+*#linkedHash: unordered_set&lt;string&gt;*
 *#element: Graphic**
 *#whichList :short*
 --
-*+execute()*
-*+unexecute()*
+*+Execute()*
+*+Unexecute()*
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>730</x>
-      <y>260</y>
-      <w>240</w>
-      <h>100</h>
+      <x>702</x>
+      <y>234</y>
+      <w>216</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>/ComposedCommand/
 /{Abstract}/
@@ -78,29 +79,29 @@ fontsize=10
 #listCommands: vector&lt;Command*&gt;
 *#whichList :short*
 --
-/*+Abstract execute()*/
-/*+Abstract unexecute()*/
+/*+Abstract Execute()*/
+/*+Abstract Unexecute()*/
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>310</x>
-      <y>360</y>
-      <w>50</w>
-      <h>200</h>
+      <x>342</x>
+      <y>324</y>
+      <w>27</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;30.0;180.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;180.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>640</x>
-      <y>110</y>
-      <w>110</w>
-      <h>190</h>
+      <x>621</x>
+      <y>99</y>
+      <w>99</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;170.0;90.0;170.0</additional_attributes>
@@ -108,10 +109,10 @@ fontsize=10
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>690</x>
-      <y>80</y>
-      <w>160</w>
-      <h>200</h>
+      <x>666</x>
+      <y>72</y>
+      <w>144</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
@@ -122,58 +123,59 @@ m2=1..*
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>540</y>
-      <w>190</w>
-      <h>110</h>
+      <x>54</x>
+      <y>486</y>
+      <w>171</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>MoveCommand
 --
 #origin: Point
 *#linkedMap: map&lt;string, Graphics*&gt;**
+*#linkedHash: unordered_set&lt;string&gt;*
 *#element: Graphic**
 *#whichList :short*
 --
-*+execute()*
-*+unexecute()*
+*+Execute()*
+*+Unexecute()*
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>110</x>
-      <y>360</y>
-      <w>200</w>
-      <h>200</h>
+      <x>153</x>
+      <y>324</y>
+      <w>171</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>180.0;10.0;10.0;180.0</additional_attributes>
+    <additional_attributes>170.0;10.0;10.0;180.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
-      <y>540</y>
-      <w>190</w>
-      <h>110</h>
+      <x>657</x>
+      <y>486</y>
+      <w>171</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>DeleteCommand
 --
 *#listCommands: vector&lt;Command*&gt;*
 *#whichList :short*
 --
-*+execute()*
-*+unexecute()*</panel_attributes>
+*+Execute()*
+*+Unexecute()*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>760</x>
-      <y>350</y>
-      <w>70</w>
-      <h>210</h>
+      <x>729</x>
+      <y>315</y>
+      <w>63</w>
+      <h>189</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>50.0;10.0;10.0;190.0</additional_attributes>
@@ -181,27 +183,27 @@ m2=1..*
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>540</y>
-      <w>190</w>
-      <h>110</h>
+      <x>855</x>
+      <y>486</y>
+      <w>171</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>LoadCommand
 --
 *#listCommands: vector&lt;Command*&gt;*
 *#whichList :short*
 --
-*+execute()*
-*+unexecute()*</panel_attributes>
+*+Execute()*
+*+Unexecute()*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>910</x>
-      <y>350</y>
-      <w>100</w>
-      <h>210</h>
+      <x>864</x>
+      <y>315</y>
+      <w>90</w>
+      <h>189</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;80.0;190.0</additional_attributes>
@@ -209,29 +211,30 @@ m2=1..*
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>250</x>
-      <y>260</y>
-      <w>240</w>
-      <h>110</h>
+      <x>270</x>
+      <y>216</y>
+      <w>216</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>/SimpleCommand/
 /{Abstract}/
 --
 #linkedMap: map&lt;string, Graphics*&gt;*
 #element: Graphic*
+#linkedHash: unordered_set&lt;string&gt;
 *#whichList :short*
 --
-/*+Abstract execute()*/
-/*+Abstract unexecute()*/</panel_attributes>
+/*+Abstract Eexecute()*/
+/*+Abstract Unexecute()*/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>110</y>
-      <w>140</w>
-      <h>190</h>
+      <x>477</x>
+      <y>99</y>
+      <w>126</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>120.0;10.0;120.0;170.0;10.0;170.0</additional_attributes>
@@ -239,10 +242,10 @@ m2=1..*
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>10</x>
-      <y>400</y>
-      <w>150</w>
-      <h>70</h>
+      <x>54</x>
+      <y>360</y>
+      <w>135</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>L'origin d'une commande Move est le point définissant le vecteur de translation par rapport au point (0,0)
 bg=blue</panel_attributes>
@@ -251,25 +254,26 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>60</x>
-      <y>460</y>
-      <w>40</w>
-      <h>100</h>
+      <x>108</x>
+      <y>414</y>
+      <w>27</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>20.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
-      <y>540</y>
-      <w>190</w>
-      <h>110</h>
+      <x>432</x>
+      <y>486</y>
+      <w>171</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>DeleteElementCommand
 --
 *#linkedMap: map&lt;string, Graphics*&gt;**
+*#linkedHash: unordered_set&lt;string&gt;*
 *#element: Graphic**
 *#whichList :short*
 --
@@ -281,10 +285,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>390</x>
-      <y>360</y>
-      <w>150</w>
-      <h>200</h>
+      <x>396</x>
+      <y>324</y>
+      <w>135</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;130.0;180.0</additional_attributes>
