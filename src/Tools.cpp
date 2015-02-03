@@ -31,7 +31,7 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-int Tools::NombreEspaces(std::string s)
+int Tools::NombreEspaces(const std::string s)
 // Algorithme : Compte le nombre d'espaces dans un string (utile pour savoir si le format d'entrée est respecté)
 //
 {
@@ -45,7 +45,7 @@ int Tools::NombreEspaces(std::string s)
 }
 
 
-bool Tools::Separateur(std::string s)
+bool Tools::Separateur(const std::string s)
 // Algorithme : Renvoie true si le nom de la figure ne contient pas de séparateur
 //
 {
@@ -101,7 +101,7 @@ std::string Tools::Decoupage(std::string s, int posSpace)
 }
 
 
-bool Tools::FileExists(std::string filename)
+bool Tools::FileExists(const std::string filename)
 // Algorithme : Renvoie true si le fichier existe déjà
 //
 {

@@ -71,7 +71,7 @@ Selection::~Selection ( )
 } //----- Fin de ~Selection
 
 
-void Selection::EraseFigure(Figure* f)
+void Selection::EraseFigure(Figure* const f)
 // Algorithme : Permet de retirer une figure contenue dans une selection
 // Si une figure est détruite, il faut spécifier aux sélections qui la contenaient qu'elle ne fait plus partie de leur liste de figures
 {
@@ -98,14 +98,14 @@ vector<Figure*> Selection::GetInDrawElements(){
 
 //----------------------------------------------------- Méthodes protégées
 
-    string Selection::description()
+    string Selection::description() const
     // Algorithme : Renvoie une chaine vide : Méthode utile pour les figures mais inutile pour les sélections (obligé de la redéfinir car description() est virtual pure dans Gaphics)
     {
         return "";
     } //----- Fin de description
 
 
-    void Selection::move(long dx, long dy)
+    void Selection::move(const long dx, const long dy)
     // Algorithme : Déplace la sélection et les figures qu'elle contient de dX et dY
     {
     vector<Figure*>::iterator it;

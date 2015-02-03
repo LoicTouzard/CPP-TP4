@@ -51,21 +51,29 @@ public:
     //
 
     vector<Figure*> GetInDrawElements();
-
-    void EraseFigure(Figure* f);
+	// Mode d'emploi :
+    //
+    // Contrat :
+    //
+    
+    void EraseFigure(Figure* const f);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-    string description();
+    string description() const;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void move(long dx, long dy);
+    void move(const long dx, const long dy);
     // Mode d'emploi :
     //
     // Contrat :

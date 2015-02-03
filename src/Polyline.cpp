@@ -100,7 +100,7 @@ Polyline::~Polyline ( )
 
 //----------------------------------------------------- Méthodes protégées
 
-string Polyline::description()
+string Polyline::description() const
 // Algorithme : Renvoie la commande propore à cette figure
 //
 {
@@ -108,7 +108,7 @@ string Polyline::description()
 
 } //----- Fin de description
 
-void Polyline::move(long dx, long dy)
+void Polyline::move(const long dx, const long dy)
 // Algorithme : Déplace tous les points caractéristiques de cette figure de dx et dy et met à jour la commande propre à cette figure
 //
 {

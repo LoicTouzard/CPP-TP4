@@ -57,13 +57,13 @@ public:
     //
 
 
-    static int NombreEspaces(std::string s);
+    static int NombreEspaces(const std::string s);
     // Mode d'emploi : Compte le nombre d'espaces dans une chaine de caractères
     //
     // Contrat :
     //
 
-    static bool Separateur(std::string s);
+    static bool Separateur(const std::string s);
     // Mode d'emploi :Vérifie si la chaine de caractères contient des espaces
     //
     // Contrat :
@@ -81,7 +81,7 @@ public:
     // Contrat :
     //
 
-    static bool FileExists(std::string nomFichier);
+    static bool FileExists(const std::string nomFichier);
     // Mode d'emploi : Vérifie si le nom du fichier est déjà présent dans le répertoire courant
     //
     // Contrat :

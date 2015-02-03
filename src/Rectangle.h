@@ -59,13 +59,13 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-    string description();
+    string description() const;
     // Mode d'emploi :Renvoie la commande propre à chaque figure
     //
     // Contrat :
     //
 
-    void move(long dx, long dy);
+    void move(const long dx, const long dy);
     // Mode d'emploi :Déplace la figure en ajoutant dx et dy à ses coordonnées
     //
     // Contrat :

@@ -80,7 +80,7 @@ Rectangle::~Rectangle ( )
 //----------------------------------------------------- Méthodes protégées
 
 
-string Rectangle::description()
+string Rectangle::description() const
 // Algorithme : Renvoie la commande propore à cette figure
 //
 {
@@ -88,7 +88,7 @@ string Rectangle::description()
 
 } //----- Fin de description
 
-void Rectangle::move(long dx, long dy)
+void Rectangle::move(const long dx, const long dy)
 // Algorithme : Déplace tous les points caractéristiques de cette figure de dx et dy et met à jour la commande propre à cette figure
 //
 {

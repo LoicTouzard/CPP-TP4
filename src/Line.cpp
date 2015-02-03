@@ -80,7 +80,7 @@ Line::~Line ( )
 //----------------------------------------------------- Méthodes protégées
 
 
-string Line:: description()
+string Line:: description() const
 // Algorithme : Renvoie la commande propore à cette figure
 //
 {
@@ -88,7 +88,7 @@ string Line:: description()
 
 } //----- Fin de description
 
-void Line:: move(long dx, long dy)
+void Line:: move(const long dx, const long dy)
 // Algorithme : Déplace tous les points caractéristiques de cette figure de dx et dy et met à jour la commande propre à cette figure
 //
 {
