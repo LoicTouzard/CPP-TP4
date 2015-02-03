@@ -60,7 +60,7 @@ typedef MapGraphics::const_iterator Graphics_const_iterator;
     // Contrat :
     //
 
-    void List();
+    void List() const;
 	// Mode d'emploi : Affiche la commande de chaque Graphics
     //
     // Contrat :
@@ -72,57 +72,57 @@ typedef MapGraphics::const_iterator Graphics_const_iterator;
     // Contrat :
     //
 
-    void Save(string nomFichier);
+    void Save(const string nomFichier) const;
 	// Mode d'emploi : Sauvegarde tous les Graphics dans un fichier
     //
     // Contrat :
     //
 
-    void moveElement(string name, long dX, long dY);
+    void moveElement(const string name, const long dX, const long dY);
 	// Mode d'emploi : Permet de déplacer un Graphics en ajoutant dX à sa coordonnée en X et dY à sa coordonnée en Y
     //
     // Contrat :
     //
 
-    void Load(string nomFichier);
+    void Load(const string nomFichier);
 	// Mode d'emploi : Charge toutes les commandes présentent dans un fichier
     //
     // Contrat :
     //
 
-    void Delete(vector<string> listeNoms);
+    void Delete(const vector<string> listeNoms);
 	// Mode d'emploi : Permet de supprimer un ou plusieurs Graphics
     //
     // Contrat :
     //
 
-	void AddCircle(string name, long radius, long centerX, long centerY, string commande);
+	void AddCircle(const string name, const long radius, const long centerX, const long centerY, const string commande);
     // Mode d'emploi : Ajoute un cercle qui s'appelle name au container (aux coordonnées centerX, centerY et de rayon radius)
     //
     // Contrat :
     //
 
-	void AddRectangle(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string entree);
+	void AddRectangle(const string name, const long coin1X, const long coin1Y, const long coin2X, const long coin2Y, const string entree);
     // Mode d'emploi :Ajoute un rectangle qui s'appelle name au container
     // Coordonnées du coin supérieur droit (coin1X, coin1Y)
     // Coordonnées du coin inférieur gauche (coin2X, coin2Y)
     // Contrat :
     //
 
-	void AddLine(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande);
+	void AddLine(const string name, const long coin1X, const long coin1Y, const long coin2X, const long coin2Y, const string commande);
     // Mode d'emploi : Ajoute une ligne qui s'appelle name au container
     // Coordonnées du coin supérieur droit (coin1X, coin1Y)
     // Coordonnées du coin inférieur gauche (coin2X, coin2Y)
     // Contrat :
     //
 
-	void AddPolyline(string name, vector<Point> newPointList, Point origin, string commande);
+	void AddPolyline(const string name, const vector<Point> newPointList, const Point origin, const string commande);
     // Mode d'emploi : Ajoute une polyligne qui s'appelle name au container
     // La polyligne est une succession de lignes reliées entre elles
     // Contrat :
     //
 
-    void AddSelection(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande);
+    void AddSelection(const string name, const long coin1X, const long coin1Y, const long coin2X, const long coin2Y, const string commande);
     // Mode d'emploi : Ajoute une sélection qui s'appelle name au container
     // Coordonnées du coin supérieur droit (coin1X, coin1Y)
     // Coordonnées du coin inférieur gauche (coin2X, coin2Y)
@@ -150,13 +150,13 @@ protected:
 private:
 //------------------------------------------------------- Méthodes privées
 
-    bool NomLibre(string name, MapGraphics* mapToAnalyse);
+    bool NomLibre(const string name, const MapGraphics* const mapToAnalyse) const;
     // Mode d'emploi : Vérifie que le nom n'est pas déjà utilisé par un autre Graphics
     //
     // Contrat :
     //
 
-    void insertCommand(Command* cmd);
+    void insertCommand(Command* const cmd);
     // Mode d'emploi :
     //
     // Contrat :

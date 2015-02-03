@@ -81,7 +81,7 @@ Circle::~Circle ( )
 //----------------------------------------------------- Méthodes protégées
 
 
-string Circle::description()
+string Circle::description() const
 // Algorithme : Renvoie la commande propore à cette figure
 //
 {
@@ -89,7 +89,7 @@ string Circle::description()
 
 } //----- Fin de description
 
-void Circle::move(long dx, long dy)
+void Circle::move(const long dx, const long dy)
 // Algorithme : Déplace tous les points caractéristiques de cette figure de dx et dy et met à jour la commande propre à cette figure
 //
 {

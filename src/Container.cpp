@@ -95,7 +95,7 @@ Container::~Container ( )
 } //----- Fin de ~Container
 
 
-void Container::Save(string nomFichier)
+void Container::Save(const string nomFichier) const
 // Algorithme : Permet de sauvegarder toutes les commandes propres à chaque Graphics
 // Le nom du fichier à créer est passé en paramètre
 // On parcourt tous les Graphics situés dans le container et pour chacun d'entre eux on stocke leur commande dans le fichier
@@ -103,7 +103,7 @@ void Container::Save(string nomFichier)
 	ofstream fichier;
     fichier.open(nomFichier.c_str(),ios::trunc);
 	if(fichier){
-		Graphics_iterator it;
+		Graphics_const_iterator it;
 		for(it=listeGraphics.begin(); it!=listeGraphics.end();++it){
 			fichier<<it->second->description(); //On récupère toutes les commandes
 		}
@@ -140,11 +140,11 @@ void Container::Clear()
 	}
 }
 
-void Container::List()
+void Container::List() const
 // Algorithme : Liste toutes les figures (pas les sélections) situées dans le container
 // On parcours la liste de Graphics et on ne récupère que les figures pour ensuite afficher leur commande
 {
-	Graphics_iterator it;
+	Graphics_const_iterator it;
 	if(listeGraphics.size()!=0){
         int compteurFigure=0;
 		for(it=listeGraphics.begin(); it!=listeGraphics.end();++it){
@@ -162,7 +162,7 @@ void Container::List()
 	}
 }
 
-void Container::moveElement(string name, long dX, long dY)
+void Container::moveElement(const string name, const long dX, const long dY)
 // Algorithme : Déplace un Graphics dans le container
 // On cherche le nom de la figure passée en param-tre dans la liste de Graphics
 // Si elle existe on ajoute dX à sa coordonnée x et dY à sa coordonnée en y
@@ -185,7 +185,7 @@ void Container::moveElement(string name, long dX, long dY)
    }
 }
 
-void Container::Load(string nomFichier)
+void Container::Load(const string nomFichier)
 // Algorithme : Permet de charger un fichier
 // On parcours tout le fichier et on récupère toutes les commandes
 // On exécute ensuite chaque commande (sans l'affichage)
@@ -418,7 +418,7 @@ void Container::Load(string nomFichier)
     }
 }
 
-void Container::Delete(vector<string> listeNoms)
+void Container::Delete(const vector<string> listeNoms)
 // Algorithme : Permet de supprimer un ou plusieurs Graphics
 // On parcours la liste de Graphics et si tous les paramètres sont valides, on supprime les Graphics qui portent ce nom
 // On stocke auparavant les commandes pour anticiper un éventuel UNDO
@@ -471,7 +471,7 @@ void Container::Delete(vector<string> listeNoms)
 	cout<<"OK"<<endl;
 }
 
-void Container::AddCircle(string name, long radius, long centerX, long centerY, string commande)
+void Container::AddCircle(const string name, const long radius, const long centerX, const long centerY, const string commande)
 // Algorithme : Création d'un objet cercle (de type Figure) à partir des valeurs passées en paramètres
 // On vérifie que le nom n'est pas déjà pris par une autre figure ou sélection
 // On peut ensuite créer l'objet en ayant pris soin de vérifier que le rayon ne soit pas négatif
@@ -499,7 +499,7 @@ void Container::AddCircle(string name, long radius, long centerX, long centerY, 
 	}
 }
 
-void Container::AddRectangle(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande)
+void Container::AddRectangle(const string name, const long coin1X, const long coin1Y, const long coin2X, const long coin2Y, const string commande)
 // Algorithme : Création d'un objet rectangle (de type Figure) à partir des valeurs passées en paramètres
 // On vérifie que le nom n'est pas déjà pris par une autre figure ou sélection
 // On peut ensuite créer l'objet en ayant calculé les coordonnées du coin supérieur gauche et du coin inférieur droit  du rectangle
@@ -526,7 +526,7 @@ void Container::AddRectangle(string name, long coin1X, long coin1Y, long coin2X,
 	cout<<"#New object :"<<name<<endl;
 }
 
-void Container::AddLine(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande)
+void Container::AddLine(const string name, const long coin1X, const long coin1Y, const long coin2X, const long coin2Y, const string commande)
 // Algorithme : Création d'un objet line (de type Figure) à partir des valeurs passées en paramètres
 // On vérifie que le nom n'est pas déjà pris par une autre figure ou sélection
 // On peut ensuite créer l'objet en ayant calculé les coordonnées du coin supérieur gauche et du coin inférieur droit  du rectangle dans lequel est contenu cette ligne
@@ -552,7 +552,7 @@ void Container::AddLine(string name, long coin1X, long coin1Y, long coin2X, long
 	cout<<"#New object : "<<name<<endl;
 }
 
-void Container::AddPolyline(string name, vector<Point> newPointList, Point origin, string commande)
+void Container::AddPolyline(const string name, const vector<Point> newPointList, const Point origin, const string commande)
 // Algorithme : Création d'un objet polyline (de type Figure) à partir des valeurs passées en paramètres
 // On vérifie que le nom n'est pas déjà pris par une autre figure ou sélection
 // On peut ensuite créer l'objet en ayant calculé les coordonnées du coin supérieur gauche et du coin inférieur droit  du rectangle dans lequel sont contenus
@@ -575,7 +575,7 @@ void Container::AddPolyline(string name, vector<Point> newPointList, Point origi
 	cout<<"#New object : "<<name<<endl;
 }
 
-void Container::AddSelection(string name, long coin1X, long coin1Y, long coin2X, long coin2Y, string commande)
+void Container::AddSelection(const string name, const long coin1X, const long coin1Y, const long coin2X, const long coin2Y, const string commande)
 // Algorithme : Création d'un objet selection (de type Selection) à partir des valeurs passées en paramètres
 // On vérifie que le nom n'est pas déjà pris par une autre figure ou sélection
 // On calcule les coordonnées du coin supérieur gauche et du coin inférieur droit  du rectangle définissant la sélection
@@ -653,10 +653,10 @@ void Container::Redo()
 }
 
 //------------------------------------------------------------------ PRIVE
-bool Container::NomLibre(string name, MapGraphics* mapToAnalyse)
+bool Container::NomLibre(const string name, const MapGraphics* const mapToAnalyse) const
 // Algorithme : Renvoie true si le nom est disponible (aucun Graphics dans le container ne le possède)
 {
-	Graphics_iterator it;
+	Graphics_const_iterator it;
 	it=mapToAnalyse->find(name);
 	if(it==mapToAnalyse->end()){
 		return true;
@@ -664,7 +664,7 @@ bool Container::NomLibre(string name, MapGraphics* mapToAnalyse)
 	return false;
 }
 
-void Container::insertCommand(Command* cmd)
+void Container::insertCommand(Command* const cmd)
 // Algorithme : Insère une commande dans la pile des UNDO et vide la pile des REDO
 {
     if(undoCommands.size() >= UNDO_REDO_MAX_LEVEL)

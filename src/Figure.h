@@ -59,7 +59,7 @@ public:
     // Contrat :
     //
 
-    virtual bool IsInside(Point p1, Point p2);
+    virtual bool IsInside(Point p1, Point p2) const;
     // Mode d'emploi :
     //	Vérifie que la figure appartient au rectangle formé par p1, p2
     //
@@ -68,13 +68,13 @@ public:
     //	P2 = coin inférieur droit du rectangle
     //
 
-    void AddSelect(Selection* s);
+    void AddSelect(Selection* const s);
     // Mode d'emploi : Ajoute une sélection au vecteur whoOwnsMe
     // Permet de savoir qu'une nouvelle sélection contient la figure
     // Contrat :
     //
 
-    void EraseSelect(Selection* s);
+    void EraseSelect(Selection* const s);
     // Mode d'emploi : Supprime une sélection du vecteur whoOwnsMe
     // Permet de savoir qu'une sélection dont faisait partie la figure a été détruite
     // Contrat :
@@ -86,14 +86,14 @@ protected:
 
 
 
-    virtual string description()=0;
+    virtual string description() const =0;
     // Mode d'emploi : Renvoie la commande propre à chaque figure
     //
     // Contrat :
     //
 
 
-    virtual void move(long dx, long dy)=0;
+    virtual void move(const long dx, const long dy)=0;
     // Mode d'emploi : Déplace la figure en ajoutant dx et dy à ses coordonnées
     //
     // Contrat :

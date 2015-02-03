@@ -30,7 +30,7 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-bool Figure::IsInside(Point p1, Point p2)
+bool Figure::IsInside(Point p1, Point p2) const
 // Algorithme : Renvoie true si la figure est contenue dans le rctangle formé par les deux points passés en paramètres
 //
 {
@@ -49,14 +49,14 @@ bool Figure::IsInside(Point p1, Point p2)
 } //----- Fin de IsInside
 
 
-void Figure::AddSelect(Selection* s)
+void Figure::AddSelect(Selection* const s)
 // Algorithme : Ajoute une selection au vector whoOwnsMe qui contient toutes les sélections dans lesquelles fait partie la figure
 //
 {
     whoOwnsMe.push_back(s);
 }
 
-void Figure::EraseSelect(Selection* s)
+void Figure::EraseSelect(Selection* const s)
 // Algorithme : Supprime une selection du vector whoOwnsMe qui contient toutes les sélections dans lesquelles fait partie la figure
 //
 {

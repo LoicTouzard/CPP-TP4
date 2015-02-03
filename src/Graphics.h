@@ -69,13 +69,13 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-	virtual void move(long dx, long dy)=0;
+	virtual void move(const long dx, const long dy)=0;
     // Mode d'emploi : Déplace le Graphics en ajoutant dx et dy à ses coordonnées
     //
     // Contrat :
     //
 
-    virtual string description()=0;
+    virtual string description() const =0;
     // Mode d'emploi : Renvoie la commande propre à chaque Graphics
     //
     // Contrat :
