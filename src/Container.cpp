@@ -209,7 +209,7 @@ void Container::Load(string nomFichier)
                 string commandType = args.front();
                 args.pop_front();
 
-                if (entree.substr(0,1)=="C") {
+                if (commandType=="C") {
 
                     if(args.size()==4)
                     {
@@ -253,7 +253,7 @@ void Container::Load(string nomFichier)
 
                 }
 
-                else if (entree.substr(0,1)=="R") {
+                else if (commandType=="R") {
 
                     if(args.size()==5){
 
@@ -290,7 +290,7 @@ void Container::Load(string nomFichier)
                     }
                 }
 
-                else if (entree.substr(0,2)=="PL") {
+                else if (commandType=="PL") {
 
                     if( args.size()%2==1 && args.size()>=3){ //Un point minimum
                         //Code pour ajouter un polyligne
@@ -336,7 +336,7 @@ void Container::Load(string nomFichier)
                     }
                 }
 
-                else if (entree.substr(0,1)=="L") {
+                else if (commandType=="L") {
 
                      if(args.size()==5){
                         string name;
@@ -373,8 +373,8 @@ void Container::Load(string nomFichier)
                         cout<<"#invalid parameters"<<endl;
                     }
                 }
-                else
-                {
+                
+                else if (commandType[0]!='#') {
                     correctFile = false;
                     cout<<"ERR"<<endl;
                     cout<<"#Unknown command"<<endl;
