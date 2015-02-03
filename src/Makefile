@@ -7,6 +7,8 @@ OBJ=$(INT:.h=.o)
 MainSRC=main.cpp
 MainOBJ=$(MainSRC:.cpp=.o)
 	
+EXEPATH=../
+
 ECHO=@echo
 
 CLEAN=clean
@@ -22,7 +24,7 @@ all: $(EXE)
 
 $(EXE): $(MainOBJ) $(OBJ)
 	$(ECHO) "Edition des liens de $(EXE)"
-	$(Linker) -o $(EXE) $(MainOBJ) $(OBJ) $(LinkerOptions)
+	$(Linker) -o $(EXEPATH)$(EXE) $(MainOBJ) $(OBJ) $(LinkerOptions)
 	
 $(MainOBJ): $(MainSRC) $(INT)
 	$(ECHO) "Compilation de $(MainSRC)"
@@ -36,4 +38,5 @@ $(MainOBJ): $(MainSRC) $(INT)
 
 .PHONY: $(CLEAN)
 $(CLEAN):
-	$(RM) $(RMFlags) $(EXE) $(OBJ) $(MainOBJ)
+	$(RM) $(RMFlags) $(EXEPATH)$(EXE) $(OBJ) $(MainOBJ)
+

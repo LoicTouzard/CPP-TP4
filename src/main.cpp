@@ -18,40 +18,25 @@ using namespace std;
 
 int main(){
 		Container espace; //Espace qui contient toutes les figures et selections
-        /*
+/*    
+        //A décommenter pour les tests de performances de SAVE
         string entree;
         getline(cin,entree);
-        
-        string nomFichier="doc/Save_"+entree"_formes.txt";
-		ifstream loadFile(nomFichier.c_str());
-		
-        for(int i=1; i<=2500000;i++){
-			fichier<<"C "<<"cercle"<<i<<" 0 0 "<<i<<endl;
-		}
-		for(int i=1; i<=2500000;i++){
-			fichier<<"R "<<"rect"<<i<<" 0 0 "<<i<<" "<<i+1<<endl;
-		}
-		for(int i=1; i<=2500000;i++){
-			fichier<<"L "<<"line"<<i<<" 0 0 "<<i<<" "<<i+1<<endl;
-		}
-		for(int i=1; i<=2500000;i++){
-			fichier<<"PL "<<"poly"<<i<<" 0 0 "<<i<<" "<<i+1<<" "<<i+2<<" "<<i+3<<endl;
-		}
-        */
-        
-        
-        //A décommenter pour les tests
-       /*
+        espace.Load("doc/Load_"+entree+"_formes.txt");
+        clock_t    start;
+        start = clock();
+        espace.Save("doc/Save_"+entree+"_formes.txt");
+        cout << "Time: " << (clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << endl;
+*/
+
+/*		//A décommenter pour les tests de performances de LOAD
         string entree;
         getline(cin,entree);
-        
         clock_t    start;
         start = clock();
         espace.Load("doc/Load_"+entree+"_formes.txt");
         cout << "Time: " << (clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << endl;
-		*/
-        //Commenter tout ce qui suit si on veut juste faire les tests
-
+*/
 		string entree;
         getline(cin,entree);
 
@@ -63,6 +48,7 @@ int main(){
         }
         string commandType = args.front();
         args.pop_front();
+
 
         while(commandType!="EXIT"){
             //les tests de detection de commande sont triés selon leur potentielle fréquence d'apparition pour optimiser la vitesse
