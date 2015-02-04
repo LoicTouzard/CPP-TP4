@@ -29,7 +29,7 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 void MoveCommand::Execute()
- // Algorithme :
+ // Algorithme : Déplace de origin.x et origin.y le Graphics associé
 //
 {
     element->move(origin.x, origin.y);
@@ -37,7 +37,7 @@ void MoveCommand::Execute()
 }
 
 void MoveCommand::UnExecute()
- // Algorithme :
+ // Algorithme : Déplace de -origin.x et -origin.y le Graphics associé
 //
 {
     element->move(-(origin.x), -(origin.y));

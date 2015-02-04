@@ -22,8 +22,7 @@ class Selection;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Figure>
-// Une figure est un objet Graphics depuis lequel vont descendre toutes les formes
-// Une forme est une figure (mais pas une sélection)
+// Une figure est un objet Graphics abstrait depuis lequel vont descendre toutes les formes
 //
 //------------------------------------------------------------------------
 

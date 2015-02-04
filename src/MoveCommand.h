@@ -31,13 +31,13 @@ public:
 
     virtual void Execute();
     // Mode d'emploi :
-    //
+    //  Déplace de origin.x et origin.y le Graphics associé
     // Contrat :
     //
 
     virtual void UnExecute();
     // Mode d'emploi :
-    //
+    //  Déplace de -origin.x et -origin.y le Graphics associé
     // Contrat :
     //
 

@@ -1,5 +1,5 @@
 /*************************************************************************
-                           DeleteCommand  -  description
+                           DeleteCommand
                              -------------------
     début                : 30/01/2015
     copyright            : (C) 2015 par TOUZARD Loïc, GOUZI Gaëtan et GONZALEZ TOLEDO Gabriela
@@ -31,13 +31,13 @@ public:
 
     virtual void Execute();
     // Mode d'emploi :
-    //
+    //  Execute tout les elements que contient la commande
     // Contrat :
     //
 
     virtual void UnExecute();
     // Mode d'emploi :
-    //
+    //  UnExecute tout les elements que contient la commande
     // Contrat :
     //
 

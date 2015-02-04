@@ -32,7 +32,7 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 void DeleteCommand::Execute()
-// Mode d'emploi :
+// Mode d'emploi :  Execute tout les elements que contient la commande
 //
 // Contrat :
 //
@@ -47,8 +47,8 @@ void DeleteCommand::Execute()
 }
 
 void DeleteCommand::UnExecute()
-// Mode d'emploi :
-//
+// Mode d'emploi : UnExecute tout les elements que contient la commande
+//    
 // Contrat :
 //
 {
@@ -86,11 +86,12 @@ DeleteCommand::DeleteCommand ( std::vector<Command*> listC )
 
 
 DeleteCommand::~DeleteCommand ( )
-// Algorithme :
+// Algorithme : Detruit toutes les commandes qu'elle contient
 //
 {
     vector<Command*>::iterator it;
-    for (it = listCommands.begin(); it != listCommands.end(); ++it){
+    for (it = listCommands.begin(); it != listCommands.end(); ++it)
+    {
         delete *it;
     }
     listCommands.clear();

@@ -51,13 +51,13 @@ public:
     //
 
     vector<Figure*> GetInDrawElements();
-	// Mode d'emploi :
+	// Mode d'emploi : retourne les elements actifs contenus par la selection
     //
     // Contrat :
     //
     
     void EraseFigure(Figure* const f);
-    // Mode d'emploi :
+    // Mode d'emploi : Supprime une figure de sa liste
     //
     // Contrat :
     //
@@ -74,7 +74,7 @@ protected:
     //
 
     void move(const long dx, const long dy);
-    // Mode d'emploi :
+    // Mode d'emploi : Déplace tous les elements de la selection de dx et dy
     //
     // Contrat :
 
@@ -85,9 +85,9 @@ private:
 protected:
 //----------------------------------------------------- Attributs protégés
 
-Point origin;
-Point extremity;
-vector<Figure*> figureList;
+Point origin;   // point en haut a gauche du rectangle qui forme la zone de selection
+Point extremity; // point en bas a droite du rectangle qui forme la zone de selection
+vector<Figure*> figureList; // vecteur contenant les elements situés dans la selection
 
 private:
 //------------------------------------------------------- Attributs privés

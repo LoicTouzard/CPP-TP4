@@ -45,11 +45,11 @@ Selection::Selection ( const Selection & unSelection ):Graphics(unSelection)
  Selection::Selection (vector<Figure*> newFigureList, Point p1, Point p2, string graphicsName, string graphicsCommandLine)
   :Graphics(graphicsName, graphicsCommandLine), origin(p1), extremity(p2), figureList(newFigureList)
  // Algorithme : Création d'une selection à partir des paramètres
-// Pour chaque figure contenue (entièrement) dans cette sélection, on lui ajoute la selection dans son vector whoOwnsMe
-// (qui repertorie toutes les sélections dans lesquelles la figure est incluse)
+// Pour chaque figure contenue (entièrement) dans cette sélection, on l'informe de sa nouvelle appartenance
 {
     vector<Figure*>::iterator it;
-    for(it=figureList.begin(); it!=figureList.end(); ++it){
+    for(it=figureList.begin(); it!=figureList.end(); ++it)
+    {
         (*it)->AddSelect(this);
     }
 #ifdef MAP
@@ -58,11 +58,11 @@ Selection::Selection ( const Selection & unSelection ):Graphics(unSelection)
 } //----- Fin de Selection
 
 Selection::~Selection ( )
-// Algorithme : Pour chaque figure contenue dans cette selection on lui retire la selection courante de son vector whoOwnsMe
-// (qui repertorie toutes les sélections dans lesquelles la figure est incluse)
+// Algorithme : Pour chaque figure contenue dans cette selection on l'informe de la suppression de cette selection
 {
     vector<Figure*>::iterator it;
-    for(it=figureList.begin(); it!=figureList.end(); ++it){
+    for(it=figureList.begin(); it!=figureList.end(); ++it)
+    {
         (*it)->EraseSelect(this);
     }
 #ifdef MAP
@@ -76,19 +76,25 @@ void Selection::EraseFigure(Figure* const f)
 // Si une figure est détruite, il faut spécifier aux sélections qui la contenaient qu'elle ne fait plus partie de leur liste de figures
 {
     vector<Figure*>::iterator it;
-    for(it=figureList.begin(); it!=figureList.end(); ++it){
-        if( (*it)==f){
+    for(it=figureList.begin(); it!=figureList.end(); ++it)
+    {
+        if( (*it)==f)
+        {
             figureList.erase(it);
             it--;
         }
     }
 }
 
-vector<Figure*> Selection::GetInDrawElements(){
+vector<Figure*> Selection::GetInDrawElements()
+// Algorithme : retourne les elements actifs contenus par la selection
+{
     vector<Figure*> figureInDraw;
     vector<Figure*>::iterator it;
-    for(it=figureList.begin(); it!=figureList.end(); ++it){
-        if( (*it)->state==GRAPHICS_STATE_IN_DRAW){
+    for(it=figureList.begin(); it!=figureList.end(); ++it)
+    {
+        if( (*it)->state==GRAPHICS_STATE_IN_DRAW)
+        {
             figureInDraw.push_back(*it);
         }
     }

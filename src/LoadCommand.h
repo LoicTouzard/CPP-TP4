@@ -31,13 +31,13 @@ public:
 
     virtual void Execute();
     // Mode d'emploi :
-    //
+    //  Execute tout les elements que contient la commande
     // Contrat :
     //
 
     virtual void UnExecute();
     // Mode d'emploi :
-    //
+    //  UnExecute tout les elements que contient la commande
     // Contrat :
     //
 

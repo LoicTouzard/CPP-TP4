@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Command  -  description
+                           Command
                              -------------------
     début                : 30/01/2015
     copyright            : (C) 2015 par TOUZARD Loïc, GOUZI Gaëtan et GONZALEZ TOLEDO Gabriela
@@ -42,10 +42,10 @@ Command::Command ( const Command & unCommand )
 
 
 Command::Command ( )
-// Algorithme :
+// Algorithme :	construit une commande et initialise sa pile de départ.
 //
 {
-whichList=IN_UNDO; //A la construction de la commande, on la stocke dans la pile des UNDO
+		whichList=IN_UNDO; //A la construction de la commande, on la stocke dans la pile des UNDO
 #ifdef MAP
     cout << "Appel au constructeur de <Command>" << endl;
 #endif

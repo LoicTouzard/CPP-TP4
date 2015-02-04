@@ -31,13 +31,15 @@ public:
 
     virtual void Execute()=0;
     // Mode d'emploi :
-    //
+    //  Fait l'action associée à la commande qui l'implémentera. Devra executer chacunes de ses commandes.
+    //  Virtuelle pure pour obliger ses descendants à implémenter cette methode
     // Contrat :
     //
 
     virtual void UnExecute()=0;
     // Mode d'emploi :
-    //
+    //  Defait l'action associée à la commande qui l'implémentera. Devra defaire chacunes de ses commandes.
+    //  Virtuelle pure pour obliger ses descendants à implémenter cette methode
     // Contrat :
     //
 
@@ -68,7 +70,8 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-std::vector<Command*> listCommands;
+std::vector<Command*> listCommands; // Vecteur contenant d'autres commandes.
+// Permet à cette classe d'être composée de plusieurs Command mais de n'être toujours considérée comme une seule Commande.
 
 private:
 //------------------------------------------------------- Méthodes privées

@@ -30,13 +30,13 @@ public:
 //----------------------------------------------------- Méthodes publiques
 
     virtual void Execute();
-    // Mode d'emploi :
+    // Mode d'emploi : Enleve l'element de la MapGraphics et de la HashTable
     //
     // Contrat :
     //
 
     virtual void UnExecute();
-    // Mode d'emploi :
+    // Mode d'emploi : Insere l'element dans la MapGraphics et dans la HashTable
     //
     // Contrat :
     //
@@ -57,7 +57,7 @@ public:
     //
 
     virtual ~DeleteElementCommand ( );
-    // Mode d'emploi :
+    // Mode d'emploi : Detruit la Command et libère potentiellement l'element graphique associé
     //
     // Contrat :
     //

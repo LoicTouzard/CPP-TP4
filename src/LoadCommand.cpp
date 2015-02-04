@@ -33,7 +33,7 @@ using namespace std;
 
 void LoadCommand::Execute()
 // Mode d'emploi :
-//
+//  Execute tout les elements que contient la commande
 // Contrat :
 //
 {
@@ -48,7 +48,7 @@ void LoadCommand::Execute()
 
 void LoadCommand::UnExecute()
 // Mode d'emploi :
-//
+//  UnExecute tout les elements que contient la commande
 // Contrat :
 //
 {
@@ -86,11 +86,12 @@ LoadCommand::LoadCommand ( std::vector<Command*> listC )
 
 
 LoadCommand::~LoadCommand ( )
-// Algorithme :
+// Algorithme : Detruit la Command et libère potentiellement l'element graphique associé
 //
 {
     vector<Command*>::iterator it;
-    for (it = listCommands.begin(); it != listCommands.end(); ++it){
+    for (it = listCommands.begin(); it != listCommands.end(); ++it)
+    {
         delete *it;
     }
     listCommands.clear();

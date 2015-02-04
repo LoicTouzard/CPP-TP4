@@ -1,5 +1,5 @@
 /*************************************************************************
-                           DeleteElementCommand  -  description
+                           DeleteElementCommand
                              -------------------
     début                : 30/01/2015
     copyright            : (C) 2015 par TOUZARD Loïc, GOUZI Gaëtan et GONZALEZ TOLEDO Gabriela
@@ -27,44 +27,39 @@ using namespace std;
 //-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Méthodes publiques
-// type DeleteElementCommand::Méthode ( liste de paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+
 
 
 void DeleteElementCommand::Execute()
-// Mode d'emploi :
+// Mode d'emploi : Enleve l'element de la MapGraphics et de la HashTable
 //
 // Contrat :
 //
 {
-    //cout << "#tentative de suppression de " << element->GetName() << endl;
-    //cout << "#il y a " << linkedMap->size() << "elements" << endl;
+ 
     //l'element est gardé en mémoire pour un futur Execute plus rapide (pas de réallocation)
     linkedMap->erase(element->GetName());
     linkedHash->erase(element->GetName());
+
+    //on désactive l'element
     element->SetInDraw(GRAPHICS_STATE_NOT_IN_DRAW);
-    //cout << "#il y a " << linkedMap->size() << "elements" << endl;
     whichList=IN_UNDO;
 
 }
 
 void DeleteElementCommand::UnExecute()
-// Mode d'emploi :
+// Mode d'emploi : Insere l'element dans la MapGraphics et dans la HashTable
 //
 // Contrat :
 //
 {
     //on insère directement l'élément pas de vérification à faire car le nom est forcément libre
     //de plus l'objet est déjà bien construit
-    //cout << "#il y a " << linkedMap->size() << "elements" << endl;
-    //cout << "#tentative d'ajout de " << element->GetName() << endl;
     linkedMap->insert(make_pair(element->GetName(), element));
     linkedHash->insert( element->GetName() );
+
+    //on réactive l'element
     element->SetInDraw(GRAPHICS_STATE_IN_DRAW);
-    //cout << "#il y a " << linkedMap->size() << "elements" << endl;
     whichList=IN_REDO;
 }
 
@@ -94,7 +89,7 @@ DeleteElementCommand::DeleteElementCommand ( MapGraphics* mapToLink, unordered_s
 
 
 DeleteElementCommand::~DeleteElementCommand ( )
-// Algorithme :
+// Algorithme : Detruit la Command et libère potentiellement l'element graphique associé
 //
 {
     if(whichList==IN_UNDO){

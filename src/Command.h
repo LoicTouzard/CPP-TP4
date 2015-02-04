@@ -29,13 +29,15 @@ public:
 
     virtual void Execute()=0;
     // Mode d'emploi :
-    //
+    //  Fait l'action associée à la commande qui l'implémentera.
+    //  Virtuelle pure pour obliger ses descendants à implémenter cette methode
     // Contrat :
     //
 
     virtual void UnExecute()=0;
     // Mode d'emploi :
-    //
+    //  Defait l'action associée à la commande qui l'implémentera.
+    //  Virtuelle pure pour obliger ses descendants à implémenter cette methode
     // Contrat :
     //
 
@@ -63,8 +65,10 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 short whichList; //0=Pile UNDO 1=Pile REDO
-const short IN_UNDO=0;
-const short IN_REDO=1;
+
+// constante de classe, valeurs pour whichList
+static const short IN_UNDO=0;
+static const short IN_REDO=1;
 
 private:
 //------------------------------------------------------- Méthodes privées

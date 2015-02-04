@@ -21,8 +21,8 @@ const short GRAPHICS_STATE_NOT_IN_DRAW = 1;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Graphics>
-// Classe définissant tout ce qui est commun à toutes les formes et sélections
-// Les classes Figure et Selection sont héritées de Graphics
+// Classe Abstraite définissant tout ce qui est commun aux Figures et sélections
+// Les classes Figure et Selection héritent de Graphics
 //
 //------------------------------------------------------------------------
 
@@ -33,16 +33,20 @@ class Graphics
 public:
 //----------------------------------------------------- Méthodes publiques
 
-
-//------------------------------------------------- Surcharge d'opérateurs
     string GetName()
+    // Mode d'emploi : Renvoie le nom du Graphics
     {
         return this->name;
     }
 
-    void SetInDraw(short inDraw){
+    void SetInDraw(short inDraw)
+    // Mode d'emploi : Permet de mettre a jour l'etat actif ou non du Graphics
+    {
         state = inDraw;
     }
+
+//------------------------------------------------- Surcharge d'opérateurs
+
 //-------------------------------------------- Constructeurs - destructeur
     Graphics ( const Graphics & unGraphics );
     // Mode d'emploi (constructeur de copie) :
@@ -90,7 +94,7 @@ protected:
 
 	string name; //Nom du Graphics
 	string commandLine; //Commande permettant de créer le Graphics (tapée par l'utilisateur)
-    short state;
+    short state;    //Etat du Graphics prend pour valeur les constantes GRAPHICS_STATE_NOT_IN_DRAW et GRAPHICS_STATE_IN_DRAW
 
 private:
 //------------------------------------------------------- Attributs privés

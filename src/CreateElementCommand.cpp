@@ -29,24 +29,28 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 void CreateElementCommand::Execute()
-// Algorithme :
+// Algorithme : Insere l'element dans la MapGraphics et dans la HashTable
 //
 {
     //on insère directement l'élément pas de vérification à faire car le nom est forcément libre
     //de plus l'objet est déjà bien construit
     linkedMap->insert(make_pair(element->GetName(), element));
     linkedHash->insert( element->GetName() );
+    
+    //on réactive l'element
     element->SetInDraw(GRAPHICS_STATE_IN_DRAW);
     whichList=IN_UNDO;
 }
 
 void CreateElementCommand::UnExecute()
-// Algorithme :
+// Algorithme : Enleve l'element de la MapGraphics et de la HashTable
 //
 {
     //l'element est gardé en mémoire pour un futur Execute plus rapide (pas de réallocation)
     linkedMap->erase(element->GetName());
     linkedHash->erase( element->GetName() );
+
+    //on desactive l'element
     element->SetInDraw(GRAPHICS_STATE_NOT_IN_DRAW);
     whichList=IN_REDO;
 }
@@ -76,10 +80,11 @@ CreateElementCommand::CreateElementCommand ( MapGraphics* mapToLink, unordered_s
 
 
 CreateElementCommand::~CreateElementCommand ( )
-// Algorithme :
+// Algorithme : Detruit la Command et libère potentiellement l'element graphique associé
 //
 {
-    if(whichList==IN_REDO){
+    if(whichList==IN_REDO)
+    {
         delete element;
     }
 #ifdef MAP

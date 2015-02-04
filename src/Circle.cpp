@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Circle  -  description
+                           Circle
                              -------------------
     début                : 30/01/2015
     copyright            : (C) 2015 par TOUZARD Loïc, GOUZI Gaëtan et GONZALEZ TOLEDO Gabriela
@@ -10,8 +10,8 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-using namespace std;
 #include <iostream>
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Circle.h"
@@ -36,7 +36,7 @@ Circle::Circle ( const Circle & unCircle ):Figure(unCircle)
 // Algorithme : Constructeur par copie qui permet de créer cette figure
 // On initialise le rectangle "fictif" dans lequel sera contenu la figure
 {
-    	leftUpCorner.x=origin.x-radius;
+        leftUpCorner.x=origin.x-radius;
         leftUpCorner.y=origin.y+radius;
         downRightCorner.x=origin.x+radius;
         downRightCorner.y=origin.y-radius;
@@ -63,8 +63,7 @@ Circle::Circle (long circleRadius, Point figureOrigin, string graphicsName, stri
 
 Circle::~Circle ( )
 // Algorithme : Supprime tous les points caractéristiques de cette figure et supprime la figure de toutes les sélections dont elle faisait partie
-// On ne delete pas l'objet car il peut potentiellement être rappelé  par un UNDO
-// Si c'est le cas, il ne fait plus partie des sélections dans lequelles il était présent
+//
 {
     vector<Selection*>::iterator it;
     for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
@@ -82,7 +81,7 @@ Circle::~Circle ( )
 
 
 string Circle::description() const
-// Algorithme : Renvoie la commande propore à cette figure
+// Algorithme : Renvoie la commande de création propre à cette figure
 //
 {
 	return commandLine+"\r\n";

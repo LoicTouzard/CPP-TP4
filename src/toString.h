@@ -9,6 +9,7 @@
 #define TOSTRING_H
 
 #include <iostream>
+#include <sstream>
 #include <string>
 template <typename T>
 	// Mode d'emploi :Convertir un objet en chaine de caractere

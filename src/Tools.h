@@ -57,21 +57,10 @@ public:
     //
 
 
-    static int NombreEspaces(const std::string s);
-    // Mode d'emploi : Compte le nombre d'espaces dans une chaine de caractères
-    //
-    // Contrat :
-    //
-
-    static bool Separateur(const std::string s);
-    // Mode d'emploi :Vérifie si la chaine de caractères contient des espaces
-    //
-    // Contrat :
-    //
 
     static std::list<std::string> &Split(const std::string &s, std::list<std::string> &elems, char delim=' ');
-    // Mode d'emploi : 
-    //
+    // Mode d'emploi : Renvoie une liste où chaque élément correspond à chaque mot de la chaine de caractères (séparation des mots par des délimiteurs)
+    //  Cette version prend une list par référence en parametre et effectue ses ajouts de mots dans celle ci
     // Contrat :
     //
     static std::list<std::string> Split(const std::string &s, char delim=' ');
@@ -80,13 +69,6 @@ public:
     // Contrat :
     //
 
-    static std::string Decoupage(std::string s, int posSpace);
-    // Mode d'emploi : Récupère la chaine de caractères comprise entre deux espaces consécutifs
-    // On passe en paramètre le numéro du premier espace à partir duquel on commence à récupérer
-    // la chaine de caractères et on s'arrête au prochain espace
-    //
-    // Contrat :
-    //
 
     static bool FileExists(const std::string nomFichier);
     // Mode d'emploi : Vérifie si le nom du fichier est déjà présent dans le répertoire courant

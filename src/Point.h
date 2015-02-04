@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Point  -  description
+                           Point 
                              -------------------
     début                : 30/01/2015
     copyright            : (C) 2015 par TOUZARD Loïc, GOUZI Gaëtan et GONZALEZ TOLEDO Gabriela

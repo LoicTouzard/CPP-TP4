@@ -38,13 +38,15 @@ public:
 
     virtual void Execute()=0;
     // Mode d'emploi :
-    //
+    //  Fait l'action associée à la commande qui l'implémentera.
+    //  Virtuelle pure pour obliger ses descendants à implémenter cette methode
     // Contrat :
     //
 
     virtual void UnExecute()=0;
     // Mode d'emploi :
-    //
+    //  Defait l'action associée à la commande qui l'implémentera.
+    //  Virtuelle pure pour obliger ses descendants à implémenter cette methode
     // Contrat :
     //
 
@@ -80,9 +82,9 @@ private:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-MapGraphics* linkedMap;
-unordered_set<string>* linkedHash;
-Graphics* element;
+MapGraphics* linkedMap; // map cible pour les insertions et suppressions
+unordered_set<string>* linkedHash;  // Table de Hash cible pour les insertions et suppressions
+Graphics* element;  // Element cible de la commande, pourra etre enlevé/ajouté de la map/hashTable ou move
 
 private:
 //------------------------------------------------------- Attributs privés

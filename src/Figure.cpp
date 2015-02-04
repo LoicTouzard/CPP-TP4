@@ -61,8 +61,10 @@ void Figure::EraseSelect(Selection* const s)
 //
 {
     vector<Selection*>::iterator it;
-    for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
-        if( (*it)==s){
+    for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it)
+    {
+        if( (*it)==s)
+        {
             whoOwnsMe.erase(it);
             it--;
         }

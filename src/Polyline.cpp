@@ -45,7 +45,7 @@ Polyline::Polyline ( const Polyline & unPolyline ):Figure(unPolyline)
 Polyline::Polyline (vector<Point> newPointList, Point figureOrigin, string graphicsName, string graphicsCommandLine)
 	:Figure(figureOrigin, graphicsName, graphicsCommandLine), pointList(newPointList)
 // Algorithme : Constructeur qui permet de créer cette figure
-// On initialise le rectangle "fictif" dans lequel sera contenu la figure
+// On initialise le rectangle "fictif" dans lequel sera contenu la figure avec les coordonnées min et max de tout les points
 {
 
     vector<Point>::iterator it;
@@ -53,6 +53,7 @@ Polyline::Polyline (vector<Point> newPointList, Point figureOrigin, string graph
     leftUpCorner.y=pointList[0].y;
     downRightCorner.x=pointList[0].x;
     downRightCorner.y=pointList[0].y;
+
     for(it=pointList.begin(); it!=pointList.end(); ++it)
     {
         if(it->x > downRightCorner.x)
@@ -82,8 +83,6 @@ Polyline::Polyline (vector<Point> newPointList, Point figureOrigin, string graph
 
 Polyline::~Polyline ( )
 // Algorithme : Supprime tous les points caractéristiques de cette figure et supprime la figure de toutes les sélections dont elle faisait partie
-// On ne delete pas l'objet car il peut potentiellement être rappelé  par un UNDO
-// Si c'est le cas, il ne fait plus partie des sélections dans lequelles il était présent
 {
     vector<Selection*>::iterator it;
     for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
@@ -101,7 +100,7 @@ Polyline::~Polyline ( )
 //----------------------------------------------------- Méthodes protégées
 
 string Polyline::description() const
-// Algorithme : Renvoie la commande propore à cette figure
+// Algorithme : Renvoie la commande propre à cette figure
 //
 {
 	return commandLine+"\r\n";
@@ -123,7 +122,8 @@ void Polyline::move(const long dx, const long dy)
     downRightCorner.y+=dy;
 
 	commandLine="PL "+name+" "+toString(origin.x)+" "+toString(origin.y);
-	for(it = pointList.begin(); it!=pointList.end(); ++it){
+	for(it = pointList.begin(); it!=pointList.end(); ++it)
+    {
 		it->x += dx;
 		it->y += dy;
 		commandLine +=" "+toString(it->x)+" "+toString(it->y);

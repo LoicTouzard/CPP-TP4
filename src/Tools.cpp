@@ -31,36 +31,15 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-int Tools::NombreEspaces(const std::string s)
-// Algorithme : Compte le nombre d'espaces dans un string (utile pour savoir si le format d'entrée est respecté)
-//
+
+std::list<std::string> &Tools::Split(const std::string &s, std::list<std::string> &elems, char delim)
+// Algorithme : Renvoie une liste où chaque élément correspond à chaque mot de la chaine de caractères (séparation des mots par des délimiteurs)
+//  Cette version prend une list par référence en parametre et effectue ses ajouts de mots dans celle ci
 {
-    int nbEspaces=0;
-    for(unsigned int i=0; i<s.length()-1; i++){
-        if(s[i]==' '){
-            nbEspaces++;
-        }
-    }
-    return nbEspaces;
-}
-
-
-bool Tools::Separateur(const std::string s)
-// Algorithme : Renvoie true si le nom de la figure ne contient pas de séparateur
-//
-{
-    if(s.find(" ")==std::string::npos){
-        return false;
-    }
-    else{
-        return true;
-    }
-}
-
-std::list<std::string> &Tools::Split(const std::string &s, std::list<std::string> &elems, char delim) {
-    std::stringstream ss(s);
+    std::stringstream ss(s);    //creation d'une stringstream a partir de la string a split
     std::string item;
-    while (std::getline(ss, item, delim)) {
+    while (std::getline(ss, item, delim))   //obtention des mot avec le séparateur
+    {
         elems.push_back(item);
     }
     return elems;
@@ -76,32 +55,6 @@ std::list<std::string> Tools::Split(const std::string &s, char delim)
     return elems;
 }
 
-std::string Tools::Decoupage(std::string s, int posSpace)
-// Algorithme : On extrait la chaine de caractères à contenue entre deux espaces consécutifs
-//
-{
-    unsigned int i;
-    int n=0;
-    std::string result;
-    int *space=new int[s.length()];
-    for(i=0; i<s.length();i++){
-            if(s[i]==' '){
-                space[n]=i;
-                n++;
-            }
-    }
-
-    for(i=space[posSpace-1]+1; i<s.length();i++){
-        if(s[i]!=' '){
-              result=result+s[i];
-        }
-        else if(s[i]==' '){
-            break;
-        }
-    }
-    delete space;
-    return result;
-}
 
 
 bool Tools::FileExists(const std::string filename)

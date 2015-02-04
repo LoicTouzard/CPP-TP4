@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Container  -  description
+                           Container
                              -------------------
     début                : 30/01/2015
     copyright            : (C) 2015 par TOUZARD Loïc, GOUZI Gaëtan et GONZALEZ TOLEDO Gabriela
@@ -15,6 +15,7 @@
 #include <vector>
 #include <unordered_set>
 #include <list>
+
 #include "Graphics.h"
 #include "Point.h"
 #include "Command.h"
@@ -29,7 +30,7 @@ typedef map<string, Graphics*> MapGraphics;
 //------------------------------------------------------------------------
 // Rôle de la classe <Container>
 // Le container est objet qui contient une liste de Graphics
-// On peut 'assimiler à un espace dans lequels on manipule des objets Graphics
+// On peut l'assimiler à un espace dans lequel on manipule des objets Graphics
 //------------------------------------------------------------------------
 
 class Container
@@ -86,7 +87,7 @@ typedef MapGraphics::const_iterator Graphics_const_iterator;
     //
 
     void Load(const string nomFichier);
-	// Mode d'emploi : Charge toutes les commandes présentent dans un fichier
+	// Mode d'emploi : Charge toutes les commandes présentes dans un fichier
     //
     // Contrat :
     //
@@ -105,15 +106,11 @@ typedef MapGraphics::const_iterator Graphics_const_iterator;
 
 	void AddRectangle(const string name, const long coin1X, const long coin1Y, const long coin2X, const long coin2Y, const string entree);
     // Mode d'emploi :Ajoute un rectangle qui s'appelle name au container
-    // Coordonnées du coin supérieur droit (coin1X, coin1Y)
-    // Coordonnées du coin inférieur gauche (coin2X, coin2Y)
     // Contrat :
     //
 
 	void AddLine(const string name, const long coin1X, const long coin1Y, const long coin2X, const long coin2Y, const string commande);
     // Mode d'emploi : Ajoute une ligne qui s'appelle name au container
-    // Coordonnées du coin supérieur droit (coin1X, coin1Y)
-    // Coordonnées du coin inférieur gauche (coin2X, coin2Y)
     // Contrat :
     //
 
@@ -125,8 +122,7 @@ typedef MapGraphics::const_iterator Graphics_const_iterator;
 
     void AddSelection(const string name, const long coin1X, const long coin1Y, const long coin2X, const long coin2Y, const string commande);
     // Mode d'emploi : Ajoute une sélection qui s'appelle name au container
-    // Coordonnées du coin supérieur droit (coin1X, coin1Y)
-    // Coordonnées du coin inférieur gauche (coin2X, coin2Y)
+    // Elle contiendra les elements situés dans la zone formés par ses points.
     // Contrat :
     //
 
@@ -152,7 +148,7 @@ private:
 //------------------------------------------------------- Méthodes privées
 
     void insertCommand(Command* const cmd);
-    // Mode d'emploi :
+    // Mode d'emploi : Insère une nouvelle commande dans la pile des UNDO et vide la pile des REDO
     //
     // Contrat :
     //

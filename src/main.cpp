@@ -1,3 +1,10 @@
+/*************************************************************************
+                           main
+                             -------------------
+    début                : 30/01/2015
+    copyright            : (C) 2015 par TOUZARD Loïc, GOUZI Gaëtan et GONZALEZ TOLEDO Gabriela
+*************************************************************************/
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -8,11 +15,7 @@
 #include "Tools.h"
 #include "Point.h"
 #include "Container.h"
-#include "Circle.h"
-#include "Rectangle.h"
-#include "Selection.h"
-#include "Polyline.h"
-#include "Line.h"
+
 using namespace std;
 
 
@@ -38,22 +41,24 @@ int main(){
         cout << "Time: " << (clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << endl;
 */
 		string entree;
-        getline(cin,entree);
+        getline(cin,entree);    // on récupère la commande de l'utilisateur
 
         list<string> args;
-        Tools::Split(entree, args);
-        if(args.size()==0)
+        Tools::Split(entree, args); // séparation des mots d la commande
+        if(args.size()==0)  //cas particulier si l'utilisateur rentre une ligne vide
         {
             args.push_back("");
         }
-        string commandType = args.front();
+        string commandType = args.front();  // On récupère le mot clé représentant le type de la commande
         args.pop_front();
 
 
-        while(commandType!="EXIT"){
+        while(commandType!="EXIT")
+        {
             //les tests de detection de commande sont triés selon leur potentielle fréquence d'apparition pour optimiser la vitesse
 
-            if (commandType=="C") {
+            if (commandType=="C")
+            {
 
                 if(args.size()==4)
                 {
@@ -66,18 +71,22 @@ int main(){
                     args.pop_front();
                     long radiusl = atol(args.front().c_str());
 
+                    //  ajout d'un cercle dans le container
                     espace.AddCircle(name, radiusl, centerlX, centerlY, entree );
                 }
-                else{
+                else
+                {
                     cout<<"ERR"<<endl;
                     cout<<"#invalid parameters : 4 parameters expected"<<endl;
                 }
 
             }
 
-            else if (commandType=="R") {
+            else if (commandType=="R")
+            {
 
-                if(args.size()==5){
+                if(args.size()==5)
+                {
                     string name;
                     long coin1X, coin1Y, coin2X, coin2Y;
 
@@ -92,32 +101,38 @@ int main(){
                     coin2Y=atol(args.front().c_str());
                     args.pop_front();
 
+                    //  ajout d'un retangle dans le container
                     espace.AddRectangle(name, coin1X, coin1Y, coin2X, coin2Y, entree);
                 }
-                else{
+                else
+                {
                     cout<<"ERR"<<endl;
                     cout<<"#invalid parameters"<<endl;
                 }
 
             }
 
-            else if (commandType=="PL") {
+            else if (commandType=="PL")
+            {
 
-                if( args.size()%2==1 && args.size()>=3){ //Un point minimum
-
+                if( args.size()%2==1 && args.size()>=3)
+                { //Un nombre pair de coordonnées + le nom => nombre impair obligatoire
                     int nbPoints=(args.size()-1)/2;
+
                     string name = args.front();
                     args.pop_front();
 
-                    //Code pour ajouter un polyligne
+                    //on stocke le premier point a part c'est l'origine.
                     Point origin;
+                    //Puis le reste des points dans un vecteur.
                     vector<Point> newPointList;
                     origin.x=atol(args.front().c_str());
                     args.pop_front();
                     origin.y=atol(args.front().c_str());
                     args.pop_front();
 
-                    for(int i=2; i<=nbPoints; i++){
+                    for(int i=2; i<=nbPoints; i++)
+                    {
                         Point p;
                         p.x=atol(args.front().c_str());
                         args.pop_front();
@@ -126,17 +141,22 @@ int main(){
 
                         newPointList.push_back(p);
                     }
+
+                    //  ajout d'une polyligne dans le container
                     espace.AddPolyline(name, newPointList, origin, entree);
                 }
-                else{
+                else
+                {
                     cout<<"ERR"<<endl;
                     cout<<"#invalid parameters"<<endl;
                 }
             }
 
-            else if (commandType=="L") {
+            else if (commandType=="L")
+            {
 
-                 if(args.size()==5){
+                 if(args.size()==5)
+                 {
                     string name;
                     long coin1X, coin1Y, coin2X, coin2Y;
 
@@ -149,17 +169,22 @@ int main(){
                     coin2X=atol(args.front().c_str());
                     args.pop_front();
                     coin2Y=atol(args.front().c_str());
+
+                    //  ajout d'une ligne dans le container
                     espace.AddLine(name, coin1X, coin1Y, coin2X, coin2Y, entree);
                 }
-                else{
+                else
+                {
                     cout<<"ERR"<<endl;
                     cout<<"#invalid parameters"<<endl;
                 }
             }
 
-            else if (commandType=="S") {
+            else if (commandType=="S") 
+            {
 
-                if(args.size()==5){
+                if(args.size()==5)
+                {
                     string name;
                     long coin1X, coin1Y, coin2X, coin2Y;
 
@@ -172,41 +197,49 @@ int main(){
                     coin2X=atol(args.front().c_str());
                     args.pop_front();
                     coin2Y=atol(args.front().c_str());
+
+                    //  ajout d'une selection dans le container
                     espace.AddSelection(name, coin1X, coin1Y, coin2X, coin2Y, entree);
                 }
-                else{
+                else
+                {
                     cout<<"ERR"<<endl;
                     cout<<"#invalid parameters"<<endl;
                 }
             }
 
-            else if (commandType=="LIST"){
-                //Code pour afficher tous les descripteurs d'objets
+            else if (commandType=="LIST")
+            {
+                //demande au container d'afficher toutes ses figures
                 espace.List();
-                //Fin du code pour afficher tous les descripteurs d'objets
             }
 
-            else if (commandType=="DELETE") {
-                //Code pour DELETE
-                if(args.size()>0){
+            else if (commandType=="DELETE")
+            {
+
+                if(args.size()>0)
+                {
                     vector<string> listeNoms;
                     list<string>::iterator it;
-                    for(it=args.begin();it!=args.end(); ++it){
+                    for(it=args.begin();it!=args.end(); ++it)
+                    {
                         listeNoms.push_back(*it);
                     }
                     espace.Delete(listeNoms);
                     //Fin du code pour DELETE
                 }
-                else{
+                else
+                {
                     cout<<"ERR"<<endl;
                     cout<<"#missing parameters"<<endl;
                 }
             }
 
-            else if (commandType=="MOVE") {
+            else if (commandType=="MOVE") 
+            {
 
-
-                if(args.size()==3){
+                if(args.size()==3)
+                {
                     //Code pour MOVE
                     string name;
                     long dX,dY;
@@ -217,30 +250,29 @@ int main(){
                     dY=atol(args.front().c_str());
                     espace.moveElement(name, dX, dY);
                 }
-                else{
+                else
+                {
                     cout<<"ERR"<<endl;
                     cout<<"#invalid parameters"<<endl;
                 }
             }
 
-            else if (commandType=="UNDO") {
-                //Code pour UNDO
+            else if (commandType=="UNDO")
+            {
+                // demande d'annulation de la derniere modification
                 espace.Undo();
-                //Fin du code pour UNDO
             }
 
-            else if (commandType=="REDO") {
-                //Code pour REDO
+            else if (commandType=="REDO") 
+            {
+                // demande pour refaire la derniere modification
                 espace.Redo();
-                //Fin du code pour REDO
             }
 
-            else if (commandType=="LOAD") {
-                //Lancer le timer pour les tests de performances
-
-
-                //Code pour LOAD
-                if(args.size()==1){
+            else if (commandType=="LOAD")
+            {
+                if(args.size()==1)
+                {
                     string Filename;
                     Filename=args.front();
                     if(!Tools::FileExists(Filename))
@@ -250,42 +282,45 @@ int main(){
                     }
                     else
                     {
+                        //demande de chargement en mémoire du fichier
                         espace.Load(Filename);
                     }
                 }
-                else{
+                else
+                {
                     cout<<"ERR"<<endl;
                     cout<<"#invalid parameters"<<endl;
                 }
-
-                 //Arreter le timer pour les tests de performances
             }
 
-            else if (commandType=="SAVE") {
-                //Code pour SAVE
-                if(args.size()==1){
+            else if (commandType=="SAVE") 
+            {
+                if(args.size()==1)
+                {
                     string filename;
                     filename=args.front();
-                    if(Tools::FileExists(filename)){
+                    if(Tools::FileExists(filename))
+                    {
                         cout<<"ERR"<<endl;
                         cout<<"#"<<filename<<" already used"<<endl;
                     }
                     else
                     {
+                        //demande de sauvegarde en fichier des elements
                         espace.Save(filename);
                     }
                 }
-                else{
+                else
+                {
                     cout<<"ERR"<<endl;
                     cout<<"#invalid parameters"<<endl;
                 }
-                //Fin du code pour SAVE
             }
 
-            else if (commandType=="CLEAR") {
-                //Code pour CLEAR
+            else if (commandType=="CLEAR")
+            {
+                //demande de suppression de tous les elements actifs
                 espace.Clear();
-                //Fin du code pour CLEAR
             }
 
             else
@@ -293,9 +328,9 @@ int main(){
                 cout<<"#invalid command"<<endl;
             }
 
-            getline(cin,entree);
-            args.clear();
-            Tools::Split(entree, args);
+            getline(cin,entree);    // on récupère la commande de l'utilisateur
+            args.clear();           //on vide la liste des arguments précédents
+            Tools::Split(entree, args);     //séparation des mots clés
             if(args.size()==0)
             {
                 args.push_back("");

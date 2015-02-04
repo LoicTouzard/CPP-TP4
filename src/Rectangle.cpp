@@ -62,8 +62,6 @@ Rectangle::Rectangle (Point recExtremity, Point figureOrigin, string graphicsNam
 
 Rectangle::~Rectangle ( )
 // Algorithme : Supprime tous les points caractéristiques de cette figure et supprime la figure de toutes les sélections dont elle faisait partie
-// On ne delete pas l'objet car il peut potentiellement être rappelé  par un UNDO
-// Si c'est le cas, il ne fait plus partie des sélections dans lequelles il était présent
 {
     vector<Selection*>::iterator it;
     for(it=whoOwnsMe.begin(); it!=whoOwnsMe.end(); ++it){
@@ -81,7 +79,7 @@ Rectangle::~Rectangle ( )
 
 
 string Rectangle::description() const
-// Algorithme : Renvoie la commande propore à cette figure
+// Algorithme : Renvoie la commande propre à cette figure
 //
 {
 	return commandLine+"\r\n";
